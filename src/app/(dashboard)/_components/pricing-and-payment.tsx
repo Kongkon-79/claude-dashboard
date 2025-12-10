@@ -40,7 +40,7 @@ const PricingAndPayment = () => {
           <h4 className="text-xl font-semibold leading-[150%] text-[#343A40]">
             Pricing & Payment 
           </h4>
-          <Link href="/organizer/tournaments-management">
+          <Link href="/pricing-and-payment">
             <button className="text-sm font-medium leading-[150%] text-primary cursor-pointer hover:underline">
               View All
             </button>

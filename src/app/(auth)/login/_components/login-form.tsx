@@ -76,7 +76,7 @@ const LoginForm = () => {
       <div className="w-full md:w-[570px] bg-white rounded-[16px] border-[2px] border-[#E7E7E7] shadow-[0px_0px_32px_0px_#0000001F] p-8">
         <div className="w-full flex items-center justify-center pb-4">
           <Link href="/">
-          <Image src="/assets/images/auth-logo.png" alt="auth logo" width={500} height={500} className="w-[290px] h-[80px] object-contain"/>
+            <Image src="/assets/images/auth-logo.png" alt="auth logo" width={500} height={500} className="w-[290px] h-[80px] object-contain" />
           </Link>
         </div>
 
@@ -115,7 +115,7 @@ const LoginForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                    <FormLabel className="text-base font-medium leading-[150%] text-[#424242]">
+                  <FormLabel className="text-base font-medium leading-[150%] text-[#424242]">
                     Password <sup className="text-[#8C311E]">*</sup>
                   </FormLabel>
                   <FormControl>
@@ -179,23 +179,13 @@ const LoginForm = () => {
             <div className="pt-2">
               <Button
                 disabled={isLoading}
-                className={`text-base font-medium text-white cursor-pointer leading-[120%] rounded-[8px] py-4 w-full h-[51px] ${
-                  isLoading ? "opacity-50 cursor-not-allowed" : "bg-primary"
-                }`}
+                className={`text-base font-medium text-white cursor-pointer leading-[120%] rounded-[8px] py-4 w-full h-[51px] ${isLoading ? "opacity-50 cursor-not-allowed" : "bg-primary"
+                  }`}
                 type="submit"
               >
                 {isLoading ? "Sign In ..." : "Sign In"}
               </Button>
             </div>
-            <div className="w-full flex items-center gap-2">
-              <span className="w-1/3 border-b border-[#6C6C6C]"/>
-              <span className="w-1/3 text-base md:text-lg font-normal text-[#424242] leading-[120%] text-center">Or Sign Up with</span>
-              <span className="w-1/3 border-b border-[#6C6C6C]"/>
-            </div>
-            <div>
-              
-              <p className="text-sm font-normal leading-[150%] text-[#616161] text-center">Don’t have an account? <Link href="/sign-up" className="text-primary hover:underline">Register Here</Link></p>
-              </div>
           </form>
         </Form>
       </div>
