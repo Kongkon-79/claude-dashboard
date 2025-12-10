@@ -1,8 +1,11 @@
+import DashboardHeader from '@/components/ui/dashboard-header'
 import React from 'react'
 
 const PricingAndPaymentPage = () => {
   return (
-    <div>PricingAndPaymentPage</div>
+    <div>
+        <DashboardHeader title="Pricing & Payment " desc="Ready to compete in your next match?"/>
+    </div>
   )
 }
 

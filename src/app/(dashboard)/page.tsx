@@ -1,14 +1,14 @@
 import React from 'react'
-import DashboardOverviewHeader from './_components/dashboard-overview-header'
 import { DashboardOverview } from './_components/dashboard-overview'
 import { RevenueActivity } from './_components/revenue-activity'
 import PricingAndPayment from './_components/pricing-and-payment'
 import UserRegistration from './_components/user-registrations'
+import DashboardHeader from '@/components/ui/dashboard-header'
 
 const DashboardOverviewPage = () => {
   return (
     <div>
-      <DashboardOverviewHeader/>
+      <DashboardHeader title="Welcome back, Michael" desc="Ready to compete in your next match?"/>
       <DashboardOverview/>
       <RevenueActivity/>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

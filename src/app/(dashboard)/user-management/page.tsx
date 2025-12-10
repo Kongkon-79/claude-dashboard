@@ -1,8 +1,11 @@
+import DashboardHeader from '@/components/ui/dashboard-header'
 import React from 'react'
 
 const UserManagementPage = () => {
   return (
-    <div>UserManagementPage</div>
+    <div>
+        <DashboardHeader title="User Management" desc="Ready to compete in your next match?"/>
+    </div>
   )
 }
 

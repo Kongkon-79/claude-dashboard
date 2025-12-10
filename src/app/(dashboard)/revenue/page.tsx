@@ -1,8 +1,11 @@
+import DashboardHeader from '@/components/ui/dashboard-header'
 import React from 'react'
 
 const RevenuePage = () => {
   return (
-    <div>RevenuePage</div>
+    <div>
+        <DashboardHeader title="Revenue" desc="Ready to compete in your next match?"/>
+    </div>
   )
 }
 
