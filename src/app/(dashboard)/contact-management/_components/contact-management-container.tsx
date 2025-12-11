@@ -48,6 +48,9 @@ const ContactManagementContainer = () => {
     enabled: !!token
   })
 
+  const totalPages = data?.meta ? Math.ceil(data.meta.total / data.meta.limit) : 0;
+
+
 
  let content;
 
@@ -189,7 +192,7 @@ const ContactManagementContainer = () => {
 
         {/* pagination  */}
         {
-          data && data?.meta && data?.meta?.page > 1 && (
+          totalPages > 1 && (
             <div className="w-full flex items-center justify-between py-6">
               <p className="text-base font-normal text-[#68706A] leading-[150%]">
                 Showing {currentPage} to 8 of {data?.meta?.total} results
@@ -197,7 +200,7 @@ const ContactManagementContainer = () => {
               <div>
                 <ClaudePagination
                   currentPage={currentPage}
-                  totalPages={data?.meta?.total}
+                  totalPages={totalPages}
                   onPageChange={(page) => setCurrentPage(page)}
                 />
               </div>

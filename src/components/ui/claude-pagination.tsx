@@ -87,10 +87,10 @@ const ClaudePagination: React.FC<PaginationProps> = ({
             <PaginationLink
               onClick={() => handlePageClick(page)}
               className={cn(
-                'border cursor-pointer border-primary hover:text-white rounded-[4px]',
+                'border cursor-pointer border-primary  hover:text-white rounded-[4px]',
                 page === currentPage
-                  ? 'bg-primary text-white'
-                  : 'hover:bg-[#079201] hover:text-white'
+                  ? 'bg-primary text-white hover:bg-primary hover:text-white'
+                  : 'hover:bg-primary hover:text-white'
               )}
             >
               {page === '...' ? '...' : page}
