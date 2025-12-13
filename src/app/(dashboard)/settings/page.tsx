@@ -1,10 +1,11 @@
-import DashboardHeader from '@/components/ui/dashboard-header'
+
 import React from 'react'
+import PersonalInfoPage from './personal-information/page'
 
 const SettingsPage = () => {
   return (
-    <div>
-        <DashboardHeader title="Settings" desc="Ready to compete in your next match?"/>
+    <div className=''>
+      <PersonalInfoPage/>
     </div>
   )
 }
