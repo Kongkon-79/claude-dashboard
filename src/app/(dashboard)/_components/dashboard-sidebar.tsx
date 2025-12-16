@@ -1,11 +1,12 @@
 "use client";
 import {
-  Brackets,
   LayoutDashboard,
   LogOut,
   Settings,
-  Swords,
-  Trophy,
+  Mail,
+  Users,
+  CircleDollarSign,
+  CreditCard
 } from "lucide-react";
 
 import {
@@ -33,22 +34,22 @@ const items = [
   {
     title: "User Management",
     url: "/user-management",
-    icon: Trophy,
+    icon: Users,
   },
   {
     title: "Contact Management",
     url: "/contact-management",
-    icon: Swords ,
+    icon: Mail  ,
   },
   {
     title: "Pricing & Payment",
     url: "/pricing-and-payment",
-    icon: Brackets,
+    icon: CreditCard ,
   },
    {
     title: "Revenue",
     url: "/revenue",
-    icon: Brackets,
+    icon: CircleDollarSign ,
   },
   {
     title: "Settings",
