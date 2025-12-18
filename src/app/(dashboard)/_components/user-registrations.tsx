@@ -55,7 +55,7 @@ const UserRegistration = () => {
                                     </p>
                                 </div>
                                 <p className="text-sm font-normal leading-[150%] text-[#616161]">
-                                    ${item?.phone}
+                                    {item?.phone}
                                 </p>
                                 <p className="text-sm font-normal leading-[150%] text-[#616161]">
                                     {item?.date}
