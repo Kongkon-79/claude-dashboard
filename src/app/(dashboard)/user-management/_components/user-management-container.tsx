@@ -19,18 +19,18 @@ import TableSkeletonWrapper from "@/components/shared/TableSkeletonWrapper/Table
 import ErrorContainer from "@/components/shared/ErrorContainer/ErrorContainer";
 import NotFound from "@/components/shared/NotFound/NotFound";
 import { toast } from "sonner";
-import { UserManagementApiResponse, UserInfo } from "./user-management-data-type";
+import { UserManagementApiResponse } from "./user-management-data-type";
+
+import Link from 'next/link';
 
 const UserManagementContainer = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const session = useSession();
   const token = (session?.data?.user as { accessToken: string })?.accessToken;
-  const [selectedContact, setSelectedContact] = useState<UserInfo | null>(null);
   const [selectedUserId, setSelectedUserId] = useState("");
   const queryClient = useQueryClient();
 
-  console.log(selectedContact)
 
 
 
@@ -117,14 +117,13 @@ const UserManagementContainer = () => {
                   {moment(item?.createdAt).format("MMM DD YYYY")}
                 </TableCell>
                 <TableCell className="h-full flex items-center justify-center gap-6 py-4">
-                  <button
-                    onClick={() => {
-                      setSelectedContact(item);
-                    }}
-                    className="cursor-pointer mt-2"
+                  <Link href={`/user-management/${item?._id}`}>
+                    <button
+                    className="cursor-pointer mt-2 "
                   >
                     <Eye className="h-6 w-6" />
                   </button>
+                  </Link>
                   <button
                     onClick={() => {
                       setDeleteModalOpen(true);
