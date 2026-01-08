@@ -19,11 +19,11 @@ export interface User {
   provider: "credentials" | "google"
   profileImage: string
   verified: boolean
-
+  phone: string
   position: string[]
   socialMedia: SocialMedia[]
   playingVideo: string[]
-
+  agent: string
   isSubscription: boolean
   subscription: Subscription | null
   accessLavel: string[]
