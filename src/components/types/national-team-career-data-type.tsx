@@ -18,7 +18,7 @@ export interface NationalTeam {
   player: Player;
   flag: string;
   teamName: string;
-  debut: string; // ISO date string
+  debut: string; 
   match: number;
   goals: number;
   createdAt: string;

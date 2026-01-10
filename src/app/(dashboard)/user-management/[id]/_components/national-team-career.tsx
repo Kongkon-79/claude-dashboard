@@ -18,10 +18,11 @@ import ErrorContainer from "@/components/shared/ErrorContainer/ErrorContainer";
 import NotFound from "@/components/shared/NotFound/NotFound";
 import Image from "next/image";
 import { NationalTeam, NationalTeamApiResponse } from "@/components/types/national-team-career-data-type";
-import { Eye, Trash } from "lucide-react";
+import { Eye, Trash, SquarePen } from "lucide-react";
 import ClaudePagination from "@/components/ui/claude-pagination";
 import DeleteModal from "@/components/modals/delete-modal";
 import NationalCareerView from "./national-team-career-view";
+import AddNationalTeamForm from './add-national-team-form';
 
 const NationalTeamCareerPage = ({ id }: { id?: string }) => {
   console.log("view data", id)
@@ -31,6 +32,7 @@ const NationalTeamCareerPage = ({ id }: { id?: string }) => {
   const [selectViewNational, setSelectViewNational] = useState(false);
   const [selectedNationalTeam, setSelectedNationalTeam] =
     useState<NationalTeam | null>(null);
+  const [addNationalTeamForm, setAddNationalTeamForm] = useState(false);
   const queryClient = useQueryClient();
   console.log(queryClient)
   const session = useSession();
@@ -144,6 +146,18 @@ const NationalTeamCareerPage = ({ id }: { id?: string }) => {
                       >
                         <Eye className="h-6 w-6 text-[#181818]" />
                       </button>
+
+                      <button
+                        onClick={() => {
+                          setSelectedNationalTeam(item);
+                          setAddNationalTeamForm(true);
+                        }}
+                        className="cursor-pointer"
+                      >
+                        <SquarePen className="h-6 w-6 text-[#181818]" />
+                      </button>
+
+
                       <button
                         onClick={() => {
                           setDeleteModalOpen(true);
@@ -151,7 +165,7 @@ const NationalTeamCareerPage = ({ id }: { id?: string }) => {
                         }}
                         className="cursor-pointer"
                       >
-                        <Trash className="h-6 w-6 text-primary" />
+                        <Trash className="h-6 w-6 text-red-500" />
                       </button>
                     </div>
                   </TableCell>
@@ -200,7 +214,14 @@ const NationalTeamCareerPage = ({ id }: { id?: string }) => {
   return (
     <div>
       <div className='pt-2'>
-        <h3 className='text-2xl md:text-3xl  text-[#131313] font-semibold leading-[120%]'>National Team Career</h3>
+        <div className="w-full flex items-center justify-between">
+
+          <h3 className='text-2xl md:text-3xl  text-[#131313] font-semibold leading-[120%]'>National Team Career</h3>
+          <button onClick={() => {
+            setSelectedNationalTeam(null);
+            setAddNationalTeamForm(true);
+          }} className="bg-primary text-white py-3 px-4 rounded-[12px] text-base leading-normal font-semibold">Add National Team</button>
+        </div>
 
         <div className="pt-6">
           {content}
@@ -244,9 +265,42 @@ const NationalTeamCareerPage = ({ id }: { id?: string }) => {
             />
           )}
         </div>
+
+        {/* add national team career form  */}
+
+        <div>
+          {
+            addNationalTeamForm && (
+              <AddNationalTeamForm
+                open={addNationalTeamForm}
+                onOpenChange={(open: boolean) => setAddNationalTeamForm(open)}
+                defaultData={selectedNationalTeam}
+                playerId={id}
+              />
+            )
+          }
+        </div>
+
+
       </div>
     </div>
   )
 }
 
 export default NationalTeamCareerPage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
