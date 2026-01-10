@@ -8,6 +8,7 @@ import { UserManagementApiResponse } from "../../_components/user-management-dat
 import PlayerData from "./player-data";
 import { User } from "./single-user-data-type";
 import TransferHistoryPage from "./transfer-history";
+import NationalTeamCareerPage from "./national-team-career";
 
 const UserManagementTabs = ({id}:{id:string}) => {
   // const session = useSession();
@@ -165,6 +166,13 @@ const UserManagementTabs = ({id}:{id:string}) => {
 
               <div>
                 <TransferHistoryPage data={data?.data as unknown as User}/>
+            </div>
+          )}
+
+            {isActive === "national-team-career" && (
+
+              <div>
+                <NationalTeamCareerPage id={id || ""}/>
             </div>
           )}
 
