@@ -26,7 +26,7 @@ const RatingPage = ({ id }: { id?: string }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [ratingId, setRatingId] = useState("");
-  const [selectedRating, setRelectedRating] =
+  const [selectedRating, setSelectedRating] =
     useState<Rating | null>(null);
   const [addRatingForm, setAddRatingForm] = useState(false);
   const queryClient = useQueryClient();
@@ -115,7 +115,7 @@ const RatingPage = ({ id }: { id?: string }) => {
                     {item?.rating || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.position || "N/A"}
+                    {item?.position?.join(", ") || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
                     {item?.numberOfGames || "N/A"}
@@ -128,7 +128,7 @@ const RatingPage = ({ id }: { id?: string }) => {
 
                       <button
                         onClick={() => {
-                          setRelectedRating(item);
+                          setSelectedRating(item);
                           setAddRatingForm(true);
                         }}
                         className="cursor-pointer"
@@ -197,7 +197,7 @@ const RatingPage = ({ id }: { id?: string }) => {
 
           <h3 className='text-2xl md:text-3xl  text-[#131313] font-semibold leading-[120%]'>Rating</h3>
           <button onClick={() => {
-            setRelectedRating(null);
+            setSelectedRating(null);
             setAddRatingForm(true);
           }} className="bg-primary text-white py-3 px-4 rounded-[12px] text-base leading-normal font-semibold">Add Rating</button>
         </div>
@@ -230,7 +230,7 @@ const RatingPage = ({ id }: { id?: string }) => {
             onClose={() => setDeleteModalOpen(false)}
             onConfirm={handleDelete}
             title="Are You Sure?"
-            desc="Are you sure you want to delete this National Team Career?"
+            desc="Are you sure you want to delete this Rating?"
           />
         )}
 

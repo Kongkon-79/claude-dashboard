@@ -10,6 +10,8 @@ import { User } from "./single-user-data-type";
 import TransferHistoryPage from "./transfer-history";
 import NationalTeamCareerPage from "./national-team-career";
 import RatingPage from "./rating";
+import FoulsPage from "./fouls";
+import SetPiecesPage from "./set-pieces";
 
 const UserManagementTabs = ({id}:{id:string}) => {
   // const session = useSession();
@@ -181,6 +183,22 @@ const UserManagementTabs = ({id}:{id:string}) => {
 
               <div>
                 <RatingPage id={id || ""}/>
+            </div>
+          )}
+
+
+
+           {isActive === "set-pieces" && (
+
+              <div>
+                <SetPiecesPage id={id || ""}/>
+            </div>
+          )}
+
+          {isActive === "fouls" && (
+
+              <div>
+                <FoulsPage id={id || ""}/>
             </div>
           )}
 

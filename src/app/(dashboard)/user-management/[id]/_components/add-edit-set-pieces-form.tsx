@@ -5,11 +5,6 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import {
   Form,
   FormControl,
   FormField,
@@ -24,19 +19,19 @@ import { useSession } from "next-auth/react";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Rating } from "@/components/types/rating-data-type";
+import { SetpiecesStats } from "@/components/types/set-pieces-data-type";
 
-type RatingFormValues = {
-  rating: number;
-  position: string[];
-  numberOfGames: number;
-  minutes: number;
+type SetPiecesFormValues = {
+  freekicks: number;
+  freekicksShots: number;
+  freekicksShotsonTarget: number;
+  penaltyKicks: number;
 };
 
 interface Props {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  defaultData?: Rating | null;
+  defaultData?: SetpiecesStats | null;
   playerId?: string;
 }
 
@@ -44,19 +39,21 @@ interface Props {
 // Zod Validation Schema
 // ----------------------
 const ratingSchema = z.object({
-  rating: z
-    .number({ message: "Rating must be a number" })
-    .min(0, "Rating cannot be negative"),
-  position: z.array(z.string()).min(1, "Select at least one position").max(2, "Maximum 2 positions"),
-  numberOfGames: z
-    .number({ message: "Number of Games must be a number" })
-    .min(0, "Number of Games cannot be negative"),
-  minutes: z
-    .number({ message: "Minutes must be a number" })
-    .min(0, "Minutes cannot be negative"),
+  freekicks: z
+    .number({ message: "Freekicks must be a number" })
+    .min(0, "Freekicks cannot be negative"),
+  freekicksShots: z
+    .number({ message: "Freekicks shots must be a number" })
+    .min(0, "Freekicks shots cannot be negative"),
+  freekicksShotsonTarget: z
+    .number({ message: "Freekicks shots on target must be a number" })
+    .min(0, "Freekicks shots on target cannot be negative"),
+  penaltyKicks: z
+    .number({ message: "Penaltykicks shots on target must be a number" })
+    .min(0, "Penaltykicks cannot be negative"),
 });
 
-const AddEditRatingForm = ({
+const AddEditSetPiecesForm = ({
   open,
   onOpenChange,
   defaultData,
@@ -67,26 +64,13 @@ const AddEditRatingForm = ({
   const token = (session?.data?.user as { accessToken: string })?.accessToken;
   const isEdit = Boolean(defaultData?._id);
 
-
-  const POSITIONS = [
-    { label: "GK", value: "gk" },
-    { label: "RB", value: "rb" },
-    { label: "LB", value: "lb" },
-    { label: "CB", value: "cb" },
-    { label: "Defensive Midfielder", value: "defensive midfielder" },
-    { label: "Offensive Midfielder", value: "offensive midfielder" },
-    { label: "Right Winger", value: "right winger" },
-    { label: "Left Winger", value: "left winger" },
-    { label: "Striker", value: "striker" },
-  ]
-
-  const form = useForm<RatingFormValues>({
+  const form = useForm<SetPiecesFormValues>({
     resolver: zodResolver(ratingSchema),
     defaultValues: {
-      rating: 0,
-      position: [],
-      numberOfGames: 0,
-      minutes: 0,
+      freekicks: 0,
+      freekicksShots: 0,
+      freekicksShotsonTarget: 0,
+      penaltyKicks: 0,
     },
   });
 
@@ -94,21 +78,20 @@ const AddEditRatingForm = ({
   useEffect(() => {
     if (defaultData) {
       form.reset({
-        rating: defaultData.rating,
-        position: defaultData.position,
-        numberOfGames: defaultData.numberOfGames,
-        minutes: defaultData.minutes,
+        freekicks: defaultData.freekicks,
+        freekicksShots: defaultData.freekicksShots,
+        freekicksShotsonTarget: defaultData.freekicksShotsonTarget,
+        penaltyKicks: defaultData.penaltyKicks,
       });
     }
   }, [defaultData, form]);
 
-  // 🔥 Add / Update mutation
   // 🔥 Add / Update mutation (JSON version)
   const { mutate, isPending } = useMutation({
-    mutationFn: async (values: RatingFormValues) => {
+    mutationFn: async (values: SetPiecesFormValues) => {
       const url = isEdit
-        ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/rating/${defaultData?._id}`
-        : `${process.env.NEXT_PUBLIC_BACKEND_URL}/rating/${playerId}`;
+        ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/setpieces/${defaultData?._id}`
+        : `${process.env.NEXT_PUBLIC_BACKEND_URL}/setpieces/${playerId}`;
 
       const method = isEdit ? "PUT" : "POST";
 
@@ -118,7 +101,7 @@ const AddEditRatingForm = ({
           "Content-Type": "application/json", // 🔥 important
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(values), // 🔥 send JSON instead of FormData
+        body: JSON.stringify(values), // 🔥 send JSON
       });
 
       return res.json();
@@ -129,19 +112,18 @@ const AddEditRatingForm = ({
         return;
       }
 
-      toast.success(isEdit ? "Rating updated" : "Rating added");
-      queryClient.invalidateQueries({ queryKey: ["all-rating"] });
+      toast.success(isEdit ? "Set Pieces updated" : "Set Pieces added");
+      queryClient.invalidateQueries({ queryKey: ["all-setpieces"] });
       onOpenChange(false);
       form.reset();
     },
   });
 
-
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-lg rounded-2xl">
         <h3 className="text-xl font-semibold mb-4">
-          {isEdit ? "Edit Rating" : "Add Rating"}
+          {isEdit ? "Edit Set Pieces" : "Add Set Pieces"}
         </h3>
 
         <Form {...form}>
@@ -151,11 +133,11 @@ const AddEditRatingForm = ({
           >
             <FormField
               control={form.control}
-              name="rating"
+              name="freekicks"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
-                    Rating
+                    Freekicks
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -171,85 +153,13 @@ const AddEditRatingForm = ({
               )}
             />
 
-            <FormField
-              control={form.control}
-              name="position"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-base font-normal leading-[150%] text-[#131313]">
-                    Position (select up to 2)
-                  </FormLabel>
-
-                  <Popover >
-                    <PopoverTrigger asChild>
-                      <FormControl >
-                        <Button
-                          variant="outline"
-                          className="w-full justify-between h-[48px] border border-[#645949]"
-                        >
-                          {field.value?.length
-                            ? field.value
-                              .map(
-                                (v) =>
-                                  POSITIONS.find((p) => p.value === v)?.label
-                              )
-                              .join(", ")
-                            : "Select position"}
-
-                          <span className="ml-2">▾</span>
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-
-                    <PopoverContent className="min-w-[320px] p-3">
-                      <div className="space-y-2">
-                        {POSITIONS.map((pos) => {
-                          const checked = field.value?.includes(pos.value)
-                          const disabled =
-                            !checked && field.value?.length >= 2
-
-                          return (
-                            <label
-                              key={pos.value}
-                              className={`flex items-center gap-3 text-sm cursor-pointer ${disabled ? "opacity-50 cursor-not-allowed" : ""
-                                }`}
-                            >
-                              <input
-                                type="checkbox"
-                                checked={checked}
-                                disabled={disabled}
-                                onChange={(e) => {
-                                  if (e.target.checked) {
-                                    field.onChange([...field.value, pos.value])
-                                  } else {
-                                    field.onChange(
-                                      field.value.filter((v) => v !== pos.value)
-                                    )
-                                  }
-                                }}
-                                className="h-4 w-4 accent-black"
-                              />
-                              {pos.label}
-                            </label>
-                          )
-                        })}
-                      </div>
-                    </PopoverContent>
-                  </Popover>
-
-                  <FormMessage className="text-red-500" />
-                </FormItem>
-              )}
-            />
-
-            <div className="grid grid-cols-2 gap-4">
               <FormField
                 control={form.control}
-                name="numberOfGames"
+                name="freekicksShots"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
-                      Number of Games
+                      Freekicks Shots
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -266,11 +176,11 @@ const AddEditRatingForm = ({
               />
               <FormField
                 control={form.control}
-                name="minutes"
+                name="freekicksShotsonTarget"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
-                      Minutes
+                      Freekicks Shots on Target
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -285,7 +195,27 @@ const AddEditRatingForm = ({
                   </FormItem>
                 )}
               />
-            </div>
+              <FormField
+                control={form.control}
+                name="penaltyKicks"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
+                      Penalty Kicks
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        {...field}
+                        value={field.value ?? ""}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
             {/* Actions */}
             <div className="flex justify-end gap-3 pt-4">
@@ -310,5 +240,5 @@ const AddEditRatingForm = ({
   );
 };
 
-export default AddEditRatingForm;
+export default AddEditSetPiecesForm;
 
