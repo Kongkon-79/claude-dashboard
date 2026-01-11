@@ -9,6 +9,7 @@ import PlayerData from "./player-data";
 import { User } from "./single-user-data-type";
 import TransferHistoryPage from "./transfer-history";
 import NationalTeamCareerPage from "./national-team-career";
+import RatingPage from "./rating";
 
 const UserManagementTabs = ({id}:{id:string}) => {
   // const session = useSession();
@@ -173,6 +174,13 @@ const UserManagementTabs = ({id}:{id:string}) => {
 
               <div>
                 <NationalTeamCareerPage id={id || ""}/>
+            </div>
+          )}
+
+          {isActive === "rating" && (
+
+              <div>
+                <RatingPage id={id || ""}/>
             </div>
           )}
 
