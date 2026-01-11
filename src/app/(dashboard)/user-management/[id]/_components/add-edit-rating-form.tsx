@@ -103,7 +103,6 @@ const AddEditRatingForm = ({
   }, [defaultData, form]);
 
   // 🔥 Add / Update mutation
-  // 🔥 Add / Update mutation (JSON version)
   const { mutate, isPending } = useMutation({
     mutationFn: async (values: RatingFormValues) => {
       const url = isEdit

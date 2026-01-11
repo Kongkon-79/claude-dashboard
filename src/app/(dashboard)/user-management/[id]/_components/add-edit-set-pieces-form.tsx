@@ -38,7 +38,7 @@ interface Props {
 // ----------------------
 // Zod Validation Schema
 // ----------------------
-const ratingSchema = z.object({
+const setPiecesSchema = z.object({
   freekicks: z
     .number({ message: "Freekicks must be a number" })
     .min(0, "Freekicks cannot be negative"),
@@ -65,7 +65,7 @@ const AddEditSetPiecesForm = ({
   const isEdit = Boolean(defaultData?._id);
 
   const form = useForm<SetPiecesFormValues>({
-    resolver: zodResolver(ratingSchema),
+    resolver: zodResolver(setPiecesSchema),
     defaultValues: {
       freekicks: 0,
       freekicksShots: 0,

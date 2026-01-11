@@ -19,45 +19,53 @@ import { useSession } from "next-auth/react";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FoulsData } from "@/components/types/fouls-data-type";
+import { GkStatsData } from "@/components/types/gk-state-data-type";
 
-type FoulsFormValues = {
-  fouls: number;
-  foulswon: number;
-  redCards: number;
-  yellowCards: number;
-  offSide:number;
+type GkStatsFormValues = {
+  goalsConceded: number;
+  penaltKitkSave: number;
+  saves: number;
+  aerialControl: number;
+  catches: number;
+  deFensiveLineSupport: number;
+  parries: number;
 };
 
 interface Props {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  defaultData?: FoulsData | null;
+  defaultData?: GkStatsData | null;
   playerId?: string;
 }
 
 // ----------------------
 // Zod Validation Schema
 // ----------------------
-const foulsSchema = z.object({
-  fouls: z
-    .number({ message: "Fouls must be a number" })
-    .min(0, "Fouls cannot be negative"),
-  foulswon: z
-    .number({ message: "Fouls Won must be a number" })
-    .min(0, "Fouls Won cannot be negative"),
-  redCards: z
-    .number({ message: "Red Card must be a number" })
-    .min(0, "Red Card cannot be negative"),
-  yellowCards: z
-    .number({ message: "Yellow Cards must be a number" })
-    .min(0, "Yellow Cards cannot be negative"),
-    offSide: z
-    .number({ message: "Off Side must be a number" })
-    .min(0, "Off Side cannot be negative"),
+export const gkStatsSchema = z.object({
+  goalsConceded: z
+    .number({ message: "Goals Conceded must be a number" })
+    .min(0, "Goals Conceded cannot be negative"),
+  penaltKitkSave: z
+    .number({ message: "Penalty Kick Saves must be a number" })
+    .min(0, "Penalty Kick Saves cannot be negative"),
+  saves: z
+    .number({ message: "Saves must be a number" })
+    .min(0, "Saves cannot be negative"),
+  aerialControl: z
+    .number({ message: "Aerial Control must be a number" })
+    .min(0, "Aerial Control cannot be negative"),
+  catches: z
+    .number({ message: "Catches must be a number" })
+    .min(0, "Catches cannot be negative"),
+  deFensiveLineSupport: z
+    .number({ message: "Defensive Line Support must be a number" })
+    .min(0, "Defensive Line Support cannot be negative"),
+  parries: z
+    .number({ message: "Parries must be a number" })
+    .min(0, "Parries cannot be negative"),
 });
 
-const AddEditFoulsForm = ({
+const AddEditGkStatsForm = ({
   open,
   onOpenChange,
   defaultData,
@@ -68,14 +76,16 @@ const AddEditFoulsForm = ({
   const token = (session?.data?.user as { accessToken: string })?.accessToken;
   const isEdit = Boolean(defaultData?._id);
 
-  const form = useForm<FoulsFormValues>({
-    resolver: zodResolver(foulsSchema),
+  const form = useForm<GkStatsFormValues>({
+    resolver: zodResolver(gkStatsSchema),
     defaultValues: {
-      fouls: 0,
-      foulswon: 0,
-      redCards: 0,
-      yellowCards: 0,
-      offSide: 0,
+      goalsConceded: 0,
+      penaltKitkSave: 0,
+      saves: 0,
+      aerialControl: 0,
+      catches: 0,
+      deFensiveLineSupport: 0,
+      parries: 0,
     },
   });
 
@@ -83,21 +93,23 @@ const AddEditFoulsForm = ({
   useEffect(() => {
     if (defaultData) {
       form.reset({
-        fouls: defaultData.fouls,
-        foulswon: defaultData.foulswon,
-        redCards: defaultData.redCards,
-        yellowCards: defaultData.yellowCards,
-        offSide: defaultData.offSide,
+        goalsConceded: defaultData.goalsConceded,
+        penaltKitkSave: defaultData.penaltKitkSave,
+        saves: defaultData.saves,
+        aerialControl: defaultData.aerialControl,
+        catches: defaultData.catches,
+        deFensiveLineSupport: defaultData.deFensiveLineSupport,
+        parries: defaultData.parries,
       });
     }
   }, [defaultData, form]);
 
   // 🔥 Add / Update mutation (JSON version)
   const { mutate, isPending } = useMutation({
-    mutationFn: async (values: FoulsFormValues) => {
+    mutationFn: async (values: GkStatsFormValues) => {
       const url = isEdit
-        ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/fouls/${defaultData?._id}`
-        : `${process.env.NEXT_PUBLIC_BACKEND_URL}/fouls/${playerId}`;
+        ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/gkstats/${defaultData?._id}`
+        : `${process.env.NEXT_PUBLIC_BACKEND_URL}/gkstats/${playerId}`;
 
       const method = isEdit ? "PUT" : "POST";
 
@@ -118,8 +130,8 @@ const AddEditFoulsForm = ({
         return;
       }
 
-      toast.success(isEdit ? "Fouls updated" : "Fouls added");
-      queryClient.invalidateQueries({ queryKey: ["all-fouls"] });
+      toast.success(isEdit ? "Gk Stats updated" : "Gk Stats added");
+      queryClient.invalidateQueries({ queryKey: ["all-gkstats"] });
       onOpenChange(false);
       form.reset();
     },
@@ -129,7 +141,7 @@ const AddEditFoulsForm = ({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-lg rounded-2xl">
         <h3 className="text-xl font-semibold mb-4">
-          {isEdit ? "Edit Set Pieces" : "Add Set Pieces"}
+          {isEdit ? "Edit Gk Stats" : "Add Gk Stats"}
         </h3>
 
         <Form {...form}>
@@ -141,12 +153,144 @@ const AddEditFoulsForm = ({
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <FormField
+                control={form.control}
+                name="goalsConceded"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
+                      Goals Conceded
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        {...field}
+                        value={field.value ?? ""}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="penaltKitkSave"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
+                      Penalty Kick Save
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        {...field}
+                        value={field.value ?? ""}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="saves"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
+                      Saves
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        {...field}
+                        value={field.value ?? ""}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="aerialControl"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
+                      Aerial Control
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        {...field}
+                        value={field.value ?? ""}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+               <FormField
+                control={form.control}
+                name="catches"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
+                      Catches
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        {...field}
+                        value={field.value ?? ""}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="deFensiveLineSupport"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
+                      Defensive Line Support
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        {...field}
+                        value={field.value ?? ""}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+
+            </div>
+            <FormField
               control={form.control}
-              name="fouls"
+              name="parries"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
-                    Fouls
+                    Parries
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -161,95 +305,6 @@ const AddEditFoulsForm = ({
                 </FormItem>
               )}
             />
-
-              <FormField
-                control={form.control}
-                name="foulswon"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
-                      Fouls Won
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        {...field}
-                        value={field.value ?? ""}
-                        onChange={(e) => field.onChange(Number(e.target.value))}
-                        className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="redCards"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
-                      Red Card
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        {...field}
-                        value={field.value ?? ""}
-                        onChange={(e) => field.onChange(Number(e.target.value))}
-                        className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              <FormField
-                control={form.control}
-                name="yellowCards"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
-                      Yello Card
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        {...field}
-                        value={field.value ?? ""}
-                        onChange={(e) => field.onChange(Number(e.target.value))}
-                        className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              
-            </div>
-             <FormField
-                control={form.control}
-                name="offSide"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
-                      Off Sice
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        {...field}
-                        value={field.value ?? ""}
-                        onChange={(e) => field.onChange(Number(e.target.value))}
-                        className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
 
             {/* Actions */}
             <div className="flex justify-end gap-3 pt-4">
@@ -274,5 +329,5 @@ const AddEditFoulsForm = ({
   );
 };
 
-export default AddEditFoulsForm;
+export default AddEditGkStatsForm;
 

@@ -18,27 +18,27 @@ import NotFound from "@/components/shared/NotFound/NotFound";
 import { Trash, SquarePen } from "lucide-react";
 import ClaudePagination from "@/components/ui/claude-pagination";
 import DeleteModal from "@/components/modals/delete-modal";
-import { Rating, RatingsApiResponse } from "@/components/types/rating-data-type";
 import AddEditFoulsForm from "./add-edit-fouls-form";
+import { FoulsApiResponse, FoulsData } from "@/components/types/fouls-data-type";
 
 const FoulsPage = ({ id }: { id?: string }) => {
   console.log("view data", id)
   const [currentPage, setCurrentPage] = useState(1);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [ratingId, setRatingId] = useState("");
-  const [selectedRating, setRelectedRating] =
-    useState<Rating | null>(null);
-  const [addRatingForm, setAddRatingForm] = useState(false);
+  const [foulsId, setFoulsId] = useState("");
+  const [selectedFouls, setSelectedFouls] =
+    useState<FoulsData | null>(null);
+  const [addSetFoulsForm, setAddSetFoulsForm] = useState(false);
   const queryClient = useQueryClient();
   console.log(queryClient)
   const session = useSession();
   const token = (session?.data?.user as { accessToken: string })?.accessToken;
 
-  const { data, isLoading, isError, error } = useQuery<RatingsApiResponse>({
-    queryKey: ["all-rating", id, currentPage],
+  const { data, isLoading, isError, error } = useQuery<FoulsApiResponse>({
+    queryKey: ["all-fouls", id, currentPage],
     queryFn: async () => {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/rating/${id}?page=${currentPage}&limit=8`, {
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/fouls/${id}?page=${currentPage}&limit=8`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -90,16 +90,19 @@ const FoulsPage = ({ id }: { id?: string }) => {
           <TableHeader className="bg-primary/15 rounded-t-[12px]">
             <TableRow className="">
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] py-3 pl-6">
-                Rating
+                Fouls
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Position
+                Fouls Won
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Number of games
+                Yellow Cards
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Minutes Played
+                Red Cards
+              </TableHead>
+              <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
+                Offside
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3">
                 Action
@@ -112,24 +115,27 @@ const FoulsPage = ({ id }: { id?: string }) => {
                 <TableRow key={index} className="">
                   <TableCell className="w-[267px] text-base font-medium text-[#131313] leading-[150%] pl-6 py-3">
 
-                    {item?.rating || "N/A"}
+                    {item?.fouls || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.position || "N/A"}
+                    {item?.foulswon || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.numberOfGames || "N/A"}
+                    {item?.yellowCards || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.minutes || "N/A"}
+                    {item?.redCards || "N/A"}
+                  </TableCell>
+                  <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
+                    {item?.offSide || "N/A"}
                   </TableCell>
                   <TableCell >
                     <div className="h-full w-auto flex items-end justify-center gap-6 py-3">
 
                       <button
                         onClick={() => {
-                          setRelectedRating(item);
-                          setAddRatingForm(true);
+                          setSelectedFouls(item);
+                          setAddSetFoulsForm(true);
                         }}
                         className="cursor-pointer"
                       >
@@ -140,7 +146,7 @@ const FoulsPage = ({ id }: { id?: string }) => {
                       <button
                         onClick={() => {
                           setDeleteModalOpen(true);
-                          setRatingId(item?._id);
+                          setFoulsId(item?._id);
                         }}
                         className="cursor-pointer"
                       >
@@ -160,10 +166,10 @@ const FoulsPage = ({ id }: { id?: string }) => {
 
   // delete national team player 
   const { mutate } = useMutation({
-    mutationKey: ["delete-rating"],
+    mutationKey: ["delete-fouls"],
     mutationFn: async (id: string) => {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/rating/${id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/fouls/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -179,14 +185,14 @@ const FoulsPage = ({ id }: { id?: string }) => {
         toast.error(data?.message || "Something went wrong");
         return;
       }
-      toast.success(data?.message || "Rating deleted successfully");
-      queryClient.invalidateQueries({ queryKey: ["all-rating"] });
+      toast.success(data?.message || "Set Pieces deleted successfully");
+      queryClient.invalidateQueries({ queryKey: ["all-fouls"] });
     },
   });
 
   const handleDelete = () => {
-    if (ratingId) {
-      mutate(ratingId);
+    if (foulsId) {
+      mutate(foulsId);
     }
     setDeleteModalOpen(false);
   };
@@ -195,11 +201,11 @@ const FoulsPage = ({ id }: { id?: string }) => {
       <div className='pt-2'>
         <div className="w-full flex items-center justify-between">
 
-          <h3 className='text-2xl md:text-3xl  text-[#131313] font-semibold leading-[120%]'>Rating</h3>
+          <h3 className='text-2xl md:text-3xl  text-[#131313] font-semibold leading-[120%]'>Fouls</h3>
           <button onClick={() => {
-            setRelectedRating(null);
-            setAddRatingForm(true);
-          }} className="bg-primary text-white py-3 px-4 rounded-[12px] text-base leading-normal font-semibold">Add Rating</button>
+            setSelectedFouls(null);
+            setAddSetFoulsForm(true);
+          }} className="bg-primary text-white py-3 px-4 rounded-[12px] text-base leading-normal font-semibold">Add Foul</button>
         </div>
 
         <div className="pt-6">
@@ -230,7 +236,7 @@ const FoulsPage = ({ id }: { id?: string }) => {
             onClose={() => setDeleteModalOpen(false)}
             onConfirm={handleDelete}
             title="Are You Sure?"
-            desc="Are you sure you want to delete this National Team Career?"
+            desc="Are you sure you want to delete this Fouls?"
           />
         )}
 
@@ -238,11 +244,11 @@ const FoulsPage = ({ id }: { id?: string }) => {
 
         <div>
           {
-            addRatingForm && (
+            addSetFoulsForm && (
               <AddEditFoulsForm
-                open={addRatingForm}
-                onOpenChange={(open: boolean) => setAddRatingForm(open)}
-                defaultData={selectedRating}
+                open={addSetFoulsForm}
+                onOpenChange={(open: boolean) => setAddSetFoulsForm(open)}
+                defaultData={selectedFouls}
                 playerId={id}
               />
             )

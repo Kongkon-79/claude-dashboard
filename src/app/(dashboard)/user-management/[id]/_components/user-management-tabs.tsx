@@ -12,8 +12,9 @@ import NationalTeamCareerPage from "./national-team-career";
 import RatingPage from "./rating";
 import FoulsPage from "./fouls";
 import SetPiecesPage from "./set-pieces";
+import GkStatsPage from "./gk-stats";
 
-const UserManagementTabs = ({id}:{id:string}) => {
+const UserManagementTabs = ({ id }: { id: string }) => {
   // const session = useSession();
   // const token = (session?.data?.user as { accessToken: string })?.accessToken;
 
@@ -24,7 +25,7 @@ const UserManagementTabs = ({id}:{id:string}) => {
   const { data } = useQuery<UserManagementApiResponse>({
     queryKey: ["single-user", id],
     queryFn: async () => {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/${id}`,{
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/${id}`, {
         method: 'GET',
         headers: {
           // 'Authorization': `Bearer ${token}`,
@@ -43,7 +44,7 @@ const UserManagementTabs = ({id}:{id:string}) => {
 
       <div className="pb-8">
         <Link href="/user-management">
-        <button className="bg-[#B6B6B6] flex items-center gap-2 text-[#131313] text-base leading-[120%] font-semibold py-2 px-4 rounded-[8px] "><ArrowLeft className="w-5 h-5"/> Back</button>
+          <button className="bg-[#B6B6B6] flex items-center gap-2 text-[#131313] text-base leading-[120%] font-semibold py-2 px-4 rounded-[8px] "><ArrowLeft className="w-5 h-5" /> Back</button>
         </Link>
       </div>
 
@@ -51,104 +52,93 @@ const UserManagementTabs = ({id}:{id:string}) => {
       <div>
         <div className="bg-[#B6B6B6] flex items-center gap-8 py-5 px-6 rounded-[8px]">
           <button
-            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${
-              isActive === "player-data" &&
+            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "player-data" &&
               "bg-primary text-white rounded-[8px]"
-            }`}
+              }`}
             onClick={() => setIsActive("player-data")}
           >
             Player Data
           </button>
-           <button
-            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${
-              isActive === "transfer-history" &&
+          <button
+            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "transfer-history" &&
               "bg-primary text-white rounded-[8px]"
-            }`}
+              }`}
             onClick={() => setIsActive("transfer-history")}
           >
             Transfer History
           </button>
 
-            <button
-            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${
-              isActive === "national-team-career" &&
+          <button
+            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "national-team-career" &&
               "bg-primary text-white rounded-[8px]"
-            }`}
+              }`}
             onClick={() => setIsActive("national-team-career")}
           >
             National Team Career
           </button>
-           <button
-            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${
-              isActive === "rating" &&
+          <button
+            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "rating" &&
               "bg-primary text-white rounded-[8px]"
-            }`}
+              }`}
             onClick={() => setIsActive("rating")}
           >
             Rating
           </button>
 
-              <button
-            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${
-              isActive === "defensive-stats" &&
+          <button
+            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "defensive-stats" &&
               "bg-primary text-white rounded-[8px]"
-            }`}
+              }`}
             onClick={() => setIsActive("defensive-stats")}
           >
             Defensive Stats
           </button>
-           <button
-            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${
-              isActive === "attacking-stats" &&
+          <button
+            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "attacking-stats" &&
               "bg-primary text-white rounded-[8px]"
-            }`}
+              }`}
             onClick={() => setIsActive("attacking-stats")}
           >
             Attacking Stats
           </button>
 
-            <button
-            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${
-              isActive === "distribution-stats" &&
+          <button
+            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "distribution-stats" &&
               "bg-primary text-white rounded-[8px]"
-            }`}
+              }`}
             onClick={() => setIsActive("distribution-stats")}
           >
             Distribution Stats
           </button>
-           <button
-            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${
-              isActive === "gk-stats" &&
+          <button
+            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "gk-stats" &&
               "bg-primary text-white rounded-[8px]"
-            }`}
+              }`}
             onClick={() => setIsActive("gk-stats")}
           >
             GK Stats
           </button>
 
-            <button
-            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${
-              isActive === "set-pieces" &&
+          <button
+            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "set-pieces" &&
               "bg-primary text-white rounded-[8px]"
-            }`}
+              }`}
             onClick={() => setIsActive("set-pieces")}
           >
             Set Pieces
           </button>
-           <button
-            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${
-              isActive === "fouls" &&
+          <button
+            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "fouls" &&
               "bg-primary text-white rounded-[8px]"
-            }`}
+              }`}
             onClick={() => setIsActive("fouls")}
           >
             Fouls
           </button>
-           <button
-            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${
-              isActive === "last-player-report" &&
+          <button
+            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "last-player-report" &&
               "bg-primary text-white rounded-[8px]"
-            }`}
+              }`}
             onClick={() => setIsActive("last-player-report")}
           >
             Last Player Report
@@ -160,49 +150,54 @@ const UserManagementTabs = ({id}:{id:string}) => {
         <div className="mt-8">
           {isActive === "player-data" && (
 
-              <div>
-                <PlayerData data={data?.data as unknown as User}/>
+            <div>
+              <PlayerData data={data?.data as unknown as User} />
             </div>
           )}
 
-           {isActive === "transfer-history" && (
+          {isActive === "transfer-history" && (
 
-              <div>
-                <TransferHistoryPage data={data?.data as unknown as User}/>
+            <div>
+              <TransferHistoryPage data={data?.data as unknown as User} />
             </div>
           )}
 
-            {isActive === "national-team-career" && (
+          {isActive === "national-team-career" && (
 
-              <div>
-                <NationalTeamCareerPage id={id || ""}/>
+            <div>
+              <NationalTeamCareerPage id={id || ""} />
             </div>
           )}
 
           {isActive === "rating" && (
 
-              <div>
-                <RatingPage id={id || ""}/>
+            <div>
+              <RatingPage id={id || ""} />
             </div>
           )}
 
+          {isActive === "gk-stats" && (
 
+            <div>
+              <GkStatsPage id={id || ""} />
+            </div>
+          )}
 
-           {isActive === "set-pieces" && (
+          {isActive === "set-pieces" && (
 
-              <div>
-                <SetPiecesPage id={id || ""}/>
+            <div>
+              <SetPiecesPage id={id || ""} />
             </div>
           )}
 
           {isActive === "fouls" && (
 
-              <div>
-                <FoulsPage id={id || ""}/>
+            <div>
+              <FoulsPage id={id || ""} />
             </div>
           )}
 
-        
+
         </div>
       </div>
     </div>
