@@ -89,8 +89,11 @@ const UserManagementContainer = () => {
               User
             </TableHead>
             <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
-              Plan Type
+              Role
             </TableHead>
+            {/* <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
+              Plan Type
+            </TableHead> */}
             <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
               Joined
             </TableHead>
@@ -111,8 +114,12 @@ const UserManagementContainer = () => {
                 </TableCell>
 
                 <TableCell className="text-base font-normal text-[#68706A] leading-[150%] text-center py-4">
-                  Premium
+                  {item?.role}
                 </TableCell>
+
+                {/* <TableCell className="text-base font-normal text-[#68706A] leading-[150%] text-center py-4">
+                  Premium
+                </TableCell> */}
                 <TableCell className="text-base font-medium text-[#68706A] leading-[150%] text-center py-4">
                   {moment(item?.createdAt).format("MMM DD YYYY")}
                 </TableCell>
