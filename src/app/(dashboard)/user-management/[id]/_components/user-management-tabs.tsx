@@ -13,6 +13,7 @@ import RatingPage from "./rating";
 import FoulsPage from "./fouls";
 import SetPiecesPage from "./set-pieces";
 import GkStatsPage from "./gk-stats";
+import LastPlayerReportPage from './last-player-report';
 
 const UserManagementTabs = ({ id }: { id: string }) => {
   // const session = useSession();
@@ -194,6 +195,13 @@ const UserManagementTabs = ({ id }: { id: string }) => {
 
             <div>
               <FoulsPage id={id || ""} />
+            </div>
+          )}
+
+          {isActive === "last-player-report" && (
+
+            <div>
+              <LastPlayerReportPage id={id || ""} />
             </div>
           )}
 
