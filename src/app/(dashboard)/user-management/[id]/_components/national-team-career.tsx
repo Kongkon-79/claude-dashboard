@@ -100,6 +100,9 @@ const NationalTeamCareerPage = ({ id }: { id?: string }) => {
                 Team Name
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
+                Category
+              </TableHead>
+              <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
                 Debut
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
@@ -125,6 +128,9 @@ const NationalTeamCareerPage = ({ id }: { id?: string }) => {
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
                     {item?.teamName || "N/A"}
+                  </TableCell>
+                  <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
+                    {item?.category || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
                     {moment(item.debut).format("MMM DD, YYYY")}

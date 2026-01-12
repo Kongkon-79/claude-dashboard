@@ -18,6 +18,7 @@ export interface NationalTeam {
   player: Player;
   flag: string;
   teamName: string;
+  category: string;
   debut: string; 
   match: number;
   goals: number;
