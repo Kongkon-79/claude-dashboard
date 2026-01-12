@@ -127,7 +127,7 @@ const FoulsPage = ({ id }: { id?: string }) => {
                     {item?.redCards || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.offSide || "N/A"}
+                    {item?.offside || "N/A"}
                   </TableCell>
                   <TableCell >
                     <div className="h-full w-auto flex items-end justify-center gap-6 py-3">

@@ -159,7 +159,7 @@ const UserManagementTabs = ({ id }: { id: string }) => {
           {isActive === "transfer-history" && (
 
             <div>
-              <TransferHistoryPage data={data?.data as unknown as User} />
+              <TransferHistoryPage id={id || ""} />
             </div>
           )}
 
