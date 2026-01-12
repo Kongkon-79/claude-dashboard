@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { User, Shield } from "lucide-react"
 import { usePathname } from "next/navigation";
 import { SettingSidebarSkeleton } from './setting-sidebar-skeleton';
+import moment from 'moment';
 
 const SettingSidebar = () => {
   const session = useSession();
@@ -48,16 +49,16 @@ const SettingSidebar = () => {
         </div>
         {/* user info  */}
         <div className='pt-6 pb-10'>
-          <h4 className="text-xl md:text-2xl font-semibold leading-[120%] text-primary text-center">{data?.data?.firstName}{data?.data?.lastName}</h4>
-          <p className='text-sm font-normal leading-[120%] text-[#68706A] text-center pt-1'>{data?.data?.role || ""}</p>
+          <h4 className="text-xl md:text-2xl font-semibold leading-[120%] text-primary text-center">{data?.data?.user?.firstName} {data?.data?.user?.lastName || "N/A"}</h4>
+          <p className='text-sm font-normal leading-[120%] text-[#68706A] text-center pt-1'>{data?.data?.user?.role || "N/A"}</p>
         </div>
         <div className='px-6'>
           <ul>
-            <li className="text-base font-normal text-[#5B6574] leading-[120%] "><strong className="text-base font-semibold leading-[120%] text-[#5B6574]">Name :</strong> {data?.data?.firstName || ""}{data?.data?.lastName || ""}</li>
-            <li className="text-base font-normal text-[#5B6574] leading-[120%] py-3"><strong className="text-base font-semibold leading-[120%] text-[#5B6574]">Email :</strong> {data?.data?.email || ""}</li>
-            <li className="text-base font-normal text-[#5B6574] leading-[120%] "><strong className="text-base font-semibold leading-[120%] text-[#5B6574]">Phone :</strong> {data?.data?.email || ""}</li>
-            <li className="text-base font-normal text-[#5B6574] leading-[120%] py-3"><strong className="text-base font-semibold leading-[120%] text-[#5B6574]">Location :</strong> {data?.data?.email || ""}</li>
-            <li className="text-base font-normal text-[#5B6574] leading-[120%] "><strong className="text-base font-semibold leading-[120%] text-[#5B6574]">Member Since :</strong> 14 August, 2025</li>
+            <li className="text-base font-normal text-[#5B6574] leading-[120%] "><strong className="text-base font-semibold leading-[120%] text-[#5B6574]">Name :</strong> {data?.data?.user?.firstName || "N/A"} {data?.data?.user?.lastName || ""}</li>
+            <li className="text-base font-normal text-[#5B6574] leading-[120%] py-3"><strong className="text-base font-semibold leading-[120%] text-[#5B6574]">Email :</strong> {data?.data?.user?.email || "N/A"}</li>
+            <li className="text-base font-normal text-[#5B6574] leading-[120%] "><strong className="text-base font-semibold leading-[120%] text-[#5B6574]">Phone :</strong> {data?.data?.user?.phone || "N/A"}</li>
+            <li className="text-base font-normal text-[#5B6574] leading-[120%] py-3"><strong className="text-base font-semibold leading-[120%] text-[#5B6574]">Location :</strong> {data?.data?.user?.address || "N/A"}</li>
+            <li className="text-base font-normal text-[#5B6574] leading-[120%] "><strong className="text-base font-semibold leading-[120%] text-[#5B6574]">Member Since :</strong> {moment(data?.data?.user?.lastLogin).format("MM DD YYYY")}</li>
           </ul>
         </div>
 
