@@ -10,7 +10,7 @@ const PlayerData = ({ data }: { data: User }) => {
     <div>
       <div className='bg-white shadow[0px_4px_16px_0px_#00000029] rounded-[16px] grid grid-cols-1 md:grid-cols-4 gap-10 p-6 border'>
         <div className="md:col-span-1">
-          <Image src={data?.profileImage || "/assets/images/no-user.jpg"} alt={data?.firstName || "profile image"} width={1000} height={1000} className="w-full h-[400px] object-cover rounded-[16px]" />
+          <Image src={data?.profileImage || "/assets/images/no-user.jpeg"} alt={data?.firstName || "profile image"} width={1000} height={1000} className="w-full h-[400px] object-cover rounded-[16px]" />
         </div>
         <div className="md:col-span-3">
           <ul className="grid gris-cols-1 md:gris-cols-2 lg:grid-cols-4 gap-6">
