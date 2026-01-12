@@ -26,7 +26,7 @@ type FoulsFormValues = {
   foulswon: number;
   redCards: number;
   yellowCards: number;
-  offSide:number;
+  offside:number;
 };
 
 interface Props {
@@ -52,7 +52,7 @@ const foulsSchema = z.object({
   yellowCards: z
     .number({ message: "Yellow Cards must be a number" })
     .min(0, "Yellow Cards cannot be negative"),
-    offSide: z
+    offside: z
     .number({ message: "Off Side must be a number" })
     .min(0, "Off Side cannot be negative"),
 });
@@ -75,7 +75,7 @@ const AddEditFoulsForm = ({
       foulswon: 0,
       redCards: 0,
       yellowCards: 0,
-      offSide: 0,
+      offside: 0,
     },
   });
 
@@ -87,7 +87,7 @@ const AddEditFoulsForm = ({
         foulswon: defaultData.foulswon,
         redCards: defaultData.redCards,
         yellowCards: defaultData.yellowCards,
-        offSide: defaultData.offSide,
+        offside: defaultData.offside,
       });
     }
   }, [defaultData, form]);
@@ -231,7 +231,7 @@ const AddEditFoulsForm = ({
             </div>
              <FormField
                 control={form.control}
-                name="offSide"
+                name="offside"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">

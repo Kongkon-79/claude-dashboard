@@ -25,16 +25,19 @@ const NationalCareerView = ({
                 <Image src={nationalTeam?.flag || "/assets/images/no-image.png"} alt="Profile" width={40} height={40} className="w-16 h-16 rounded-[12px] object-cover" />
           </p>
           <p className="text-base font-normal text-[#6C757D)] leading-[150%]">
-            <strong className="text-base font-semibold text-[#343A40] leading-[150%]">Team Name :</strong> <br/> {nationalTeam?.teamName}
+            <strong className="text-base font-semibold text-[#343A40] leading-[150%]">Team Name :</strong> <br/> {nationalTeam?.teamName || "N/A"}
+          </p>
+          <p className="text-base font-normal text-[#6C757D)] leading-[150%]">
+            <strong className="text-base font-semibold text-[#343A40] leading-[150%]">Category :</strong> <br/> {nationalTeam?.category || "N/A"}
           </p>
           <p className="text-base font-normal text-[#6C757D)] leading-[150%]">
             <strong className="text-base font-semibold text-[#343A40] leading-[150%]">Debut Date :</strong> <br/> {moment(nationalTeam?.debut).format("MMM DD, YYYY")}
           </p>
            <p className="text-base font-normal text-[#6C757D)] leading-[150%]">
-            <strong className="text-base font-semibold text-[#343A40] leading-[150%]">Goals:</strong> <br/> {nationalTeam?.goals}
+            <strong className="text-base font-semibold text-[#343A40] leading-[150%]">Goals:</strong> <br/> {nationalTeam?.goals || "N/A"}
           </p>
           <p className="text-base font-normal text-[#6C757D)] leading-[150%]">
-            <strong className="text-base font-semibold text-[#343A40] leading-[150%]">Match :</strong> <br/> {nationalTeam?.match}
+            <strong className="text-base font-semibold text-[#343A40] leading-[150%]">Match :</strong> <br/> {nationalTeam?.match || "N/A"}
           </p>
         </div>
       </DialogContent>

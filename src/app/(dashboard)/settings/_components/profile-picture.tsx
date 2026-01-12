@@ -64,11 +64,11 @@ const ProfilePicture = () => {
   });
 
   useEffect(() => {
-    const image = data?.data?.profileImage;
+    const image = data?.data?.user?.profileImage;
     if (image) {
       setProfileImage(image);
     }
-  }, [data?.data?.profileImage]);
+  }, [data?.data?.user?.profileImage]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

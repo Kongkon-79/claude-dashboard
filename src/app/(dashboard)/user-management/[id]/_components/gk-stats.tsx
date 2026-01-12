@@ -214,10 +214,16 @@ const GkStatsPage = ({ id }: { id?: string }) => {
         <div className="w-full flex items-center justify-between">
 
           <h3 className='text-2xl md:text-3xl  text-[#131313] font-semibold leading-[120%]'>GK Stats</h3>
-          <button onClick={() => {
+          <div>
+          {
+            data && data?.data && data?.data?.length < 1 && (
+               <button onClick={() => {
             setSelectedGkStates(null);
             setAddGkStatesForm(true);
-          }} className="bg-primary text-white py-3 px-4 rounded-[12px] text-base leading-normal font-semibold">Add Gk Stats</button>
+          }} className="bg-primary text-white py-3 px-4 rounded-[12px] text-base leading-normal font-semibold">Add Set Pieces</button>
+            )
+          }
+          </div>
         </div>
 
         <div className="pt-6">

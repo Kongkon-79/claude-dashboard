@@ -43,7 +43,7 @@ export interface FoulsData {
   foulswon: number;
   redCards: number;
   yellowCards: number;
-  offSide:number;
+  offside:number;
   createdAt: string;
   updatedAt: string;
   __v: number;
