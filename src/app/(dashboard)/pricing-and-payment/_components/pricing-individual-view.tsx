@@ -3,7 +3,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import moment from "moment";
 import { ContactItem } from "./pricing-data-type";
 
-const PricingAndPaymentView = ({
+const PricingIndividualView = ({
   open,
   onOpenChange,
   contactData,
@@ -40,5 +40,5 @@ const PricingAndPaymentView = ({
   );
 };
 
-export default PricingAndPaymentView;
+export default PricingIndividualView;
 

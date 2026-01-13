@@ -12,17 +12,17 @@ import {
 import DeleteModal from "@/components/modals/delete-modal";
 import ClaudePagination from "@/components/ui/claude-pagination";
 import { Trash, Eye } from "lucide-react";
-import ContactManagementView from "./contact-management-view";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { ContactApiResponse, ContactItem } from "./contact-data-type";
 import { useSession } from "next-auth/react";
 import moment from "moment";
 import TableSkeletonWrapper from "@/components/shared/TableSkeletonWrapper/TableSkeletonWrapper";
 import ErrorContainer from "@/components/shared/ErrorContainer/ErrorContainer";
 import NotFound from "@/components/shared/NotFound/NotFound";
 import { toast } from "sonner";
+import { ContactApiResponse, ContactItem } from "./pricing-data-type";
+import PricingIndividualView from "./pricing-individual-view";
 
-const ContactManagementContainer = () => {
+const PricingIndividualContainer = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [selectViewContact, setSelectViewContact] = useState(false);
@@ -35,9 +35,9 @@ const ContactManagementContainer = () => {
 
 
   const { data, isLoading, error, isError } = useQuery<ContactApiResponse>({
-    queryKey: ["contact-management", currentPage],
+    queryKey: ["individual-pricing", currentPage],
     queryFn: async () => {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/contact?page=${currentPage}&limit=8`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/dashboard/all-player-reveneue?page=${currentPage}&limit=8`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`
@@ -84,20 +84,20 @@ const ContactManagementContainer = () => {
           <TableHeader className="bg-[#E6F4E6] rounded-t-[12px]">
             <TableRow className="">
               <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] py-4 pl-6">
-                Email Address
+                Customer Name
               </TableHead>
               <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
-                Name
-              </TableHead>
-              <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
-                Phone Number
-              </TableHead>
-              <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
-                Message
+                Price
               </TableHead>
               <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
                 Date
               </TableHead>
+              {/* <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
+                Message
+              </TableHead>
+              <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
+                Date
+              </TableHead> */}
               <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4">
                 Action
               </TableHead>
@@ -108,7 +108,7 @@ const ContactManagementContainer = () => {
               return (
                 <TableRow key={index} className="">
                   <TableCell className="text-base font-medium text-[#68706A] leading-[150%] pl-6 py-4">
-                    {item?.email}
+                    {/* {item?.name} */}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#68706A] leading-[150%] text-center py-4">
                     {item?.fullName}
@@ -150,12 +150,12 @@ const ContactManagementContainer = () => {
     )
   }
 
-    // delete contact api
+    // delete individual pricing api
   const { mutate } = useMutation({
-    mutationKey: ["delete-contact"],
+    mutationKey: ["delete-individual-pricing"],
     mutationFn: async (id: string) => {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/contact/${id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/dashboard/delete-player-account/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -171,8 +171,8 @@ const ContactManagementContainer = () => {
         toast.error(data?.message || "Something went wrong");
         return;
       }
-      toast.success(data?.message || "Contact deleted successfully");
-      queryClient.invalidateQueries({ queryKey: ["contact-management"] });
+      toast.success(data?.message || "Individual Pricing deleted successfully");
+      queryClient.invalidateQueries({ queryKey: ["individual-pricing"] });
     },
   });
 
@@ -222,7 +222,7 @@ const ContactManagementContainer = () => {
         {/* contact view modal  */}
         <div>
           {selectViewContact && (
-            <ContactManagementView
+            <PricingIndividualView
               open={selectViewContact}
               onOpenChange={(open: boolean) => setSelectViewContact(open)}
               contactData={selectedContact}
@@ -234,4 +234,4 @@ const ContactManagementContainer = () => {
   );
 };
 
-export default ContactManagementContainer;
+export default PricingIndividualContainer;
