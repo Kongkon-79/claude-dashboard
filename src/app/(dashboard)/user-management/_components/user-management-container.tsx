@@ -20,6 +20,7 @@ import ErrorContainer from "@/components/shared/ErrorContainer/ErrorContainer";
 import NotFound from "@/components/shared/NotFound/NotFound";
 import { toast } from "sonner";
 import { UserManagementApiResponse } from "./user-management-data-type";
+import Image from "next/image"
 
 import Link from 'next/link';
 
@@ -88,6 +89,16 @@ const UserManagementContainer = () => {
             <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] py-4 pl-6">
               User
             </TableHead>
+           
+             <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
+              Phone Number
+            </TableHead>
+             <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
+              Citizeship
+            </TableHead>
+             <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
+              Gender
+            </TableHead>
             <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
               Role
             </TableHead>
@@ -107,10 +118,31 @@ const UserManagementContainer = () => {
             return (
               <TableRow key={index} className="">
                 <TableCell className="text-left pl-6 py-4">
-                  <p className="text-base font-medium text-[#343A40] leading-[150%]">
-                    {item?.firstName} {item?.lastName}
-                  </p>
-                  <p className="text-sm font-normal leading-[150%] text-[#68706A]"> {item?.email}</p>
+                  <div className='w-[230px] flex items-center gap-2'>
+                    <div>
+                      <Image src={item?.profileImage || "/assets/images/no-user.jpeg"} alt="Profile" width={100} height={100} className="w-10 h-10 rounded-full object-contain" />
+                    </div>
+                    <div>
+                      <h4 className="text-base font-semibold leading-[150%] text-[#181818]">
+                        {item?.firstName} {item?.lastName}
+                      </h4>
+                      <p className="flex items-center gap-2 text-sm font-normal leading-[150%] text-[#616161]">
+                        {item?.email}
+                      </p>
+                    </div>
+
+                  </div>
+                </TableCell>
+
+                <TableCell className="text-base font-normal text-[#68706A] leading-[150%] text-center py-4">
+                  {item?.phone || "N/A"}
+                </TableCell>
+
+                <TableCell className="text-base font-normal text-[#68706A] leading-[150%] text-center py-4">
+                  {item?.citizenship || "N/A"}
+                </TableCell>
+                <TableCell className="text-base font-normal text-[#68706A] leading-[150%] text-center py-4">
+                  {item?.gender || "N/A"}
                 </TableCell>
 
                 <TableCell className="text-base font-normal text-[#68706A] leading-[150%] text-center py-4">
@@ -126,10 +158,10 @@ const UserManagementContainer = () => {
                 <TableCell className="h-full flex items-center justify-center gap-6 py-4">
                   <Link href={`/user-management/${item?._id}`}>
                     <button
-                    className="cursor-pointer mt-2 "
-                  >
-                    <Eye className="h-6 w-6" />
-                  </button>
+                      className="cursor-pointer mt-2 "
+                    >
+                      <Eye className="h-6 w-6" />
+                    </button>
                   </Link>
                   <button
                     onClick={() => {
