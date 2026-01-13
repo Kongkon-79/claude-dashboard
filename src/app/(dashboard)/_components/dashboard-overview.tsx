@@ -63,7 +63,7 @@ export function DashboardOverview() {
             <p className="text-sm font-semibold text-[#424242] leading-[120%]">
               Total Revenue
             </p>
-            <p className="text-3xl leading-[120%] text-[#424242] font-normal font-hexco pt-1">
+            <p className="text-3xl leading-[120%] text-[#424242] font-bold font-hexco pt-1">
               {data?.data?.totalRevenew || 0}
             </p>
           </div>
@@ -79,7 +79,7 @@ export function DashboardOverview() {
             <p className="text-sm font-semibold text-[#424242] leading-[120%]">
               Total Players
             </p>
-            <p className="text-3xl leading-[120%] text-[#424242] font-normal font-hexco pt-1">
+            <p className="text-3xl leading-[120%] text-[#424242] font-bold font-hexco pt-1">
               {data?.data?.totalPlayers || 0}
             </p>
           </div>
@@ -95,7 +95,7 @@ export function DashboardOverview() {
             <p className="text-sm font-semibold text-[#424242] leading-[120%]">
               Total Contact
             </p>
-            <p className="text-3xl leading-[120%] text-[#424242] font-normal font-hexco pt-1">
+            <p className="text-3xl leading-[120%] text-[#424242] font-bold font-hexco pt-1">
               {data?.data?.totalContact || 0}
             </p>
           </div>
@@ -111,7 +111,7 @@ export function DashboardOverview() {
             <p className="text-sm font-semibold text-[#424242] leading-[120%]">
               Total GK
             </p>
-            <p className="text-3xl leading-[120%] text-[#424242] font-normal font-hexco pt-1">
+            <p className="text-3xl leading-[120%] text-[#424242] font-bold font-hexco pt-1">
               {data?.data?.totalGk || 0}
             </p>
           </div>
