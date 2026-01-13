@@ -84,7 +84,7 @@ const ContactManagementContainer = () => {
           <TableHeader className="bg-[#E6F4E6] rounded-t-[12px]">
             <TableRow className="">
               <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] py-4 pl-6">
-                Mail Address
+                Email Address
               </TableHead>
               <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
                 Name

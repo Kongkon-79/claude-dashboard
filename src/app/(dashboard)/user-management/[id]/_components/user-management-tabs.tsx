@@ -14,6 +14,7 @@ import FoulsPage from "./fouls";
 import SetPiecesPage from "./set-pieces";
 import GkStatsPage from "./gk-stats";
 import LastPlayerReportPage from './last-player-report';
+import DefensiveStatsPage from './defensive-stats';
 
 const UserManagementTabs = ({ id }: { id: string }) => {
   // const session = useSession();
@@ -176,6 +177,14 @@ const UserManagementTabs = ({ id }: { id: string }) => {
               <RatingPage id={id || ""} />
             </div>
           )}
+
+
+          {isActive === "defensive-stats" && (
+
+            <div>
+              <DefensiveStatsPage id={id || ""} />
+            </div>
+          )} 
 
           {isActive === "gk-stats" && (
 
