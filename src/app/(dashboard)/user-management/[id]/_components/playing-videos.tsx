@@ -14,6 +14,9 @@ const PlayingVideosPage = ({ videos }: { videos?: string[] }) => {
   }
 
   return (
+
+
+    
     <Card className="mt-8">
       <CardHeader>
         <CardTitle className="text-2xl md:text-3xl font-bold">Playing Videos</CardTitle>
