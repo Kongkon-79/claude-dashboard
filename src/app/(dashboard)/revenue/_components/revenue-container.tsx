@@ -19,7 +19,7 @@ import TableSkeletonWrapper from "@/components/shared/TableSkeletonWrapper/Table
 import ErrorContainer from "@/components/shared/ErrorContainer/ErrorContainer";
 import NotFound from "@/components/shared/NotFound/NotFound";
 import { toast } from "sonner";
-import { ContactApiResponse } from "./revenue-data-type";
+import { GetRevenueApiResponse } from "./revenue-data-type";
 
 const RevenueContainer = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -31,10 +31,10 @@ const RevenueContainer = () => {
 
 
 
-  const { data, isLoading, error, isError } = useQuery<ContactApiResponse>({
-    queryKey: ["contact-management", currentPage],
+  const { data, isLoading, error, isError } = useQuery<GetRevenueApiResponse>({
+    queryKey: ["all-revenue", currentPage],
     queryFn: async () => {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/contact?page=${currentPage}&limit=8`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/dashboard/total-revenue?page=${currentPage}&limit=8`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`
@@ -45,7 +45,9 @@ const RevenueContainer = () => {
     enabled: !!token
   })
 
-  const totalPages = data?.meta ? Math.ceil(data.meta.total / data.meta.limit) : 0;
+  console.log(data?.data?.data)
+
+  const totalPages = data?.meta ? Math.ceil(data?.meta?.total / data?.meta?.limit) : 0;
 
 
 
@@ -67,7 +69,8 @@ const RevenueContainer = () => {
   } else if (
     data &&
     data?.data &&
-    data?.data?.length === 0
+    data?.data?.data &&
+    data?.data?.data?.length === 0
   ) {
     content = (
       <div>
@@ -75,22 +78,16 @@ const RevenueContainer = () => {
       </div>
     );
   }
-  else if (data && data?.data && data?.data?.length > 0){
+  else if (data && data?.data && data?.data?.data && data?.data?.data?.length > 0){
     content = (
         <Table className="">
           <TableHeader className="bg-[#E6F4E6] rounded-t-[12px]">
             <TableRow className="">
               <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] py-4 pl-6">
-                Mail Address
+                Customer Name
               </TableHead>
               <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
-                Name
-              </TableHead>
-              <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
-                Phone Number
-              </TableHead>
-              <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
-                Message
+                Price
               </TableHead>
               <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
                 Date
@@ -101,20 +98,14 @@ const RevenueContainer = () => {
             </TableRow>
           </TableHeader>
           <TableBody className="border-b border-x border-[#E6E7E6] rounded-b-[12px]">
-            {data?.data?.map((item, index) => {
+            {data?.data?.data?.map((item, index) => {
               return (
                 <TableRow key={index} className="">
                   <TableCell className="text-base font-medium text-[#68706A] leading-[150%] pl-6 py-4">
-                    {item?.email}
+                    {item?.user?.name || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#68706A] leading-[150%] text-center py-4">
-                    {item?.fullName}
-                  </TableCell>
-                  <TableCell className="text-base font-normal text-[#68706A] leading-[150%] text-center py-4">
-                    {item?.phone}
-                  </TableCell>
-                  <TableCell className="w-[395px] text-base font-normal text-[#68706A] leading-[150%] text-center py-4">
-                    {item?.message}
+                    {item?.amount || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-medium text-[#343A40] leading-[150%] text-center py-4">
                     {moment(item?.createdAt).format("MMM DD YYYY")}
@@ -123,7 +114,7 @@ const RevenueContainer = () => {
                     <button
                       onClick={() => {
                         setDeleteModalOpen(true);
-                        setSelectedContactId(item?._id)
+                        setSelectedContactId(item?.paymentId)
                       }}
                       className="cursor-pointer mt-2"
                     >
@@ -140,10 +131,10 @@ const RevenueContainer = () => {
 
     // delete contact api
   const { mutate } = useMutation({
-    mutationKey: ["delete-contact"],
+    mutationKey: ["delete-revenue"],
     mutationFn: async (id: string) => {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/contact/${id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/dashboard/delete-player-account/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -159,8 +150,8 @@ const RevenueContainer = () => {
         toast.error(data?.message || "Something went wrong");
         return;
       }
-      toast.success(data?.message || "Contact deleted successfully");
-      queryClient.invalidateQueries({ queryKey: ["contact-management"] });
+      toast.success(data?.message || "Revenue deleted successfully");
+      queryClient.invalidateQueries({ queryKey: ["all-revenue"] });
     },
   });
 
@@ -171,12 +162,17 @@ const RevenueContainer = () => {
     setDeleteModalOpen(false);
   };
   return (
-    <div>
+    <div className="p-6 ">
+         <div className="pt-12 pb-16">
+          <span className="bg-primary text-2xl md:text-3xl lg:text-4xl text-[#F4FFF4] font-bold leading-[120%] border border-primary rounded-[6px] py-10 px-16">$ {data?.data?.totalRevenue || 0}</span>
+        </div>
       {/* table container */}
-      <div className="p-6 space-y-6">
+      <div className=" space-y-6 mb-6">
+
+     
 
         {/* table  */}
-      <div>{content}</div>
+      <div className="">{content}</div>
 
         {/* pagination  */}
         {
@@ -203,7 +199,7 @@ const RevenueContainer = () => {
             onClose={() => setDeleteModalOpen(false)}
             onConfirm={handleDelete}
             title="Are You Sure?"
-            desc="Are you sure you want to delete this match?"
+            desc="Are you sure you want to delete this Revenue?"
           />
         )}
       </div>
