@@ -15,6 +15,7 @@ import SetPiecesPage from "./set-pieces";
 import GkStatsPage from "./gk-stats";
 import LastPlayerReportPage from './last-player-report';
 import DefensiveStatsPage from './defensive-stats';
+import AttackingStatsPage from "./attacking-stats";
 
 const UserManagementTabs = ({ id }: { id: string }) => {
   // const session = useSession();
@@ -183,6 +184,12 @@ const UserManagementTabs = ({ id }: { id: string }) => {
 
             <div>
               <DefensiveStatsPage id={id || ""} />
+            </div>
+          )} 
+          {isActive === "attacking-stats" && (
+
+            <div>
+              <AttackingStatsPage id={id || ""} />
             </div>
           )} 
 
