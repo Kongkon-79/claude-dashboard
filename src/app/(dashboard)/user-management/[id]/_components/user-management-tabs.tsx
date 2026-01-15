@@ -41,10 +41,7 @@ const UserManagementTabs = ({ id }: { id: string }) => {
     // enabled: !!token
   })
 
-  console.log( "single user", data?.data)
-
-  const playerRole =  data && data?.data && data?.data?.role;
-  console.log(playerRole)
+  const playerRole =   data?.data?.role;
 
   return (
     <div className="p-6">
@@ -200,7 +197,7 @@ const UserManagementTabs = ({ id }: { id: string }) => {
             {isActive === "distribution-stats" && (
 
             <div>
-              <DistributionStatsPage id={id || ""} role={playerRole} />
+              <DistributionStatsPage id={id || ""} role={playerRole || ""} />
             </div>
           )} 
 

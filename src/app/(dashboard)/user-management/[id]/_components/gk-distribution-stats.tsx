@@ -18,27 +18,27 @@ import NotFound from "@/components/shared/NotFound/NotFound";
 import { Trash, SquarePen } from "lucide-react";
 import ClaudePagination from "@/components/ui/claude-pagination";
 import DeleteModal from "@/components/modals/delete-modal";
-import AddEditAttackingStatsForm from "./add-edit-attacking-stats-form";
-import { AttackingStat, AttackingStatApiResponse } from "@/components/types/attacking-stats-data-type";
+import { GkDistributionStats, GkDistributionStatsApiResponse } from "@/components/types/gk-distribution-stats-data-type";
+import AddEditGkDistributionForm from "./add-edit-gk-distribution-form";
 
 const GkDistributionStatsPage = ({ id }: { id?: string }) => {
   const [currentPage, setCurrentPage] = useState(1);
   console.log("view data", id)
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [attackingStatsId, setAttackingStatsId] = useState("");
-  const [selectedAttackingStates, setSelectedAttackingStates] =
-    useState<AttackingStat | null>(null);
-  const [addAttackingStatesForm, setAddAttackingStatesForm] = useState(false);
+  const [gkDistributionId, setGkDistributionId] = useState("");
+  const [selectedGkDistribution, setselectedGkDistribution] =
+    useState<GkDistributionStats | null>(null);
+  const [addGkDistributionForm, setAddGkDistributionForm] = useState(false);
   const queryClient = useQueryClient();
   console.log(queryClient)
   const session = useSession();
   const token = (session?.data?.user as { accessToken: string })?.accessToken;
 
-  const { data, isLoading, isError, error } = useQuery<AttackingStatApiResponse>({
-    queryKey: ["all-attacking", id, currentPage],
+  const { data, isLoading, isError, error } = useQuery<GkDistributionStatsApiResponse>({
+    queryKey: ["all-gkdistributionstats", id, currentPage],
     queryFn: async () => {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/attacking/${id}?page=${currentPage}&limit=8`, {
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/gkdistributionstats/${id}?page=${currentPage}&limit=8`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -90,28 +90,28 @@ const GkDistributionStatsPage = ({ id }: { id?: string }) => {
           <TableHeader className="bg-primary/15 rounded-t-[12px]">
             <TableRow className="">
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] py-3 pl-6">
-                Goals
+                Key Passes
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Assists 
+                Medium Range Passes 
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Shots inside PA
+                Passes
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Shots outside PA
+                Short Passes
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Total Shots
+                Passes in Final Third
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Shots on Target
+                Passes Forward
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Shooting Accuracy
+                Passes in Middle Third
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Shots off Target
+                Passes Sideways
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3">
                 Action
@@ -124,36 +124,36 @@ const GkDistributionStatsPage = ({ id }: { id?: string }) => {
                 <TableRow key={index} className="">
                   <TableCell className=" text-base font-medium text-[#131313] leading-[150%] pl-10 py-3">
 
-                    {item?.goals || "N/A"}
+                    {item?.keyPasses || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.assists || "N/A"}
+                    {item?.mediumRangePasses || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.shotsNsidePr || "N/A"}
+                    {item?.passes || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.shotsOutsidePa || "N/A"}
+                    {item?.shortPasses || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.totalShots || "N/A"}
+                    {item?.passesInFinalThird || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.shotsOnTarget || "N/A"}
+                    {item?.passesForward || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.shootingAccuracy || "N/A"}
+                    {item?.passesInMiddleThird || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.shotsOffTarget || "N/A"}
+                    {item?.passesSideways || "N/A"}
                   </TableCell>
                   <TableCell >
                     <div className="h-full w-auto flex items-end justify-center gap-6 py-3">
 
                       <button
                         onClick={() => {
-                          setSelectedAttackingStates(item);
-                          setAddAttackingStatesForm(true);
+                          setselectedGkDistribution(item);
+                          setAddGkDistributionForm(true);
                         }}
                         className="cursor-pointer"
                       >
@@ -164,7 +164,7 @@ const GkDistributionStatsPage = ({ id }: { id?: string }) => {
                       <button
                         onClick={() => {
                           setDeleteModalOpen(true);
-                          setAttackingStatsId(item?._id);
+                          setGkDistributionId(item?._id);
                         }}
                         className="cursor-pointer"
                       >
@@ -184,10 +184,10 @@ const GkDistributionStatsPage = ({ id }: { id?: string }) => {
 
   // delete national team player 
   const { mutate } = useMutation({
-    mutationKey: ["delete-attacking"],
+    mutationKey: ["delete-gkdistributionstats"],
     mutationFn: async (id: string) => {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/attacking/${id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/gkdistributionstats/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -203,14 +203,14 @@ const GkDistributionStatsPage = ({ id }: { id?: string }) => {
         toast.error(data?.message || "Something went wrong");
         return;
       }
-      toast.success(data?.message || "Attacking Stats deleted successfully");
-      queryClient.invalidateQueries({ queryKey: ["all-attacking"] });
+      toast.success(data?.message || "Gk Distribution Stats deleted successfully");
+      queryClient.invalidateQueries({ queryKey: ["all-gkdistributionstats"] });
     },
   });
 
   const handleDelete = () => {
-    if (attackingStatsId) {
-      mutate(attackingStatsId);
+    if (gkDistributionId) {
+      mutate(gkDistributionId);
     }
     setDeleteModalOpen(false);
   };
@@ -224,8 +224,8 @@ const GkDistributionStatsPage = ({ id }: { id?: string }) => {
           {
             data && data?.data && data?.data?.length < 1 && (
                <button onClick={() => {
-            setSelectedAttackingStates(null);
-            setAddAttackingStatesForm(true);
+            setselectedGkDistribution(null);
+            setAddGkDistributionForm(true);
           }} className="bg-primary text-white py-3 px-4 rounded-[12px] text-base leading-normal font-semibold">Add Gk Distribution Stats</button>
             )
           }
@@ -261,7 +261,7 @@ const GkDistributionStatsPage = ({ id }: { id?: string }) => {
             onClose={() => setDeleteModalOpen(false)}
             onConfirm={handleDelete}
             title="Are You Sure?"
-            desc="Are you sure you want to delete this Defensive State?"
+            desc="Are you sure you want to delete this Gk Distribution Stats?"
           />
         )}
 
@@ -269,11 +269,11 @@ const GkDistributionStatsPage = ({ id }: { id?: string }) => {
 
         <div>
           {
-            addAttackingStatesForm && (
-              <AddEditAttackingStatsForm
-                open={addAttackingStatesForm}
-                onOpenChange={(open: boolean) => setAddAttackingStatesForm(open)}
-                defaultData={selectedAttackingStates}
+            addGkDistributionForm && (
+              <AddEditGkDistributionForm
+                open={addGkDistributionForm}
+                onOpenChange={(open: boolean) => setAddGkDistributionForm(open)}
+                defaultData={selectedGkDistribution}
                 playerId={id}
               />
             )

@@ -261,7 +261,7 @@ const DefensiveStatsPage = ({ id }: { id?: string }) => {
             onClose={() => setDeleteModalOpen(false)}
             onConfirm={handleDelete}
             title="Are You Sure?"
-            desc="Are you sure you want to delete this Defensive State?"
+            desc="Are you sure you want to delete this Defensive Stats?"
           />
         )}
 

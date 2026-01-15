@@ -5,12 +5,13 @@ import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
-import { UserManagementApiResponse } from "../user-management/_components/user-management-data-type";
+// import { UserManagementApiResponse } from "../user-management/_components/user-management-data-type";
 import TableSkeletonWrapper from "@/components/shared/TableSkeletonWrapper/TableSkeletonWrapper";
 import ErrorContainer from "@/components/shared/ErrorContainer/ErrorContainer";
 import NotFound from "@/components/shared/NotFound/NotFound";
 import moment from "moment";
 import Image from "next/image"
+import { UserManagementApiResponse } from "./user-data-type";
 
 const UserRegistration = () => {
 
