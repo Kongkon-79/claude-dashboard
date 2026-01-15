@@ -50,5 +50,5 @@ export interface UserManagementApiResponse {
   success: boolean;
   message: string;
   meta: Meta;
-  data: UserInfo;
+  data: UserInfo[];
 }

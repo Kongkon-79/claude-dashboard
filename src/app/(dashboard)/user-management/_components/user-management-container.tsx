@@ -19,10 +19,11 @@ import TableSkeletonWrapper from "@/components/shared/TableSkeletonWrapper/Table
 import ErrorContainer from "@/components/shared/ErrorContainer/ErrorContainer";
 import NotFound from "@/components/shared/NotFound/NotFound";
 import { toast } from "sonner";
-import { UserManagementApiResponse } from "./user-management-data-type";
+// import { UserManagementApiResponse } from "./user-management-data-type";
 import Image from "next/image"
 
 import Link from 'next/link';
+import { UserManagementApiResponse } from "../../_components/user-data-type";
 
 const UserManagementContainer = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -214,12 +215,12 @@ const UserManagementContainer = () => {
     setDeleteModalOpen(false);
   };
   return (
-    <div>
+    <div className="">
       {/* table container */}
       <div className="p-6 space-y-6">
 
         {/* table  */}
-        <div>{content}</div>
+        <div className="">{content}</div>
 
         {/* pagination  */}
         {

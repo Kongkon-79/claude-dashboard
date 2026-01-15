@@ -19,8 +19,8 @@ import TableSkeletonWrapper from "@/components/shared/TableSkeletonWrapper/Table
 import ErrorContainer from "@/components/shared/ErrorContainer/ErrorContainer";
 import NotFound from "@/components/shared/NotFound/NotFound";
 import { toast } from "sonner";
-import { ContactApiResponse, ContactItem } from "./pricing-data-type";
 import PricingIndividualView from "./pricing-individual-view";
+import { GetIndividualApiResponse, PaymentItem } from "./individual-pricing-data-type";
 
 const PricingIndividualContainer = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -28,16 +28,16 @@ const PricingIndividualContainer = () => {
   const [selectViewContact, setSelectViewContact] = useState(false);
   const session = useSession();
   const token = (session?.data?.user as { accessToken: string })?.accessToken;
-  const [selectedContact, setSelectedContact] = useState<ContactItem | null>(null);
+  const [selectedContact, setSelectedContact] = useState<PaymentItem | null>(null);
   const [selectedContactId, setSelectedContactId] = useState("");
   const queryClient = useQueryClient();
 
 
 
-  const { data, isLoading, error, isError } = useQuery<ContactApiResponse>({
+  const { data, isLoading, error, isError } = useQuery<GetIndividualApiResponse>({
     queryKey: ["individual-pricing", currentPage],
     queryFn: async () => {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/dashboard/all-player-reveneue?page=${currentPage}&limit=8`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/dashboard/total-revenue?paymentType=Individual&page=${currentPage}&limit=8`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`
@@ -70,7 +70,8 @@ const PricingIndividualContainer = () => {
   } else if (
     data &&
     data?.data &&
-    data?.data?.length === 0
+    data?.data?.data &&
+    data?.data?.data?.length === 0
   ) {
     content = (
       <div>
@@ -78,7 +79,7 @@ const PricingIndividualContainer = () => {
       </div>
     );
   }
-  else if (data && data?.data && data?.data?.length > 0){
+  else if (data && data?.data && data?.data?.data && data?.data?.data?.length > 0){
     content = (
         <Table className="">
           <TableHeader className="bg-[#E6F4E6] rounded-t-[12px]">
@@ -92,32 +93,20 @@ const PricingIndividualContainer = () => {
               <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
                 Date
               </TableHead>
-              {/* <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
-                Message
-              </TableHead>
-              <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
-                Date
-              </TableHead> */}
               <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4">
                 Action
               </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody className="border-b border-x border-[#E6E7E6] rounded-b-[12px]">
-            {data?.data?.map((item, index) => {
+            {data?.data?.data?.map((item, index) => {
               return (
                 <TableRow key={index} className="">
                   <TableCell className="text-base font-medium text-[#68706A] leading-[150%] pl-6 py-4">
-                    {/* {item?.name} */}
+                    {item?.user?.name}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#68706A] leading-[150%] text-center py-4">
-                    {item?.fullName}
-                  </TableCell>
-                  <TableCell className="text-base font-normal text-[#68706A] leading-[150%] text-center py-4">
-                    {item?.phone}
-                  </TableCell>
-                  <TableCell className="w-[395px] text-base font-normal text-[#68706A] leading-[150%] text-center py-4">
-                    {item?.message}
+                    $ {item?.amount}
                   </TableCell>
                   <TableCell className="text-base font-medium text-[#343A40] leading-[150%] text-center py-4">
                     {moment(item?.createdAt).format("MMM DD YYYY")}
@@ -135,7 +124,7 @@ const PricingIndividualContainer = () => {
                     <button
                       onClick={() => {
                         setDeleteModalOpen(true);
-                        setSelectedContactId(item?._id)
+                        setSelectedContactId(item?.paymentId)
                       }}
                       className="cursor-pointer mt-2"
                     >
@@ -225,7 +214,7 @@ const PricingIndividualContainer = () => {
             <PricingIndividualView
               open={selectViewContact}
               onOpenChange={(open: boolean) => setSelectViewContact(open)}
-              contactData={selectedContact}
+              individualPricing={selectedContact}
             />
           )}
         </div>

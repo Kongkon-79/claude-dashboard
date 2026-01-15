@@ -18,27 +18,27 @@ import NotFound from "@/components/shared/NotFound/NotFound";
 import { Trash, SquarePen } from "lucide-react";
 import ClaudePagination from "@/components/ui/claude-pagination";
 import DeleteModal from "@/components/modals/delete-modal";
-import AddEditDefensiveStatsForm from "./add-edit-defensive-stats-form";
-import { DefensiveStats, DefensiveListApiResponse } from "@/components/types/defensive-stats-data-type";
+import { GkDistributionStats, GkDistributionStatsApiResponse } from "@/components/types/gk-distribution-stats-data-type";
+import AddEditGkDistributionForm from "./add-edit-gk-distribution-form";
 
-const DefensiveStatsPage = ({ id }: { id?: string }) => {
+const GkDistributionStatsPage = ({ id }: { id?: string }) => {
   const [currentPage, setCurrentPage] = useState(1);
   console.log("view data", id)
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [defensiveStatsId, setDefensiveStatsId] = useState("");
-  const [selectedDefensiveStates, setSelectedDefensiveStates] =
-    useState<DefensiveStats | null>(null);
-  const [addDefensiveStatesForm, setAddDefensiveStatesForm] = useState(false);
+  const [gkDistributionId, setGkDistributionId] = useState("");
+  const [selectedGkDistribution, setselectedGkDistribution] =
+    useState<GkDistributionStats | null>(null);
+  const [addGkDistributionForm, setAddGkDistributionForm] = useState(false);
   const queryClient = useQueryClient();
   console.log(queryClient)
   const session = useSession();
   const token = (session?.data?.user as { accessToken: string })?.accessToken;
 
-  const { data, isLoading, isError, error } = useQuery<DefensiveListApiResponse>({
-    queryKey: ["all-defensive", id, currentPage],
+  const { data, isLoading, isError, error } = useQuery<GkDistributionStatsApiResponse>({
+    queryKey: ["all-gkdistributionstats", id, currentPage],
     queryFn: async () => {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/defensive/${id}?page=${currentPage}&limit=8`, {
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/gkdistributionstats/${id}?page=${currentPage}&limit=8`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -90,28 +90,28 @@ const DefensiveStatsPage = ({ id }: { id?: string }) => {
           <TableHeader className="bg-primary/15 rounded-t-[12px]">
             <TableRow className="">
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] py-3 pl-6">
-                Tackle Attempts
+                Key Passes
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Tackle Succeeded: Possession 
+                Medium Range Passes 
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Tackle Succeeded: No Possession
+                Passes
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Tackle Failed
+                Short Passes
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Turnover Won
+                Passes in Final Third
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Interceptions
+                Passes Forward
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Recoveries
+                Passes in Middle Third
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Clearance
+                Passes Sideways
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3">
                 Action
@@ -122,38 +122,38 @@ const DefensiveStatsPage = ({ id }: { id?: string }) => {
             {data?.data?.map((item, index) => {
               return (
                 <TableRow key={index} className="">
-                  <TableCell className="w-[267px] text-base font-medium text-[#131313] leading-[150%] pl-10 py-3">
+                  <TableCell className=" text-base font-medium text-[#131313] leading-[150%] pl-10 py-3">
 
-                    {item?.tackleAttempts || "N/A"}
+                    {item?.keyPasses || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.tackleSucceededPossession || "N/A"}
+                    {item?.mediumRangePasses || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.tackleSucceededNOPossession || "N/A"}
+                    {item?.passes || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.tackleFailed || "N/A"}
+                    {item?.shortPasses || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.turnoverwon || "N/A"}
+                    {item?.passesInFinalThird || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.interceptions || "N/A"}
+                    {item?.passesForward || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.recoveries || "N/A"}
+                    {item?.passesInMiddleThird || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.clearance || "N/A"}
+                    {item?.passesSideways || "N/A"}
                   </TableCell>
                   <TableCell >
                     <div className="h-full w-auto flex items-end justify-center gap-6 py-3">
 
                       <button
                         onClick={() => {
-                          setSelectedDefensiveStates(item);
-                          setAddDefensiveStatesForm(true);
+                          setselectedGkDistribution(item);
+                          setAddGkDistributionForm(true);
                         }}
                         className="cursor-pointer"
                       >
@@ -164,7 +164,7 @@ const DefensiveStatsPage = ({ id }: { id?: string }) => {
                       <button
                         onClick={() => {
                           setDeleteModalOpen(true);
-                          setDefensiveStatsId(item?._id);
+                          setGkDistributionId(item?._id);
                         }}
                         className="cursor-pointer"
                       >
@@ -184,10 +184,10 @@ const DefensiveStatsPage = ({ id }: { id?: string }) => {
 
   // delete national team player 
   const { mutate } = useMutation({
-    mutationKey: ["delete-defensive"],
+    mutationKey: ["delete-gkdistributionstats"],
     mutationFn: async (id: string) => {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/defensive/${id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/gkdistributionstats/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -203,14 +203,14 @@ const DefensiveStatsPage = ({ id }: { id?: string }) => {
         toast.error(data?.message || "Something went wrong");
         return;
       }
-      toast.success(data?.message || "Defensive Stats deleted successfully");
-      queryClient.invalidateQueries({ queryKey: ["all-defensive"] });
+      toast.success(data?.message || "Gk Distribution Stats deleted successfully");
+      queryClient.invalidateQueries({ queryKey: ["all-gkdistributionstats"] });
     },
   });
 
   const handleDelete = () => {
-    if (defensiveStatsId) {
-      mutate(defensiveStatsId);
+    if (gkDistributionId) {
+      mutate(gkDistributionId);
     }
     setDeleteModalOpen(false);
   };
@@ -219,14 +219,14 @@ const DefensiveStatsPage = ({ id }: { id?: string }) => {
       <div className='pt-2'>
         <div className="w-full flex items-center justify-between">
 
-          <h3 className='text-2xl md:text-3xl  text-[#131313] font-semibold leading-[120%]'>Defensive Stats</h3>
+          <h3 className='text-2xl md:text-3xl  text-[#131313] font-semibold leading-[120%]'>Gk Distribution Stats</h3>
           <div>
           {
             data && data?.data && data?.data?.length < 1 && (
                <button onClick={() => {
-            setSelectedDefensiveStates(null);
-            setAddDefensiveStatesForm(true);
-          }} className="bg-primary text-white py-3 px-4 rounded-[12px] text-base leading-normal font-semibold">Add Defensive Stats</button>
+            setselectedGkDistribution(null);
+            setAddGkDistributionForm(true);
+          }} className="bg-primary text-white py-3 px-4 rounded-[12px] text-base leading-normal font-semibold">Add Gk Distribution Stats</button>
             )
           }
           </div>
@@ -261,7 +261,7 @@ const DefensiveStatsPage = ({ id }: { id?: string }) => {
             onClose={() => setDeleteModalOpen(false)}
             onConfirm={handleDelete}
             title="Are You Sure?"
-            desc="Are you sure you want to delete this Defensive Stats?"
+            desc="Are you sure you want to delete this Gk Distribution Stats?"
           />
         )}
 
@@ -269,11 +269,11 @@ const DefensiveStatsPage = ({ id }: { id?: string }) => {
 
         <div>
           {
-            addDefensiveStatesForm && (
-              <AddEditDefensiveStatsForm
-                open={addDefensiveStatesForm}
-                onOpenChange={(open: boolean) => setAddDefensiveStatesForm(open)}
-                defaultData={selectedDefensiveStates}
+            addGkDistributionForm && (
+              <AddEditGkDistributionForm
+                open={addGkDistributionForm}
+                onOpenChange={(open: boolean) => setAddGkDistributionForm(open)}
+                defaultData={selectedGkDistribution}
                 playerId={id}
               />
             )
@@ -286,6 +286,5 @@ const DefensiveStatsPage = ({ id }: { id?: string }) => {
   )
 }
 
-export default DefensiveStatsPage
-
+export default GkDistributionStatsPage
 

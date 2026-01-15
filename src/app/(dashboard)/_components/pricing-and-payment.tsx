@@ -1,41 +1,112 @@
-import { MapPin } from "lucide-react";
+
+"use client"
+
+import { useQuery } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
+import TableSkeletonWrapper from "@/components/shared/TableSkeletonWrapper/TableSkeletonWrapper";
+import ErrorContainer from "@/components/shared/ErrorContainer/ErrorContainer";
+import NotFound from "@/components/shared/NotFound/NotFound";
+import moment from "moment";
+import Image from "next/image"
+import { PricingAndPaymentApiResponse } from "./pricing-and-payment-data-type";
+import { MapPin } from "lucide-react";
 
 const PricingAndPayment = () => {
-  const tournaments = [
-    {
-      id: 1,
-      name: "Spring Championship 2023",
-      location: "Pine Valley Golf Club",
-      date: "May 15-20, 2023",
-      players: 48,
+
+  const session = useSession();
+  const token = (session?.data?.user as { accessToken: string })?.accessToken;
+
+
+
+
+
+  const { data, isLoading, error, isError } = useQuery<PricingAndPaymentApiResponse>({
+    queryKey: ["pricing-and-payment"],
+    queryFn: async () => {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/dashboard/total-revenue-user?limit=3`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      return res.json()
     },
-    {
-      id: 2,
-      name: "Spring Championship 2023",
-      location: "Pine Valley Golf Club",
-      date: "May 15-20, 2023",
-      players: 48,
-    },
-    {
-      id: 3,
-      name: "Spring Championship 2023",
-      location: "Pine Valley Golf Club",
-      date: "May 15-20, 2023",
-      players: 48,
-    },
-     {
-      id: 4,
-      name: "Spring Championship 2023",
-      location: "Pine Valley Golf Club",
-      date: "May 15-20, 2023",
-      players: 48,
-    },
-  ];
+    enabled: !!token
+  })
+
+  // console.log(totalPages)
+
+
+  let content;
+
+
+  if (isLoading) {
+    content = (
+      <div className="pt-6">
+        <TableSkeletonWrapper count={2} />
+      </div>
+    );
+  } else if (isError) {
+    content = (
+      <div className="pt-4">
+        <ErrorContainer message={error?.message || "Something went wrong"} />
+      </div>
+    );
+  } else if (
+    data &&
+    data?.data &&
+    data?.data?.length === 0
+  ) {
+    content = (
+      <div>
+        <NotFound message="Oops! No data available. Modify your filters or check your internet connection." />
+      </div>
+    );
+  }
+  else if (data && data?.data && data?.data?.length > 0) {
+    content = (
+      <div>
+        {data?.data?.map((item) => {
+          return (
+            <div
+              key={item?._id}
+              className="w-full flex items-center justify-between border-b border-[#E6E6E8] p-6"
+            >
+              <div className='w-[230px] flex items-center gap-2'>
+                <div>
+                  <Image src={item?.user?.profileImage || "/assets/images/no-user.jpeg"} alt="Profile" width={100} height={100} className="w-8 h-8 rounded-full object-contain" />
+                </div>
+                <div>
+                  <h4 className="text-base font-semibold leading-[150%] text-[#181818]">
+                    {item?.user?.firstName} {item?.user?.lastName}
+                  </h4>
+                  <p className="flex items-center gap-2 text-sm font-normal leading-[150%] text-[#616161]">
+                    {item?.user?.email}
+                  </p>
+                </div>
+
+              </div>
+              <p className="w-[150px] flex items-center gap-2 text-sm font-normal text-center leading-[150%] text-[#616161]">
+              <MapPin />  {item?.user?.citizenship || "N/A"}
+              </p>
+              <p className="w-[150px] text-center text-sm font-normal leading-[150%] text-[#616161]">
+                $ {item?.amount || 0}
+              </p>
+              
+              <p className="text-sm font-normal leading-[150%] text-[#616161]">
+                {moment(item?.createdAt).format("DD / MM / YYYY")}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+    )
+  }
   return (
-    <div className="pl-6 pb-20">
-      <div className="bg-white border border-[#E6E6E8] px-6 py-5 rounded-[12px]">
+    <div className="pl-6 pb-20 ">
+      <div className="h-full bg-white border border-[#E6E6E8] p-6 rounded-[12px]">
         <div className="w-full flex items-center justify-between">
           <h4 className="text-xl font-semibold leading-[150%] text-[#343A40]">
             Pricing & Payment 
@@ -47,27 +118,7 @@ const PricingAndPayment = () => {
           </Link>
         </div>
         <div>
-          {tournaments?.map((item) => {
-            return (
-              <div
-                key={item?.id}
-                className="w-full flex items-center justify-between border-b border-[#E6E6E8] p-6"
-              >
-                <h4 className="text-base font-semibold leading-[150%] text-[#181818]">
-                  {item?.name}
-                </h4>
-                <p className="flex items-center gap-2 text-sm font-normal leading-[150%] text-[#616161]">
-                  <MapPin className="w-4 h-4 " /> {item?.location}
-                </p>
-                <p className="text-sm font-normal leading-[150%] text-[#616161]">
-                  ${item?.players}
-                </p>
-                <p className="text-sm font-normal leading-[150%] text-[#616161]">
-                  {item?.date}
-                </p>
-              </div>
-            );
-          })}
+          {content}
         </div>
       </div>
     </div>
@@ -75,3 +126,4 @@ const PricingAndPayment = () => {
 };
 
 export default PricingAndPayment;
+

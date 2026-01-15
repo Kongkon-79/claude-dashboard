@@ -16,6 +16,7 @@ import GkStatsPage from "./gk-stats";
 import LastPlayerReportPage from './last-player-report';
 import DefensiveStatsPage from './defensive-stats';
 import AttackingStatsPage from "./attacking-stats";
+import DistributionStatsPage from "./distribution-stats";
 
 const UserManagementTabs = ({ id }: { id: string }) => {
   // const session = useSession();
@@ -40,7 +41,7 @@ const UserManagementTabs = ({ id }: { id: string }) => {
     // enabled: !!token
   })
 
-  console.log(data)
+  const playerRole =   data?.data?.role;
 
   return (
     <div className="p-6">
@@ -190,6 +191,13 @@ const UserManagementTabs = ({ id }: { id: string }) => {
 
             <div>
               <AttackingStatsPage id={id || ""} />
+            </div>
+          )} 
+
+            {isActive === "distribution-stats" && (
+
+            <div>
+              <DistributionStatsPage id={id || ""} role={playerRole || ""} />
             </div>
           )} 
 

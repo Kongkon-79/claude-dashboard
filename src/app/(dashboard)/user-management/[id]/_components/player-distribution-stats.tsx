@@ -18,27 +18,27 @@ import NotFound from "@/components/shared/NotFound/NotFound";
 import { Trash, SquarePen } from "lucide-react";
 import ClaudePagination from "@/components/ui/claude-pagination";
 import DeleteModal from "@/components/modals/delete-modal";
-import AddEditDefensiveStatsForm from "./add-edit-defensive-stats-form";
-import { DefensiveStats, DefensiveListApiResponse } from "@/components/types/defensive-stats-data-type";
+import { DistributionStats, PlayerDistributionStatsApiResponse } from "@/components/types/player-distribution-stats-data-type";
+import AddEditPlayerDistributionForm from "./add-edit-player-distribution-form";
 
-const DefensiveStatsPage = ({ id }: { id?: string }) => {
+const PlayerDistributionStatsPage = ({ id }: { id?: string }) => {
   const [currentPage, setCurrentPage] = useState(1);
   console.log("view data", id)
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [defensiveStatsId, setDefensiveStatsId] = useState("");
-  const [selectedDefensiveStates, setSelectedDefensiveStates] =
-    useState<DefensiveStats | null>(null);
-  const [addDefensiveStatesForm, setAddDefensiveStatesForm] = useState(false);
+  const [playerDistributionId, setPlayerDistributionId] = useState("");
+  const [selectedPlayerDistribution, setselectedPlayerDistribution] =
+    useState<DistributionStats | null>(null);
+  const [addPlayerDistributionForm, setAddPlayerDistributionForm] = useState(false);
   const queryClient = useQueryClient();
   console.log(queryClient)
   const session = useSession();
   const token = (session?.data?.user as { accessToken: string })?.accessToken;
 
-  const { data, isLoading, isError, error } = useQuery<DefensiveListApiResponse>({
-    queryKey: ["all-defensive", id, currentPage],
+  const { data, isLoading, isError, error } = useQuery<PlayerDistributionStatsApiResponse>({
+    queryKey: ["all-distributionstats", id, currentPage],
     queryFn: async () => {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/defensive/${id}?page=${currentPage}&limit=8`, {
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/distributionstats/${id}?page=${currentPage}&limit=8`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -90,28 +90,28 @@ const DefensiveStatsPage = ({ id }: { id?: string }) => {
           <TableHeader className="bg-primary/15 rounded-t-[12px]">
             <TableRow className="">
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] py-3 pl-6">
-                Tackle Attempts
+                Passes
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Tackle Succeeded: Possession 
+                Passes in Final Third 
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Tackle Succeeded: No Possession
+                Passes in Middle Third
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Tackle Failed
+                Passes in Defensive Third
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Turnover Won
+                Key Passes
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Interceptions
+                Long Passes
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Recoveries
+                Medium Passes
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Clearance
+                Short Passes
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3">
                 Action
@@ -122,38 +122,38 @@ const DefensiveStatsPage = ({ id }: { id?: string }) => {
             {data?.data?.map((item, index) => {
               return (
                 <TableRow key={index} className="">
-                  <TableCell className="w-[267px] text-base font-medium text-[#131313] leading-[150%] pl-10 py-3">
+                  <TableCell className=" text-base font-medium text-[#131313] leading-[150%] pl-10 py-3">
 
-                    {item?.tackleAttempts || "N/A"}
+                    {item?.passes || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.tackleSucceededPossession || "N/A"}
+                    {item?.passesinFinalThird || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.tackleSucceededNOPossession || "N/A"}
+                    {item?.passesinMiddleThird || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.tackleFailed || "N/A"}
+                    {item?.passesinOerensiveThird || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.turnoverwon || "N/A"}
+                    {item?.kevPasses || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.interceptions || "N/A"}
+                    {item?.longPasses || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.recoveries || "N/A"}
+                    {item?.mediumPasses || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.clearance || "N/A"}
+                    {item?.shortPasses || "N/A"}
                   </TableCell>
                   <TableCell >
                     <div className="h-full w-auto flex items-end justify-center gap-6 py-3">
 
                       <button
                         onClick={() => {
-                          setSelectedDefensiveStates(item);
-                          setAddDefensiveStatesForm(true);
+                          setselectedPlayerDistribution(item);
+                          setAddPlayerDistributionForm(true);
                         }}
                         className="cursor-pointer"
                       >
@@ -164,7 +164,7 @@ const DefensiveStatsPage = ({ id }: { id?: string }) => {
                       <button
                         onClick={() => {
                           setDeleteModalOpen(true);
-                          setDefensiveStatsId(item?._id);
+                          setPlayerDistributionId(item?._id);
                         }}
                         className="cursor-pointer"
                       >
@@ -184,10 +184,10 @@ const DefensiveStatsPage = ({ id }: { id?: string }) => {
 
   // delete national team player 
   const { mutate } = useMutation({
-    mutationKey: ["delete-defensive"],
+    mutationKey: ["delete-distributionstats"],
     mutationFn: async (id: string) => {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/defensive/${id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/distributionstats/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -203,14 +203,14 @@ const DefensiveStatsPage = ({ id }: { id?: string }) => {
         toast.error(data?.message || "Something went wrong");
         return;
       }
-      toast.success(data?.message || "Defensive Stats deleted successfully");
-      queryClient.invalidateQueries({ queryKey: ["all-defensive"] });
+      toast.success(data?.message || "Player Distribution Stats deleted successfully");
+      queryClient.invalidateQueries({ queryKey: ["all-distributionstats"] });
     },
   });
 
   const handleDelete = () => {
-    if (defensiveStatsId) {
-      mutate(defensiveStatsId);
+    if (playerDistributionId) {
+      mutate(playerDistributionId);
     }
     setDeleteModalOpen(false);
   };
@@ -219,14 +219,14 @@ const DefensiveStatsPage = ({ id }: { id?: string }) => {
       <div className='pt-2'>
         <div className="w-full flex items-center justify-between">
 
-          <h3 className='text-2xl md:text-3xl  text-[#131313] font-semibold leading-[120%]'>Defensive Stats</h3>
+          <h3 className='text-2xl md:text-3xl  text-[#131313] font-semibold leading-[120%]'>Player Distribution Stats</h3>
           <div>
           {
             data && data?.data && data?.data?.length < 1 && (
                <button onClick={() => {
-            setSelectedDefensiveStates(null);
-            setAddDefensiveStatesForm(true);
-          }} className="bg-primary text-white py-3 px-4 rounded-[12px] text-base leading-normal font-semibold">Add Defensive Stats</button>
+            setselectedPlayerDistribution(null);
+            setAddPlayerDistributionForm(true);
+          }} className="bg-primary text-white py-3 px-4 rounded-[12px] text-base leading-normal font-semibold">Add Player Distribution Stats</button>
             )
           }
           </div>
@@ -261,7 +261,7 @@ const DefensiveStatsPage = ({ id }: { id?: string }) => {
             onClose={() => setDeleteModalOpen(false)}
             onConfirm={handleDelete}
             title="Are You Sure?"
-            desc="Are you sure you want to delete this Defensive Stats?"
+            desc="Are you sure you want to delete this Player Distribution Stats?"
           />
         )}
 
@@ -269,11 +269,11 @@ const DefensiveStatsPage = ({ id }: { id?: string }) => {
 
         <div>
           {
-            addDefensiveStatesForm && (
-              <AddEditDefensiveStatsForm
-                open={addDefensiveStatesForm}
-                onOpenChange={(open: boolean) => setAddDefensiveStatesForm(open)}
-                defaultData={selectedDefensiveStates}
+            addPlayerDistributionForm && (
+              <AddEditPlayerDistributionForm
+                open={addPlayerDistributionForm}
+                onOpenChange={(open: boolean) => setAddPlayerDistributionForm(open)}
+                defaultData={selectedPlayerDistribution}
                 playerId={id}
               />
             )
@@ -286,6 +286,5 @@ const DefensiveStatsPage = ({ id }: { id?: string }) => {
   )
 }
 
-export default DefensiveStatsPage
-
+export default PlayerDistributionStatsPage
 
