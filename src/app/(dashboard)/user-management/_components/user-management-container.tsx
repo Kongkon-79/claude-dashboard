@@ -214,12 +214,12 @@ const UserManagementContainer = () => {
     setDeleteModalOpen(false);
   };
   return (
-    <div>
+    <div className="">
       {/* table container */}
       <div className="p-6 space-y-6">
 
         {/* table  */}
-        <div>{content}</div>
+        <div className="">{content}</div>
 
         {/* pagination  */}
         {

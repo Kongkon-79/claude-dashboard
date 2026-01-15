@@ -1,8 +1,17 @@
-import React from 'react'
 
-const DistributionStatsPage = () => {
+import React from 'react'
+import GkDistributionStatsPage from './gk-distribution-stats';
+import PlayerDistributionStatsPage from './player-distribution-stats';
+
+const DistributionStatsPage = ({id, role}:{id:string, role:string}) => {
+  console.log("DistributionStatsPage id:", "role :", role);
+ 
   return (
-    <div>DistributionStatsPage</div>
+    <div>
+      {
+        role == "gk" ? <GkDistributionStatsPage id={id}/> : <PlayerDistributionStatsPage id={id}/>
+      }
+    </div>
   )
 }
 
