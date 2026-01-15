@@ -38,7 +38,7 @@ const PlayerData = ({ data }: { data: User }) => {
             <li className="flex flex-col gap-2"><span className='text-base font-medium text-[#616161] leading-[150%]'>League</span> <span className='text-lg md:text-xl text-[#131313] font-medium leading-[120%] '>{data?.league || "N/A"}</span></li>
             <li className="flex flex-col gap-2"><span className='text-base font-medium text-[#616161] leading-[150%]'>Gender</span> <span className='text-lg md:text-xl text-[#131313] font-medium leading-[120%] '>{data?.gender || "N/A"}</span></li>
             <li className="flex flex-col gap-2"><span className='text-base font-medium text-[#616161] leading-[150%]'>Institute Name</span> <span className='text-lg md:text-xl text-[#131313] font-medium leading-[120%] '>{data?.institute || "N/A"}</span></li>
-            <li className="flex flex-col gap-2"><span className='text-base font-medium text-[#616161] leading-[150%]'>Role</span> <span className='text-lg md:text-xl text-[#131313] font-medium leading-[120%] '>{data?.role || "N/A"}</span></li>
+            {/* <li className="flex flex-col gap-2"><span className='text-base font-medium text-[#616161] leading-[150%]'>Role</span> <span className='text-lg md:text-xl text-[#131313] font-medium leading-[120%] '>{data?.role || "N/A"}</span></li> */}
             <li className="flex flex-col gap-2"><span className='text-base font-medium text-[#616161] leading-[150%]'>Email</span> <span className='text-lg md:text-xl text-[#131313] font-medium leading-[120%] '>{data?.email || "N/A"}</span></li>
 
           </ul>
