@@ -1,39 +1,51 @@
 import React from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import moment from "moment";
-import { ContactItem } from "./pricing-data-type";
+import { Payment } from "./team-pricing-data-type";
 
 const PricingTeamView = ({
   open,
   onOpenChange,
-  contactData,
+  TeamPricing,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  contactData: ContactItem | null;
+  TeamPricing: Payment | null;
 }) => {
-  if (!contactData) return null;
+  if (!TeamPricing) return null;
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="p-6 space-y-4">
+      <DialogContent className="max-w-xl p-6 space-y-4">
+        <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-[120%] text-primary text-center">Team Details</h3>
 
-        <div className="space-y-4">
-          <p className="text-base font-normal text-[#6C757D)] leading-[150%]">
-            <strong className="text-base font-semibold text-[#343A40] leading-[150%]">Name :</strong> <br/> {contactData?.fullName}
+        <div className="space-y-2">
+          <p className="text-base font-normal text-[#6C757D)] leading-[150%] text-center">
+            <strong className="text-lg font-semibold text-[#343A40] leading-[150%]">Coach Name :</strong> {TeamPricing?.team?.coachName || "N/A"}
           </p>
-          <p className="text-base font-normal text-[#6C757D)] leading-[150%]">
-            <strong className="text-base font-semibold text-[#343A40] leading-[150%]">Email :</strong> <br/> {contactData?.email}
+          <p className="text-base font-normal text-[#6C757D)] leading-[150%] text-center">
+            <strong className="text-lg font-semibold text-[#343A40] leading-[150%]">Team Name :</strong> {TeamPricing?.team?.teamName || "N/A"}
           </p>
-          <p className="text-base font-normal text-[#6C757D)] leading-[150%]">
-            <strong className="text-base font-semibold text-[#343A40] leading-[150%]">Phone Number :</strong> <br/> {contactData?.phone}
+          <p className="text-base font-normal text-[#6C757D)] leading-[150%] text-center">
+            <strong className="text-lg font-semibold text-[#343A40] leading-[150%]">Category :</strong> {TeamPricing?.team?.category || "N/A"}
           </p>
-          <p className="text-base font-normal text-[#6C757D)] leading-[150%]">
-            <strong className="text-base font-semibold text-[#343A40] leading-[150%]">Date :</strong> <br/> {moment(contactData?.createdAt).format("MMM DD, YYYY")}
+          
+          <p className="text-base font-normal text-[#6C757D)] leading-[150%] text-center">
+            <strong className="text-lg font-semibold text-[#343A40] leading-[150%]">League :</strong> {TeamPricing?.team?.league || "N/A"}
           </p>
-          <p className="text-base font-normal text-[#6C757D)] leading-[150%]">
-            <strong className="text-base font-semibold text-[#343A40] leading-[150%]">Messages :</strong> <br/> {contactData?.message}
+          <p className="text-base font-normal text-[#6C757D)] leading-[150%] text-center">
+            <strong className="text-lg font-semibold text-[#343A40] leading-[150%]">Date :</strong> {moment(TeamPricing?.createdAt).format("MMM DD, YYYY")}
           </p>
+
+          <div className="pt-4">
+            {
+              TeamPricing?.team?.players?.map((item, index)=>{
+                return  <p key={item?._id} className="text-base font-normal text-[#6C757D)] leading-[150%] text-center">
+             <strong className="text-lg font-semibold text-[#343A40] leading-[150%]">Player {index+1} :</strong> {item?.name || "N/A"}
+          </p>
+              })
+            }
+          </div>
         </div>
       </DialogContent>
     </Dialog>

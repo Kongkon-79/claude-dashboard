@@ -118,7 +118,7 @@ const RatingPage = ({ id }: { id?: string }) => {
                     {item?.position?.join(", ") || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.numberOfGames || "N/A"}
+                    {item?.gamesNumber || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
                     {item?.minutes || "N/A"}
