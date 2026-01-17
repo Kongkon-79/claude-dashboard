@@ -11,7 +11,7 @@ import NotFound from "@/components/shared/NotFound/NotFound";
 import moment from "moment";
 import Image from "next/image"
 import { PricingAndPaymentApiResponse } from "./pricing-and-payment-data-type";
-import { MapPin } from "lucide-react";
+// import { MapPin } from "lucide-react";
 
 const PricingAndPayment = () => {
 
@@ -88,9 +88,9 @@ const PricingAndPayment = () => {
                 </div>
 
               </div>
-              <p className="w-[150px] flex items-center gap-2 text-sm font-normal text-center leading-[150%] text-[#616161]">
+              {/* <p className="w-[150px] flex items-center gap-2 text-sm font-normal text-center leading-[150%] text-[#616161]">
               <MapPin />  {item?.user?.citizenship || "N/A"}
-              </p>
+              </p> */}
               <p className="w-[150px] text-center text-sm font-normal leading-[150%] text-[#616161]">
                 $ {item?.amount || 0}
               </p>

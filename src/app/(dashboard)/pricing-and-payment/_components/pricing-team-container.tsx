@@ -19,8 +19,8 @@ import TableSkeletonWrapper from "@/components/shared/TableSkeletonWrapper/Table
 import ErrorContainer from "@/components/shared/ErrorContainer/ErrorContainer";
 import NotFound from "@/components/shared/NotFound/NotFound";
 import { toast } from "sonner";
-import { ContactApiResponse, ContactItem } from "./pricing-data-type";
 import PricingTeamView from "./pricing-team-view";
+import { TeamRevenueApiResponse, Payment } from "./team-pricing-data-type";
 
 const PricingTeamContainer = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -28,16 +28,16 @@ const PricingTeamContainer = () => {
   const [selectViewContact, setSelectViewContact] = useState(false);
   const session = useSession();
   const token = (session?.data?.user as { accessToken: string })?.accessToken;
-  const [selectedContact, setSelectedContact] = useState<ContactItem | null>(null);
+  const [selectedContact, setSelectedContact] = useState<Payment | null>(null);
   const [selectedContactId, setSelectedContactId] = useState("");
   const queryClient = useQueryClient();
 
 
 
-  const { data, isLoading, error, isError } = useQuery<ContactApiResponse>({
-    queryKey: ["contact-management", currentPage],
+  const { data, isLoading, error, isError } = useQuery<TeamRevenueApiResponse>({
+    queryKey: ["team-payment-and-pricing", currentPage],
     queryFn: async () => {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/contact?page=${currentPage}&limit=8`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/dashboard/total-revenue?paymentType=TeamGame&page=${currentPage}&limit=8`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`
@@ -70,7 +70,8 @@ const PricingTeamContainer = () => {
   } else if (
     data &&
     data?.data &&
-    data?.data?.length === 0
+    data?.data?.data &&
+    data?.data?.data?.length === 0
   ) {
     content = (
       <div>
@@ -78,23 +79,23 @@ const PricingTeamContainer = () => {
       </div>
     );
   }
-  else if (data && data?.data && data?.data?.length > 0){
+  else if (data && data?.data && data?.data?.data && data?.data?.data?.length > 0){
     content = (
         <Table className="">
           <TableHeader className="bg-[#E6F4E6] rounded-t-[12px]">
             <TableRow className="">
               <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] py-4 pl-6">
-                Mail Address
+                Team Name
               </TableHead>
               <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
-                Name
+                Price
               </TableHead>
-              <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
+              {/* <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
                 Phone Number
               </TableHead>
               <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
                 Message
-              </TableHead>
+              </TableHead> */}
               <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
                 Date
               </TableHead>
@@ -104,21 +105,21 @@ const PricingTeamContainer = () => {
             </TableRow>
           </TableHeader>
           <TableBody className="border-b border-x border-[#E6E7E6] rounded-b-[12px]">
-            {data?.data?.map((item, index) => {
+            {data?.data?.data?.map((item, index) => {
               return (
                 <TableRow key={index} className="">
                   <TableCell className="text-base font-medium text-[#68706A] leading-[150%] pl-6 py-4">
-                    {item?.email}
+                    {item?.team?.teamName || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#68706A] leading-[150%] text-center py-4">
-                    {item?.fullName}
+                    {item?.amount || 0}
                   </TableCell>
-                  <TableCell className="text-base font-normal text-[#68706A] leading-[150%] text-center py-4">
+                  {/* <TableCell className="text-base font-normal text-[#68706A] leading-[150%] text-center py-4">
                     {item?.phone}
                   </TableCell>
                   <TableCell className="w-[395px] text-base font-normal text-[#68706A] leading-[150%] text-center py-4">
                     {item?.message}
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell className="text-base font-medium text-[#343A40] leading-[150%] text-center py-4">
                     {moment(item?.createdAt).format("MMM DD YYYY")}
                   </TableCell>
@@ -135,7 +136,7 @@ const PricingTeamContainer = () => {
                     <button
                       onClick={() => {
                         setDeleteModalOpen(true);
-                        setSelectedContactId(item?._id)
+                        setSelectedContactId(item?.paymentId)
                       }}
                       className="cursor-pointer mt-2"
                     >
@@ -150,12 +151,12 @@ const PricingTeamContainer = () => {
     )
   }
 
-    // delete contact api
+    // delete team payment api
   const { mutate } = useMutation({
-    mutationKey: ["delete-contact"],
+    mutationKey: ["delete-team-payment"],
     mutationFn: async (id: string) => {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/contact/${id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/dashboard/delete-player-account/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -171,8 +172,8 @@ const PricingTeamContainer = () => {
         toast.error(data?.message || "Something went wrong");
         return;
       }
-      toast.success(data?.message || "Contact deleted successfully");
-      queryClient.invalidateQueries({ queryKey: ["contact-management"] });
+      toast.success(data?.message || "Team Payment deleted successfully");
+      queryClient.invalidateQueries({ queryKey: ["team-payment-and-pricing"] });
     },
   });
 
@@ -215,7 +216,7 @@ const PricingTeamContainer = () => {
             onClose={() => setDeleteModalOpen(false)}
             onConfirm={handleDelete}
             title="Are You Sure?"
-            desc="Are you sure you want to delete this match?"
+            desc="Are you sure you want to delete this Team Payment"
           />
         )}
 
@@ -225,7 +226,7 @@ const PricingTeamContainer = () => {
             <PricingTeamView
               open={selectViewContact}
               onOpenChange={(open: boolean) => setSelectViewContact(open)}
-              contactData={selectedContact}
+              TeamPricing={selectedContact}
             />
           )}
         </div>

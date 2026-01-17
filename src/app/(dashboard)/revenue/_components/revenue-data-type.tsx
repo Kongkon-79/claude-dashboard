@@ -30,9 +30,30 @@ export interface Payment {
   stripePaymentIntentId: string
   createdAt: string
   updatedAt: string
-  team: Record<string, unknown>
+    team: Team  
   subscription: Subscription
 }
+
+export interface Team {
+  id?: string;
+  teamName?: string;
+  coachName?: string;
+  coachEmail?: string;
+  category?: string;
+  league?: string;
+  players?: Player[];
+  createdAt?: string;
+}
+
+export interface Player {
+  _id: string;
+  name: string;
+  email: string;
+  role: "player" | "gk";
+  usedGames: number;
+}
+
+
 
 
 export interface User {

@@ -51,7 +51,7 @@ const RevenueContainer = () => {
 
 
 
- let content;
+  let content;
 
 
   if (isLoading) {
@@ -78,58 +78,66 @@ const RevenueContainer = () => {
       </div>
     );
   }
-  else if (data && data?.data && data?.data?.data && data?.data?.data?.length > 0){
+  else if (data && data?.data && data?.data?.data && data?.data?.data?.length > 0) {
     content = (
-        <Table className="">
-          <TableHeader className="bg-[#E6F4E6] rounded-t-[12px]">
-            <TableRow className="">
-              <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] py-4 pl-6">
-                Customer Name
-              </TableHead>
-              <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
-                Price
-              </TableHead>
-              <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
-                Date
-              </TableHead>
-              <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4">
-                Action
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody className="border-b border-x border-[#E6E7E6] rounded-b-[12px]">
-            {data?.data?.data?.map((item, index) => {
-              return (
-                <TableRow key={index} className="">
-                  <TableCell className="text-base font-medium text-[#68706A] leading-[150%] pl-6 py-4">
-                    {item?.user?.name || "N/A"}
-                  </TableCell>
-                  <TableCell className="text-base font-normal text-[#68706A] leading-[150%] text-center py-4">
-                    {item?.amount || "N/A"}
-                  </TableCell>
-                  <TableCell className="text-base font-medium text-[#343A40] leading-[150%] text-center py-4">
-                    {moment(item?.createdAt).format("MMM DD YYYY")}
-                  </TableCell>
-                  <TableCell className="h-full flex items-center justify-center gap-6 py-4">
-                    <button
-                      onClick={() => {
-                        setDeleteModalOpen(true);
-                        setSelectedContactId(item?.paymentId)
-                      }}
-                      className="cursor-pointer mt-2"
-                    >
-                      <Trash className="h-6 w-6 text-red-500" />
-                    </button>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
+      <Table className="">
+        <TableHeader className="bg-[#E6F4E6] rounded-t-[12px]">
+          <TableRow className="">
+            <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] py-4 pl-6">
+              Customer Name
+            </TableHead>
+            <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
+              Price
+            </TableHead>
+            <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4 ">
+              Date
+            </TableHead>
+            <TableHead className="text-sm font-normal leading-[150%] text-[#343A40] text-center py-4">
+              Action
+            </TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody className="border-b border-x border-[#E6E7E6] rounded-b-[12px]">
+          {data?.data?.data?.map((item, index) => {
+            return (
+              <TableRow key={index} className="">
+                <TableCell className="text-base font-medium text-[#68706A] leading-[150%] pl-6 py-4">
+                  {/* {item?.user?.name || item?.team?.teamName} */}
+                  {item?.user?.name && (
+                    <span>{item.user.name}</span>
+                  )}
+                  {item?.team?.teamName && (
+                    <span className="block text-sm text-[#68706A]">
+                      {item.team.teamName}
+                    </span>
+                  )}
+                </TableCell>
+                <TableCell className="text-base font-normal text-[#68706A] leading-[150%] text-center py-4">
+                  {item?.amount || "N/A"}
+                </TableCell>
+                <TableCell className="text-base font-medium text-[#343A40] leading-[150%] text-center py-4">
+                  {moment(item?.createdAt).format("MMM DD YYYY")}
+                </TableCell>
+                <TableCell className="h-full flex items-center justify-center gap-6 py-4">
+                  <button
+                    onClick={() => {
+                      setDeleteModalOpen(true);
+                      setSelectedContactId(item?.paymentId)
+                    }}
+                    className="cursor-pointer mt-2"
+                  >
+                    <Trash className="h-6 w-6 text-red-500" />
+                  </button>
+                </TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
     )
   }
 
-    // delete contact api
+  // delete contact api
   const { mutate } = useMutation({
     mutationKey: ["delete-revenue"],
     mutationFn: async (id: string) => {
@@ -163,16 +171,16 @@ const RevenueContainer = () => {
   };
   return (
     <div className="p-6 ">
-         <div className="pt-12 pb-16">
-          <span className="bg-primary text-2xl md:text-3xl lg:text-4xl text-[#F4FFF4] font-bold leading-[120%] border border-primary rounded-[6px] py-10 px-16">$ {data?.data?.totalRevenue || 0}</span>
-        </div>
+      <div className="pt-12 pb-16">
+        <span className="bg-primary text-2xl md:text-3xl lg:text-4xl text-[#F4FFF4] font-bold leading-[120%] border border-primary rounded-[6px] py-10 px-16">$ {data?.data?.totalRevenue.toFixed(2) || 0}</span>
+      </div>
       {/* table container */}
       <div className=" space-y-6 mb-6">
 
-     
+
 
         {/* table  */}
-      <div className="">{content}</div>
+        <div className="">{content}</div>
 
         {/* pagination  */}
         {

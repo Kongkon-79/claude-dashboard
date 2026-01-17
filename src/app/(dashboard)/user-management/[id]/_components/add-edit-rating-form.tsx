@@ -29,7 +29,7 @@ import { Rating } from "@/components/types/rating-data-type";
 type RatingFormValues = {
   rating: number;
   position: string[];
-  numberOfGames: number;
+  // numberOfGames: number;
   minutes: number;
 };
 
@@ -46,11 +46,12 @@ interface Props {
 const ratingSchema = z.object({
   rating: z
     .number({ message: "Rating must be a number" })
-    .min(0, "Rating cannot be negative"),
+    .min(0, "Rating cannot be less than 0")
+    .max(10, "Rating cannot be more than 10"),
   position: z.array(z.string()).min(1, "Select at least one position").max(2, "Maximum 2 positions"),
-  numberOfGames: z
-    .number({ message: "Number of Games must be a number" })
-    .min(0, "Number of Games cannot be negative"),
+  // numberOfGames: z
+  //   .number({ message: "Number of Games must be a number" })
+  //   .min(0, "Number of Games cannot be negative"),
   minutes: z
     .number({ message: "Minutes must be a number" })
     .min(0, "Minutes cannot be negative"),
@@ -85,7 +86,7 @@ const AddEditRatingForm = ({
     defaultValues: {
       rating: 0,
       position: [],
-      numberOfGames: 0,
+      // numberOfGames: 0,
       minutes: 0,
     },
   });
@@ -96,7 +97,7 @@ const AddEditRatingForm = ({
       form.reset({
         rating: defaultData.rating,
         position: defaultData.position,
-        numberOfGames: defaultData.numberOfGames,
+        // numberOfGames: defaultData.numberOfGames,
         minutes: defaultData.minutes,
       });
     }
@@ -241,8 +242,8 @@ const AddEditRatingForm = ({
               )}
             />
 
-            <div className="grid grid-cols-2 gap-4">
-              <FormField
+            <div className="grid grid-cols-1 gap-4">
+              {/* <FormField
                 control={form.control}
                 name="numberOfGames"
                 render={({ field }) => (
@@ -262,7 +263,7 @@ const AddEditRatingForm = ({
                     <FormMessage />
                   </FormItem>
                 )}
-              />
+              /> */}
               <FormField
                 control={form.control}
                 name="minutes"
