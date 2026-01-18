@@ -25,6 +25,7 @@ export interface UserInfo {
   otpExpiry?: string;
 
   agent?: string;
+  age?: number;
   birthdayPlace?: string;
   citizenship?: string;
   currentClub?: string;

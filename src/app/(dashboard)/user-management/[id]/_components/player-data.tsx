@@ -29,9 +29,11 @@ const PlayerData = ({ data }: { data: User }) => {
               <span className="text-base font-medium text-[#616161] leading-[150%]">
                 Age
               </span>
-              <span className="text-lg md:text-xl text-[#131313] font-medium leading-[120%]">
-                {moment(data?.dob).format("DD MMM YYYY") || "N/A"}
-              </span>
+              <span className="text-lg md:text-xl text-[#131313] font-normal leading-[120%]">
+  {data?.dob
+    ? `${moment(data.dob).format("DD MMM YYYY")} (${data.age || 0})`
+    : "N/A"}
+</span>
             </li>
             <li className="flex flex-col gap-2"><span className='text-base font-medium text-[#616161] leading-[150%]'>Height</span> <span className='text-lg md:text-xl text-[#131313] font-medium leading-[120%] '>{data?.hight || "N/A"}</span></li>
             <li className="flex flex-col gap-2"><span className='text-base font-medium text-[#616161] leading-[150%]'>Position</span> <span className='text-lg md:text-xl text-[#131313] font-medium leading-[120%] '>{data?.position.join(", ") || "N/A"}</span></li>
