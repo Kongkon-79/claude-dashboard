@@ -30,13 +30,13 @@ const PlayerData = ({ data }: { data: User }) => {
                 Age
               </span>
               <span className="text-lg md:text-xl text-[#131313] font-normal leading-[120%]">
-  {data?.dob
-    ? `${moment(data.dob).format("DD MMM YYYY")} (${data.age || 0})`
-    : "N/A"}
-</span>
+                {data?.dob
+                  ? `${moment(data.dob).format("DD MMM YYYY")} (${data.age || 0})`
+                  : "N/A"}
+              </span>
             </li>
             <li className="flex flex-col gap-2"><span className='text-base font-medium text-[#616161] leading-[150%]'>Height</span> <span className='text-lg md:text-xl text-[#131313] font-medium leading-[120%] '>{data?.hight || "N/A"}</span></li>
-            <li className="flex flex-col gap-2"><span className='text-base font-medium text-[#616161] leading-[150%]'>Position</span> <span className='text-lg md:text-xl text-[#131313] font-medium leading-[120%] '>{data?.position.join(", ") || "N/A"}</span></li>
+            <li className="flex flex-col gap-2"><span className='text-base font-medium text-[#616161] leading-[150%]'>Position</span> <span className='text-lg md:text-xl text-[#131313] font-medium leading-[120%] '><span className='text-lg md:text-xl text-[#131313] font-normal leading-[120%] '>{data?.position?.map(p => p.toUpperCase()).join("-") || "N/A"}</span></span></li>
             <li className="flex flex-col gap-2"><span className='text-base font-medium text-[#616161] leading-[150%]'>League</span> <span className='text-lg md:text-xl text-[#131313] font-medium leading-[120%] '>{data?.league || "N/A"}</span></li>
             <li className="flex flex-col gap-2"><span className='text-base font-medium text-[#616161] leading-[150%]'>Gender</span> <span className='text-lg md:text-xl text-[#131313] font-medium leading-[120%] '>{data?.gender || "N/A"}</span></li>
             <li className="flex flex-col gap-2"><span className='text-base font-medium text-[#616161] leading-[150%]'>Institute Name</span> <span className='text-lg md:text-xl text-[#131313] font-medium leading-[120%] '>{data?.institute || "N/A"}</span></li>
@@ -47,7 +47,7 @@ const PlayerData = ({ data }: { data: User }) => {
         </div>
       </div>
 
-      <PlayingVideosPage videos={data?.playingVideo}/>
+      <PlayingVideosPage videos={data?.playingVideo} />
     </div>
   )
 }
