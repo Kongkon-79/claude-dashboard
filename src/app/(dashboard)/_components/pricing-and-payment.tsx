@@ -80,7 +80,20 @@ const PricingAndPayment = () => {
                 </div>
                 <div>
                   <h4 className="text-base font-semibold leading-[150%] text-[#181818]">
-                    {item?.user?.firstName} {item?.user?.lastName}
+                    {/* {item?.user?.firstName} {item?.user?.lastName} */}
+                    {item?.user && (
+                      <span>{item?.user?.firstName} {item?.user?.lastName}</span>
+                    )}
+                    {item?.team?.coachName && (
+                      <>
+                        <span className="block text-sm text-[#68706A]">
+                          {item.team.coachName}
+                        </span>
+                        <span className="block text-sm text-[#68706A]">
+                          {item.team.coachEmail}
+                        </span>
+                      </>
+                    )}
                   </h4>
                   <p className="flex items-center gap-2 text-sm font-normal leading-[150%] text-[#616161]">
                     {item?.user?.email}
@@ -94,7 +107,7 @@ const PricingAndPayment = () => {
               <p className="w-[150px] text-center text-sm font-normal leading-[150%] text-[#616161]">
                 $ {item?.amount || 0}
               </p>
-              
+
               <p className="text-sm font-normal leading-[150%] text-[#616161]">
                 {moment(item?.createdAt).format("DD / MM / YYYY")}
               </p>
@@ -109,7 +122,7 @@ const PricingAndPayment = () => {
       <div className="h-full bg-white border border-[#E6E6E8] p-6 rounded-[12px]">
         <div className="w-full flex items-center justify-between">
           <h4 className="text-xl font-semibold leading-[150%] text-[#343A40]">
-            Pricing & Payment 
+            Pricing & Payment
           </h4>
           <Link href="/pricing-and-payment">
             <button className="text-sm font-medium leading-[150%] text-primary cursor-pointer hover:underline">
