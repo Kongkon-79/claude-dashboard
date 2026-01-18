@@ -24,6 +24,7 @@ export interface User {
   socialMedia: SocialMedia[]
   playingVideo: string[]
   agent: string
+  age: number
   isSubscription: boolean
   subscription: Subscription | null
   accessLavel: string[]
