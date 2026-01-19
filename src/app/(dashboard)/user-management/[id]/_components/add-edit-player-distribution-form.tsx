@@ -41,6 +41,8 @@ type PlayerDistributionFormValues = {
   stepIn: number;
   turnoverConceded: number;
   mostPassesPlayerBetween: number;
+  passTheMost: string;
+  ballTheMost: string;
 };
 
 interface Props {
@@ -117,6 +119,14 @@ export const PlayerDistributionSchema = z.object({
   mostPassesPlayerBetween: z
     .number({ message: "Most passes between players must be a number" })
     .min(0, "Most passes between players cannot be negative"),
+
+      passTheMost: z
+    .string()
+    .min(1, "Pass The Most is required"),
+
+      ballTheMost: z
+    .string()
+    .min(1, "Ball The Most is required"),
 });
 
 
@@ -153,6 +163,8 @@ const AddEditPlayerDistributionForm = ({
   stepIn: 0,
   turnoverConceded: 0,
   mostPassesPlayerBetween: 0,
+passTheMost: "",
+  ballTheMost: ""
 }
 
 
@@ -182,6 +194,8 @@ const AddEditPlayerDistributionForm = ({
   stepIn: defaultData?.stepIn ?? 0,
   turnoverConceded: defaultData?.turnoverConceded ?? 0,
   mostPassesPlayerBetween: defaultData?.mostPassesPlayerBetween ?? 0,
+  passTheMost: defaultData?.passTheMost ?? "",
+  ballTheMost: defaultData?.ballTheMost ?? "",
 });
 
 
@@ -589,6 +603,48 @@ const AddEditPlayerDistributionForm = ({
                   </FormItem>
                 )}
               />
+
+               <FormField
+              control={form.control}
+              name="passTheMost"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
+                    Who do you pass the to the most?
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
+                      {...field}
+                      placeholder="Enter team name"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+             <FormField
+              control={form.control}
+              name="ballTheMost"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
+                    Who Pass The ball to you the most?
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
+                      {...field}
+                      placeholder="Enter team name"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+
 
               </div>
 
