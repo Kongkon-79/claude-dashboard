@@ -37,6 +37,8 @@ export interface DistributionStats {
   stepIn: number;
   turnoverConceded: number;
   mostPassesPlayerBetween: number;
+  passTheMost: string;
+  ballTheMost: string;
 
   createdAt: string; // ISO date
   updatedAt: string; // ISO date
