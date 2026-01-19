@@ -46,17 +46,17 @@ const UserManagementTabs = ({ id }: { id: string }) => {
   return (
     <div className="p-6">
 
-      <div className="pb-8">
+      <div className="pb-4">
         <Link href="/user-management">
-          <button className="bg-[#B6B6B6] flex items-center gap-2 text-[#131313] text-base leading-[120%] font-semibold py-2 px-4 rounded-[8px] "><ArrowLeft className="w-5 h-5" /> Back</button>
+          <button className="bg-[#B6B6B6] flex items-center gap-2 text-[#131313] text-back leading-[120%] font-semibold py-2 px-4 rounded-[8px] "><ArrowLeft className="w-5 h-5" /> Back</button>
         </Link>
       </div>
 
       {/* sub-pages */}
       <div>
-        <div className="bg-[#B6B6B6] flex items-center gap-8 py-5 px-6 rounded-[8px]">
+        <div className="bg-[#B6B6B6] flex items-center gap-8 p-3 rounded-[8px]">
           <button
-            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "player-data" &&
+            className={`text-xs lg:text-sm text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "player-data" &&
               "bg-primary text-white rounded-[8px]"
               }`}
             onClick={() => setIsActive("player-data")}
@@ -64,7 +64,7 @@ const UserManagementTabs = ({ id }: { id: string }) => {
             Player Data
           </button>
           <button
-            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "transfer-history" &&
+            className={`text-xs lg:text-sm text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "transfer-history" &&
               "bg-primary text-white rounded-[8px]"
               }`}
             onClick={() => setIsActive("transfer-history")}
@@ -73,7 +73,7 @@ const UserManagementTabs = ({ id }: { id: string }) => {
           </button>
 
           <button
-            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "national-team-career" &&
+            className={`text-xs lg:text-sm text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "national-team-career" &&
               "bg-primary text-white rounded-[8px]"
               }`}
             onClick={() => setIsActive("national-team-career")}
@@ -81,7 +81,7 @@ const UserManagementTabs = ({ id }: { id: string }) => {
             National Team Career
           </button>
           <button
-            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "rating" &&
+            className={`text-xs lg:text-sm text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "rating" &&
               "bg-primary text-white rounded-[8px]"
               }`}
             onClick={() => setIsActive("rating")}
@@ -90,57 +90,79 @@ const UserManagementTabs = ({ id }: { id: string }) => {
           </button>
 
           <button
-            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "defensive-stats" &&
+            className={`text-xs lg:text-sm text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "defensive-stats" &&
               "bg-primary text-white rounded-[8px]"
               }`}
             onClick={() => setIsActive("defensive-stats")}
           >
             Defensive Stats
           </button>
-          <button
-            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "attacking-stats" &&
+
+           {/* attacking  */}
+
+          {
+            playerRole == "player" &&  <button
+            className={`text-xs lg:text-sm text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "attacking-stats" &&
               "bg-primary text-white rounded-[8px]"
               }`}
             onClick={() => setIsActive("attacking-stats")}
           >
             Attacking Stats
           </button>
+          }
+         
 
           <button
-            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "distribution-stats" &&
+            className={`text-xs lg:text-sm text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "distribution-stats" &&
               "bg-primary text-white rounded-[8px]"
               }`}
             onClick={() => setIsActive("distribution-stats")}
           >
             Distribution Stats
           </button>
-          <button
-            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "gk-stats" &&
+
+          {/* gk stats  */}
+          
+          {
+            playerRole == "gk" && <button
+            className={`text-xs lg:text-sm text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "gk-stats" &&
               "bg-primary text-white rounded-[8px]"
               }`}
             onClick={() => setIsActive("gk-stats")}
           >
             GK Stats
           </button>
+          }
 
-          <button
-            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "set-pieces" &&
+          {/* set pieces  */}
+
+              {
+                playerRole == "player" && <button
+            className={`text-xs lg:text-sm text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "set-pieces" &&
               "bg-primary text-white rounded-[8px]"
               }`}
             onClick={() => setIsActive("set-pieces")}
           >
             Set Pieces
           </button>
-          <button
-            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "fouls" &&
+              }
+          
+
+          {/* fouls  */}
+
+          {
+            playerRole == "player" && <button
+            className={`text-xs lg:text-sm text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "fouls" &&
               "bg-primary text-white rounded-[8px]"
               }`}
             onClick={() => setIsActive("fouls")}
           >
             Fouls
           </button>
+          }
+          
           <button
-            className={`text-base text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "last-player-report" &&
+            className={`text-xs lg:text-sm text-[#131313] leading-[120%] font-semibold py-2 px-2 ${isActive === "last-player-report" &&
               "bg-primary text-white rounded-[8px]"
               }`}
             onClick={() => setIsActive("last-player-report")}
@@ -187,6 +209,7 @@ const UserManagementTabs = ({ id }: { id: string }) => {
               <DefensiveStatsPage id={id || ""} />
             </div>
           )} 
+
           {isActive === "attacking-stats" && (
 
             <div>
