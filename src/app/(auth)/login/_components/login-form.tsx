@@ -58,10 +58,24 @@ const LoginForm = () => {
         redirect: false,
       });
 
-      if (res?.error) {
-        throw new Error(res.error);
+      // if (res?.error) {
+      //   throw new Error(res.error);
+      // }
+
+       if (res?.error) {
+      if (res.error === "ADMIN_ONLY") {
+        toast.error("Only admin can access this admin dashboard");
+        return;
       }
 
+      if (res.error === "INVALID_CREDENTIALS") {
+        toast.error("Email or Password wrong");
+        return;
+      }
+
+      toast.error("Login failed");
+      return;
+    }
       toast.success("Login successful!");
       router.push("/");
     } catch (error) {
