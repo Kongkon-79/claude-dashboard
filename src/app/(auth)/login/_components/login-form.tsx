@@ -97,9 +97,9 @@ const LoginForm = () => {
         <h3 className="text-2xl md:text-[32px] lg:text-[40px] font-normal text-[#131313] text-center leading-[120%] ">
           Welcome Back!
         </h3>
-        <p className="text-basefont-normal text-[#616161] leading-[150%] text-center pt-2">
+        {/* <p className="text-basefont-normal text-[#616161] leading-[150%] text-center pt-2">
           Enter to get unlimited data & information
-        </p>
+        </p> */}
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
