@@ -20,6 +20,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { UserProfileApiResponse } from "../../_components/user-data-type"
 import { useEffect } from "react"
 import { toast } from "sonner"
+import PersonalInfoSkeleton from "../../_components/personal-info-skeleton"
 
 const formSchema = z.object({
   firstName: z.string().min(2, {
@@ -143,7 +144,9 @@ const PersonalInformationForm = () => {
 
   // loading 
   if (isLoading) {
-    return <div className="py-20 text-center">Loading profile...</div>
+    return <div className="">
+      <PersonalInfoSkeleton/>
+    </div>
   }
 
   // 2. Define a submit handler.
