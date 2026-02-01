@@ -210,7 +210,7 @@ const AddEditLastPlayerReportForm = ({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-xl rounded-2xl">
         <h3 className="text-xl font-semibold mb-4">
-          {isEdit ? "Edit Set Pieces" : "Add Set Pieces"}
+          {isEdit ? "Edit Last Player Report" : "Add Last Player Report"}
         </h3>
 
         <div className="max-h-[550px] overflow-y-auto pr-2">

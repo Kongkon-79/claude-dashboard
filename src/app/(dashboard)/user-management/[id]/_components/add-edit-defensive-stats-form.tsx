@@ -213,7 +213,7 @@ const AddEditDefensiveStatsForm = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl rounded-2xl">
+      <DialogContent className="max-w-2xl min-h-[400px] md:max-h-[600px] overflow-auto rounded-2xl">
         <h3 className="text-xl font-semibold mb-4">
           {isEdit ? "Edit Defensive Stats" : "Add Defensive Stats"}
         </h3>

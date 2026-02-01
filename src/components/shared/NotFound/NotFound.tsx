@@ -1,3 +1,5 @@
+
+
 import { TextAnimate } from "@/components/ui/text-animate";
 import Image from "next/image";
 import React from "react";
@@ -16,7 +18,8 @@ const NotFound = ({ message }: Props) => {
           alt="404 Not Found Illustration"
           width={300}
           height={300}
-          className="mb-4 w-[250px] h-[250px]"
+          priority
+          className="mb-4 w-[250px] h-[200px]"
         />
 
         {/* Text Animation applied to message string only */}
