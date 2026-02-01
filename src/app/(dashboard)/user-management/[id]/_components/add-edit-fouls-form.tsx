@@ -129,7 +129,7 @@ const AddEditFoulsForm = ({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-lg rounded-2xl">
         <h3 className="text-xl font-semibold mb-4">
-          {isEdit ? "Edit Set Pieces" : "Add Set Pieces"}
+          {isEdit ? "Edit Fouls" : "Add Fouls"}
         </h3>
 
         <Form {...form}>
