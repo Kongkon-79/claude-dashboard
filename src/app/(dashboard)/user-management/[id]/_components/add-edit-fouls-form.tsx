@@ -71,11 +71,11 @@ const AddEditFoulsForm = ({
   const form = useForm<FoulsFormValues>({
     resolver: zodResolver(foulsSchema),
     defaultValues: {
-      fouls: 0,
-      foulswon: 0,
-      redCards: 0,
-      yellowCards: 0,
-      offside: 0,
+      fouls: undefined,
+      foulswon: undefined,
+      redCards: undefined,
+      yellowCards: undefined,
+      offside: undefined,
     },
   });
 
@@ -153,6 +153,7 @@ const AddEditFoulsForm = ({
                       type="number"
                       {...field}
                       value={field.value ?? ""}
+                      placeholder="Enter Fouls"
                       onChange={(e) => field.onChange(Number(e.target.value))}
                       className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                     />
@@ -175,6 +176,7 @@ const AddEditFoulsForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Fouls won"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -196,6 +198,7 @@ const AddEditFoulsForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Red card"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -218,6 +221,7 @@ const AddEditFoulsForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Yello Card"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -235,13 +239,14 @@ const AddEditFoulsForm = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
-                      Off Sice
+                      Off Side
                     </FormLabel>
                     <FormControl>
                       <Input
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter off side"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />

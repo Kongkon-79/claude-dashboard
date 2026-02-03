@@ -144,25 +144,25 @@ const AddEditPlayerDistributionForm = ({
   const form = useForm<PlayerDistributionFormValues>({
     resolver: zodResolver(PlayerDistributionSchema),
  defaultValues: {
-  passes: 0,
-  passesinFinalThird: 0,
-  passesinMiddleThird: 0,
-  passesinOerensiveThird: 0,
+  passes: undefined,
+  passesinFinalThird: undefined,
+  passesinMiddleThird: undefined,
+  passesinOerensiveThird: undefined,
 
-  kevPasses: 0,
-  longPasses: 0,
-  mediumPasses: 0,
-  shortPasses: 0,
+  kevPasses: undefined,
+  longPasses: undefined,
+  mediumPasses: undefined,
+  shortPasses: undefined,
 
-  passesForward: 0,
-  passesSidewavs: 0,
-  passesBackward: 0,
+  passesForward: undefined,
+  passesSidewavs: undefined,
+  passesBackward: undefined,
 
-  passesReceived: 0,
-  crosses: 0,
-  stepIn: 0,
-  turnoverConceded: 0,
-  mostPassesPlayerBetween: 0,
+  passesReceived: undefined,
+  crosses: undefined,
+  stepIn: undefined,
+  turnoverConceded: undefined,
+  mostPassesPlayerBetween: undefined,
 passTheMost: "",
   ballTheMost: ""
 }
@@ -239,7 +239,7 @@ passTheMost: "",
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="min-h-[400px] md:max-h-[600px] overflow-auto max-w-2xl rounded-2xl">
+      <DialogContent className="undefined max-w-2xl min-h-[400px] md:max-h-[600px] overflow-auto rounded-2xl">
         <h3 className="text-xl font-semibold mb-4">
           {isEdit ? "Edit Player Distribution Stats" : "Add Player Distribution Stats"}
         </h3>
@@ -265,6 +265,7 @@ passTheMost: "",
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Passes"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -287,6 +288,7 @@ passTheMost: "",
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Passes in final third"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -308,6 +310,7 @@ passTheMost: "",
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter passes in middle third"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -329,6 +332,7 @@ passTheMost: "",
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Passes in Defensive third"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -344,13 +348,14 @@ passTheMost: "",
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
-                     Kev Passes
+                     Key Passes
                     </FormLabel>
                     <FormControl>
                       <Input
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Key Passes"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -372,6 +377,7 @@ passTheMost: "",
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter long passes"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -394,6 +400,7 @@ passTheMost: "",
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Medium Passes"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -419,6 +426,7 @@ passTheMost: "",
                       {...field}
                       value={field.value ?? ""}
                       onChange={(e) => field.onChange(Number(e.target.value))}
+                      placeholder="Enter Short Passes"
                       className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                     />
                   </FormControl>
@@ -440,6 +448,7 @@ passTheMost: "",
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Passes Forward"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -455,13 +464,14 @@ passTheMost: "",
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
-                      Passes Sidewavs
+                      Passes Sideways
                     </FormLabel>
                     <FormControl>
                       <Input
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter passes shdeways"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -483,6 +493,7 @@ passTheMost: "",
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter passes backward"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -506,6 +517,7 @@ passTheMost: "",
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter passes received"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -530,6 +542,7 @@ passTheMost: "",
                       type="number"
                       {...field}
                       value={field.value ?? ""}
+                      placeholder="Enter Crosses"
                       onChange={(e) => field.onChange(Number(e.target.value))}
                       className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                     />
@@ -552,6 +565,7 @@ passTheMost: "",
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Step In"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -574,6 +588,7 @@ passTheMost: "",
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Turnover Conceded"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -595,6 +610,7 @@ passTheMost: "",
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Most Passes Player Between"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />

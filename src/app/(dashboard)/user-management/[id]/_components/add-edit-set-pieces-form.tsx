@@ -67,10 +67,10 @@ const AddEditSetPiecesForm = ({
   const form = useForm<SetPiecesFormValues>({
     resolver: zodResolver(setPiecesSchema),
     defaultValues: {
-      freekicks: 0,
-      freekicksShots: 0,
-      freekicksShotsonTarget: 0,
-      penaltyKicks: 0,
+      freekicks: undefined,
+      freekicksShots: undefined,
+      freekicksShotsonTarget: undefined,
+      penaltyKicks: undefined,
     },
   });
 
@@ -144,6 +144,7 @@ const AddEditSetPiecesForm = ({
                       type="number"
                       {...field}
                       value={field.value ?? ""}
+                      placeholder="Enter Freekicks"
                       onChange={(e) => field.onChange(Number(e.target.value))}
                       className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                     />
@@ -166,6 +167,7 @@ const AddEditSetPiecesForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Freekicks shots"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -187,6 +189,7 @@ const AddEditSetPiecesForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Freekicks shots on target"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -208,6 +211,7 @@ const AddEditSetPiecesForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Penalty kicks"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />

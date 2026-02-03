@@ -128,24 +128,24 @@ const AddEditDefensiveStatsForm = ({
   const form = useForm<DefensiveStatsFormValues>({
     resolver: zodResolver(defensiveStatsSchema),
     defaultValues: {
-  tackleAttempts: 0,
-  tackleSucceededPossession: 0,
-  tackleSucceededNOPossession: 0,
-  tackleFailed: 0,
+  tackleAttempts: undefined,
+  tackleSucceededPossession: undefined,
+  tackleSucceededNOPossession: undefined,
+  tackleFailed: undefined,
 
-  turnoverwon: 0,
-  interceptions: 0,
-  recoveries: 0,
-  clearance: 0,
+  turnoverwon: undefined,
+  interceptions: undefined,
+  recoveries: undefined,
+  clearance: undefined,
 
-  totalBlocked: 0,
-  shotBlocked: 0,
-  crossBlocked: 0,
+  totalBlocked: undefined,
+  shotBlocked: undefined,
+  crossBlocked: undefined,
 
-  mistakes: 0,
-  aerialDuels: 0,
-  phvsicalDuels: 0,
-  ownGoals: 0,
+  mistakes: undefined,
+  aerialDuels: undefined,
+  phvsicalDuels: undefined,
+  ownGoals: undefined,
 },
 
   });
@@ -239,6 +239,7 @@ const AddEditDefensiveStatsForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Tackle Attempts"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -261,6 +262,7 @@ const AddEditDefensiveStatsForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Tackle Succeeded"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -282,6 +284,7 @@ const AddEditDefensiveStatsForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Tackle Succeeded"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -304,6 +307,7 @@ const AddEditDefensiveStatsForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Tackie Failed"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -325,6 +329,7 @@ const AddEditDefensiveStatsForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Turnover Won"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -347,6 +352,7 @@ const AddEditDefensiveStatsForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Interceptions"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -371,6 +377,7 @@ const AddEditDefensiveStatsForm = ({
                       type="number"
                       {...field}
                       value={field.value ?? ""}
+                      placeholder="Enter Recoveries"
                       onChange={(e) => field.onChange(Number(e.target.value))}
                       className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                     />
@@ -393,6 +400,7 @@ const AddEditDefensiveStatsForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Clearance"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -415,6 +423,7 @@ const AddEditDefensiveStatsForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Total Blocked"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -436,6 +445,7 @@ const AddEditDefensiveStatsForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Shot Blocked"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -458,6 +468,7 @@ const AddEditDefensiveStatsForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Cross Blocked"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -479,6 +490,7 @@ const AddEditDefensiveStatsForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Mistakes"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -501,6 +513,7 @@ const AddEditDefensiveStatsForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Aerial Duels"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -525,6 +538,7 @@ const AddEditDefensiveStatsForm = ({
                       type="number"
                       {...field}
                       value={field.value ?? ""}
+                      placeholder="Enter Physical Duels"
                       onChange={(e) => field.onChange(Number(e.target.value))}
                       className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                     />
@@ -546,6 +560,7 @@ const AddEditDefensiveStatsForm = ({
                       type="number"
                       {...field}
                       value={field.value ?? ""}
+                      placeholder="Enter Own Goals"
                       onChange={(e) => field.onChange(Number(e.target.value))}
                       className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                     />

@@ -88,8 +88,8 @@ const AddNationalTeamForm = ({
       teamName: "",
       category: "",
       debut: "",
-      goals: 0,
-      match: 0,
+      goals: undefined,
+      match: undefined,
       flag: null,
     },
   });
@@ -221,6 +221,7 @@ const AddNationalTeamForm = ({
                         {...field}
                         value={field.value ?? ""}
                         onChange={(e) => field.onChange(Number(e.target.value))}
+                        placeholder="Enter goals"
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
                     </FormControl>
@@ -241,6 +242,7 @@ const AddNationalTeamForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter matches"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
