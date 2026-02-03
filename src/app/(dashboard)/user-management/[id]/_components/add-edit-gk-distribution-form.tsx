@@ -107,17 +107,17 @@ const AddEditGkDistributionForm = ({
   const form = useForm<GkDistributionStatsFormValues>({
     resolver: zodResolver(GkDistributionStatsSchema),
     defaultValues: {
-  keyPasses: 0,
-  mediumRangePasses: 0,
-  passes: 0,
-  shortPasses: 0,
-  passesInFinalThird: 0,
-  passesForward: 0,
-  passesInMiddleThird: 0,
-  passesSideways: 0,
-  passesInDefensiveThird: 0,
-  passesReceived: 0,
-  longPasses: 0,
+  keyPasses: undefined,
+  mediumRangePasses: undefined,
+  passes: undefined,
+  shortPasses: undefined,
+  passesInFinalThird: undefined,
+  passesForward: undefined,
+  passesInMiddleThird: undefined,
+  passesSideways: undefined,
+  passesInDefensiveThird: undefined,
+  passesReceived: undefined,
+  longPasses: undefined,
 }
 
 
@@ -207,6 +207,7 @@ const AddEditGkDistributionForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Key passes"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -229,6 +230,7 @@ const AddEditGkDistributionForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Medium range passes"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -250,6 +252,7 @@ const AddEditGkDistributionForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter passes"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -272,6 +275,7 @@ const AddEditGkDistributionForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Short passes"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -293,6 +297,7 @@ const AddEditGkDistributionForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter passes in final third"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -315,6 +320,7 @@ const AddEditGkDistributionForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter passes forward"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -339,6 +345,7 @@ const AddEditGkDistributionForm = ({
                       type="number"
                       {...field}
                       value={field.value ?? ""}
+                      placeholder="Enter Passes in middle third"
                       onChange={(e) => field.onChange(Number(e.target.value))}
                       className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                     />
@@ -361,6 +368,7 @@ const AddEditGkDistributionForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Passes sideways"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -383,6 +391,7 @@ const AddEditGkDistributionForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Passes in defensive third"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -404,6 +413,7 @@ const AddEditGkDistributionForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter passes received"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -425,6 +435,7 @@ const AddEditGkDistributionForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter long passes"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />

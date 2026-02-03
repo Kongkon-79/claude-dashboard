@@ -102,20 +102,20 @@ const AddEditAttackingStatsForm = ({
   const form = useForm<AttackingStatsFormValues>({
     resolver: zodResolver(attackingStatsSchema),
     defaultValues: {
-  goals: 0,
-  assists: 0,
+  goals: undefined,
+  assists: undefined,
 
-  shotsNsidePr: 0,
-  shotsOutsidePa: 0,
-  totalShots: 0,
+  shotsNsidePr: undefined,
+  shotsOutsidePa: undefined,
+  totalShots: undefined,
 
-  shotsOnTarget: 0,
-  shotsOffTarget: 0,
+  shotsOnTarget: undefined,
+  shotsOffTarget: undefined,
 
-  shootingAccuracy: 0,
-  passesAccuracy: 0,
+  shootingAccuracy: undefined,
+  passesAccuracy: undefined,
 
-  takeOn: 0,
+  takeOn: undefined,
 },
 
 
@@ -207,6 +207,7 @@ const AddEditAttackingStatsForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Goals"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -229,6 +230,7 @@ const AddEditAttackingStatsForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Assists"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -250,6 +252,7 @@ const AddEditAttackingStatsForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Shots inside pa"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -272,6 +275,7 @@ const AddEditAttackingStatsForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Shots outside pa"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -293,6 +297,7 @@ const AddEditAttackingStatsForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Total Shots"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -315,6 +320,7 @@ const AddEditAttackingStatsForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Shots On Target"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -339,6 +345,7 @@ const AddEditAttackingStatsForm = ({
                       type="number"
                       {...field}
                       value={field.value ?? ""}
+                      placeholder="Enter off target"
                       onChange={(e) => field.onChange(Number(e.target.value))}
                       className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                     />
@@ -361,6 +368,7 @@ const AddEditAttackingStatsForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter shooting accuracy"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -383,6 +391,7 @@ const AddEditAttackingStatsForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter passes accuracy"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -404,6 +413,7 @@ const AddEditAttackingStatsForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Take on"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />

@@ -139,9 +139,9 @@ const AddEditLastPlayerReportForm = ({
       date: "",
       category: "",
       gameTitle: "",
-      rating: 0,
+      rating: undefined,
       position: [],
-      minutesPlayed: 0,
+      minutesPlayed: undefined,
       deFensiveSummary: "",
       strengths: "",
       offensiveSummary: "",
@@ -313,6 +313,7 @@ const AddEditLastPlayerReportForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Rating"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />
@@ -405,6 +406,7 @@ const AddEditLastPlayerReportForm = ({
                         type="number"
                         {...field}
                         value={field.value ?? ""}
+                        placeholder="Enter Minutes played"
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                       />

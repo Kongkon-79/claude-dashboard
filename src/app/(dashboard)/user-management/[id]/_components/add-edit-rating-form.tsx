@@ -84,10 +84,10 @@ const AddEditRatingForm = ({
   const form = useForm<RatingFormValues>({
     resolver: zodResolver(ratingSchema),
     defaultValues: {
-      rating: 0,
+      rating: undefined,
       position: [],
       // numberOfGames: 0,
-      minutes: 0,
+      minutes: undefined,
     },
   });
 
@@ -162,6 +162,7 @@ const AddEditRatingForm = ({
                       type="number"
                       {...field}
                       value={field.value ?? ""}
+                      placeholder="Enter Rating"
                       onChange={(e) => field.onChange(Number(e.target.value))}
                       className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                     />
@@ -218,6 +219,7 @@ const AddEditRatingForm = ({
                                 type="checkbox"
                                 checked={checked}
                                 disabled={disabled}
+                                
                                 onChange={(e) => {
                                   if (e.target.checked) {
                                     field.onChange([...field.value, pos.value])
@@ -276,6 +278,7 @@ const AddEditRatingForm = ({
                       <Input
                         type="number"
                         {...field}
+                        placeholder="Enter Minutes"
                         value={field.value ?? ""}
                         onChange={(e) => field.onChange(Number(e.target.value))}
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
