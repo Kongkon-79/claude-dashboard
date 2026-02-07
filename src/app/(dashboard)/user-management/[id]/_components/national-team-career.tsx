@@ -122,7 +122,7 @@ const NationalTeamCareerPage = ({ id }: { id?: string }) => {
                 <TableRow key={index} className="">
                   <TableCell className="w-[267px] text-base font-medium text-[#131313] leading-[150%] pl-6 py-3">
                     <div>
-                      <Image src={item?.flag || "/assets/images/no-image.png"} alt="Profile" width={40} height={40} className="w-16 h-16 rounded-[12px] object-cover" />
+                      <Image src={item?.flag || "/assets/images/no-image.png"} alt="Profile" width={40} height={40} className="w-16 h-16 rounded-[12px] object-contain" />
                     </div>
 
                   </TableCell>

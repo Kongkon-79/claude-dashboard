@@ -48,6 +48,7 @@ type LastPlayerReportFormValues = {
   weaknesses: string;
   distributionSummary: string;
   generalComments: string;
+  numberOfGames: number;
 };
 
 interface Props {
@@ -83,6 +84,10 @@ export const lastPlayerReportSchema = z.object({
   minutesPlayed: z
     .number({ message: "Minutes played must be a number" })
     .min(0, "Minutes played cannot be negative"),
+
+      numberOfGames: z
+    .number({ message: "Number Of Game must be a number" })
+    .min(0, "Number Of Game cannot be negative"),
 
   deFensiveSummary: z
     .string()
@@ -139,6 +144,7 @@ const AddEditLastPlayerReportForm = ({
       date: "",
       category: "",
       gameTitle: "",
+      numberOfGames: undefined,
       rating: undefined,
       position: [],
       minutesPlayed: undefined,
@@ -160,6 +166,7 @@ const AddEditLastPlayerReportForm = ({
         category: defaultData.category ?? "",
         gameTitle: defaultData.gameTitle ?? "",
         rating: defaultData.rating ?? 0,
+        numberOfGames: defaultData?.numberOfGames ?? 0,
         position: defaultData.position ?? "",
         minutesPlayed: defaultData.minutesPlayed ?? 0,
         deFensiveSummary: defaultData.deFensiveSummary ?? "",
@@ -419,6 +426,28 @@ const AddEditLastPlayerReportForm = ({
               
 
             </div>
+              <FormField
+                control={form.control}
+                name="numberOfGames"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
+                      Number Of Games
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        {...field}
+                        value={field.value ?? ""}
+                        placeholder="Enter Number Of games"
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
              <FormField
                 control={form.control}

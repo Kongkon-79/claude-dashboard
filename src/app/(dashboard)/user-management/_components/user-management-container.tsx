@@ -119,9 +119,9 @@ const UserManagementContainer = () => {
             return (
               <TableRow key={index} className="">
                 <TableCell className="text-left pl-6 py-4">
-                  <div className='w-[230px] flex items-center gap-2'>
+                  <div className='flex items-center gap-2'>
                     <div>
-                      <Image src={item?.profileImage || "/assets/images/no-user.jpeg"} alt="Profile" width={100} height={100} className="w-8 h-8 rounded-full object-contain" />
+                      <Image src={item?.profileImage || "/assets/images/no-user.jpeg"} alt="Profile" width={100} height={100} className="w-10 h-10 rounded-full object-cover" />
                     </div>
                     <div>
                       <h4 className="text-base font-semibold leading-[150%] text-[#181818]">
@@ -136,7 +136,7 @@ const UserManagementContainer = () => {
                 </TableCell>
 
                 <TableCell className="text-base font-normal text-[#68706A] leading-[150%] text-center py-4">
-                  {item?.phone || "N/A"}
+                 {item?.phoneCode} {item?.phone || "N/A"}
                 </TableCell>
 
                 <TableCell className="text-base font-normal text-[#68706A] leading-[150%] text-center py-4">

@@ -30,6 +30,7 @@ export interface PlayerReport {
   weaknesses: string;
   distributionSummary: string;
   generalComments: string;
+  numberOfGames?: number;
   createdAt: string;
   updatedAt: string;
   __v: number;

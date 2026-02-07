@@ -97,7 +97,7 @@ const TransferHistoryPage = ({ id }: { id?: string }) => {
                 Season
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Date
+                Departure Date
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
                 Left Club Name
@@ -138,12 +138,12 @@ const TransferHistoryPage = ({ id }: { id?: string }) => {
                   </TableCell>
                   <TableCell className=" text-base font-normal text-[#131313] leading-[150%] py-3">
                     <div className="flex items-center justify-center">
-                      <Image src={item?.leftClub || "/assets/images/no-image.png"} alt="Profile" width={40} height={40} className="w-16 h-16 rounded-[12px] object-cover" />
+                      <Image src={item?.leftClub || "/assets/images/no-image.png"} alt="Profile" width={40} height={40} className="w-16 h-16 rounded-[12px] object-contain" />
                     </div>
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] py-3">
                     <div className="flex items-center justify-center">
-                      <Image src={item?.leftCountery || "/assets/images/no-image.png"} alt="Profile" width={40} height={40} className="w-16 h-16 rounded-[12px] object-cover" />
+                      <Image src={item?.leftCountery || "/assets/images/no-image.png"} alt="Profile" width={40} height={40} className="w-16 h-16 rounded-[12px] object-contain" />
                     </div>
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
@@ -151,12 +151,12 @@ const TransferHistoryPage = ({ id }: { id?: string }) => {
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
                     <div className="flex items-center justify-center">
-                      <Image src={item?.joinedClub || "/assets/images/no-image.png"} alt="Profile" width={40} height={40} className="w-16 h-16 rounded-[12px] object-cover" />
+                      <Image src={item?.joinedClub || "/assets/images/no-image.png"} alt="Profile" width={40} height={40} className="w-16 h-16 rounded-[12px] object-contain" />
                     </div>
                   </TableCell>
                   <TableCell className=" text-base font-normal text-[#131313] leading-[150%] py-3">
                     <div className="flex items-center justify-center">
-                      <Image src={item?.joinedCountery || "/assets/images/no-image.png"} alt="Profile" width={40} height={40} className="w-16 h-16 rounded-[12px] object-cover" />
+                      <Image src={item?.joinedCountery || "/assets/images/no-image.png"} alt="Profile" width={40} height={40} className="w-16 h-16 rounded-[12px] object-contain" />
                     </div>
                   </TableCell>
                   <TableCell >

@@ -20,6 +20,7 @@ export interface User {
   profileImage: string
   verified: boolean
   phone: string
+  phoneCode: string
   position: string[]
   socialMedia: SocialMedia[]
   playingVideo: string[]

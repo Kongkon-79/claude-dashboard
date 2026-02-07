@@ -16,7 +16,7 @@ const PlayerData = ({ data }: { data: User }) => {
         <div className="md:col-span-4">
           <ul className="grid gris-cols-1 md:gris-cols-2 lg:grid-cols-4 gap-6">
             <li className="flex flex-col gap-2"><span className='text-base font-medium text-[#616161] leading-[150%]'>Full Name</span> <span className='text-lg md:text-xl text-[#131313] font-medium leading-[120%] '>{data?.firstName || "N/A"}  {data?.lastName || "N/A"}</span></li>
-            <li className="flex flex-col gap-2"><span className='text-base font-medium text-[#616161] leading-[150%]'>Phone</span> <span className='text-lg md:text-xl text-[#131313] font-medium leading-[120%] '>{data?.phone || "N/A"}</span></li>
+            <li className="flex flex-col gap-2"><span className='text-base font-medium text-[#616161] leading-[150%]'>Phone</span> <span className='text-lg md:text-xl text-[#131313] font-medium leading-[120%] '> {data?.phoneCode} {data?.phone || "N/A"}</span></li>
             <li className="flex flex-col gap-2"><span className='text-base font-medium text-[#616161] leading-[150%]'>Nationality</span> <span className='text-lg md:text-xl text-[#131313] font-medium leading-[120%] '>{data?.citizenship || "N/A"}</span></li>
             <li className="flex flex-col gap-2"><span className='text-base font-medium text-[#616161] leading-[150%]'>Preferred Foot</span> <span className='text-lg md:text-xl text-[#131313] font-medium leading-[120%] '>{data?.foot || "N/A"}</span></li>
             <li className="flex flex-col gap-2"><span className='text-base font-medium text-[#616161] leading-[150%]'>Current Club</span> <span className='text-lg md:text-xl text-[#131313] font-medium leading-[120%] '>{data?.currentClub || "N/A"}</span></li>

@@ -15,7 +15,7 @@ import {
 import TableSkeletonWrapper from "@/components/shared/TableSkeletonWrapper/TableSkeletonWrapper";
 import ErrorContainer from "@/components/shared/ErrorContainer/ErrorContainer";
 import NotFound from "@/components/shared/NotFound/NotFound";
-import { Trash, SquarePen } from "lucide-react";
+import { SquarePen } from "lucide-react";
 import ClaudePagination from "@/components/ui/claude-pagination";
 import DeleteModal from "@/components/modals/delete-modal";
 import { Rating, RatingsApiResponse } from "@/components/types/rating-data-type";
@@ -33,6 +33,8 @@ const RatingPage = ({ id }: { id?: string }) => {
   console.log(queryClient)
   const session = useSession();
   const token = (session?.data?.user as { accessToken: string })?.accessToken;
+
+  console.log(setRatingId)
 
   const { data, isLoading, isError, error } = useQuery<RatingsApiResponse>({
     queryKey: ["all-rating", id, currentPage],
@@ -92,9 +94,9 @@ const RatingPage = ({ id }: { id?: string }) => {
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] py-3 pl-6">
                 Rating
               </TableHead>
-              <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
+              {/* <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
                 Position
-              </TableHead>
+              </TableHead> */}
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
                 Number of games
               </TableHead>
@@ -112,11 +114,11 @@ const RatingPage = ({ id }: { id?: string }) => {
                 <TableRow key={index} className="">
                   <TableCell className="w-[267px] text-base font-medium text-[#131313] leading-[150%] pl-6 py-3">
 
-                    {item?.rating || "N/A"}
+                    {item?.rating || 0}
                   </TableCell>
-                  <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
+                  {/* <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
                     {item?.position?.join(", ") || "N/A"}
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
                     {item?.gamesNumber || "N/A"}
                   </TableCell>
@@ -137,7 +139,7 @@ const RatingPage = ({ id }: { id?: string }) => {
                       </button>
 
 
-                      <button
+                      {/* <button
                         onClick={() => {
                           setDeleteModalOpen(true);
                           setRatingId(item?._id);
@@ -145,7 +147,7 @@ const RatingPage = ({ id }: { id?: string }) => {
                         className="cursor-pointer"
                       >
                         <Trash className="h-6 w-6 text-red-500" />
-                      </button>
+                      </button> */}
                     </div>
                   </TableCell>
                 </TableRow>

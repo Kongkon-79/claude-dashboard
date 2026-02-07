@@ -233,7 +233,7 @@ const AddEditTransferHistoryForm = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
-                    Date
+                    Departure Date
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -291,7 +291,7 @@ const AddEditTransferHistoryForm = ({
                             src={leftClubPreview}
                             alt="Flag"
                             fill
-                            className="object-cover"
+                            className="object-contain py-2"
                           />
                           <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
                             <button
@@ -350,7 +350,7 @@ const AddEditTransferHistoryForm = ({
                             src={leftCountryPreview}
                             alt="Flag"
                             fill
-                            className="object-cover"
+                            className="object-contain py-2"
                           />
                           <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
                             <button
@@ -431,7 +431,7 @@ const AddEditTransferHistoryForm = ({
                             src={joinedClubPreview}
                             alt="Flag"
                             fill
-                            className="object-cover"
+                            className="object-contain py-2"
                           />
                           <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
                             <button
@@ -490,7 +490,7 @@ const AddEditTransferHistoryForm = ({
                             src={joinedCountryPreview}
                             alt="Flag"
                             fill
-                            className="object-cover"
+                            className="object-contain py-2"
                           />
                           <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
                             <button
