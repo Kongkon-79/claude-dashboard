@@ -4,11 +4,11 @@ import React, { useEffect } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+// import {
+//   Popover,
+//   PopoverContent,
+//   PopoverTrigger,
+// } from "@/components/ui/popover";
 import {
   Form,
   FormControl,
@@ -28,7 +28,7 @@ import { Rating } from "@/components/types/rating-data-type";
 
 type RatingFormValues = {
   rating: number;
-  position: string[];
+  // position: string[];
   // numberOfGames: number;
   minutes: number;
 };
@@ -48,7 +48,7 @@ const ratingSchema = z.object({
     .number({ message: "Rating must be a number" })
     .min(0, "Rating cannot be less than 0")
     .max(10, "Rating cannot be more than 10"),
-  position: z.array(z.string()).min(1, "Select at least one position").max(2, "Maximum 2 positions"),
+  // position: z.array(z.string()).min(1, "Select at least one position").max(2, "Maximum 2 positions"),
   // numberOfGames: z
   //   .number({ message: "Number of Games must be a number" })
   //   .min(0, "Number of Games cannot be negative"),
@@ -69,23 +69,23 @@ const AddEditRatingForm = ({
   const isEdit = Boolean(defaultData?._id);
 
 
-  const POSITIONS = [
-    { label: "GK", value: "gk" },
-    { label: "RB", value: "rb" },
-    { label: "LB", value: "lb" },
-    { label: "CB", value: "cb" },
-    { label: "Defensive Midfielder", value: "defensive midfielder" },
-    { label: "Offensive Midfielder", value: "offensive midfielder" },
-    { label: "Right Winger", value: "right winger" },
-    { label: "Left Winger", value: "left winger" },
-    { label: "Striker", value: "striker" },
-  ]
+  // const POSITIONS = [
+  //   { label: "GK", value: "gk" },
+  //   { label: "RB", value: "rb" },
+  //   { label: "LB", value: "lb" },
+  //   { label: "CB", value: "cb" },
+  //   { label: "Defensive Midfielder", value: "defensive midfielder" },
+  //   { label: "Offensive Midfielder", value: "offensive midfielder" },
+  //   { label: "Right Winger", value: "right winger" },
+  //   { label: "Left Winger", value: "left winger" },
+  //   { label: "Striker", value: "striker" },
+  // ]
 
   const form = useForm<RatingFormValues>({
     resolver: zodResolver(ratingSchema),
     defaultValues: {
       rating: undefined,
-      position: [],
+      // position: [],
       // numberOfGames: 0,
       minutes: undefined,
     },
@@ -96,7 +96,7 @@ const AddEditRatingForm = ({
     if (defaultData) {
       form.reset({
         rating: defaultData.rating,
-        position: defaultData.position,
+        // position: defaultData.position,
         // numberOfGames: defaultData.numberOfGames,
         minutes: defaultData.minutes,
       });
@@ -172,7 +172,7 @@ const AddEditRatingForm = ({
               )}
             />
 
-            <FormField
+            {/* <FormField
               control={form.control}
               name="position"
               render={({ field }) => (
@@ -242,7 +242,7 @@ const AddEditRatingForm = ({
                   <FormMessage className="text-red-500" />
                 </FormItem>
               )}
-            />
+            /> */}
 
             <div className="grid grid-cols-1 gap-4">
               {/* <FormField

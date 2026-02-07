@@ -22,7 +22,7 @@ const NationalCareerView = ({
         <div className="space-y-4">
           <p className="text-base font-normal text-[#6C757D)] leading-[150%]">
             <strong className="text-base font-semibold text-[#343A40] leading-[150%]">Team Flag :</strong> <br/> 
-                <Image src={nationalTeam?.flag || "/assets/images/no-image.png"} alt="Profile" width={40} height={40} className="w-16 h-16 rounded-[12px] object-cover" />
+                <Image src={nationalTeam?.flag || "/assets/images/no-image.png"} alt="Profile" width={40} height={40} className="w-16 h-16 rounded-[12px] object-contain" />
           </p>
           <p className="text-base font-normal text-[#6C757D)] leading-[150%]">
             <strong className="text-base font-semibold text-[#343A40] leading-[150%]">Team Name :</strong> <br/> {nationalTeam?.teamName || "N/A"}

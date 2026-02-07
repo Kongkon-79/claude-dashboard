@@ -267,7 +267,7 @@ const AddNationalTeamForm = ({
                         value={field.value}
                       >
                         <SelectTrigger className="w-full h-[48px] py-2 px-3 rounded-[8px] border border-[#645949] text-base font-medium leading-[120%] text-[#131313]">
-                          <SelectValue placeholder="Select" />
+                          <SelectValue placeholder="Select Category" />
                         </SelectTrigger>
                         <SelectContent className="h-[200px] overflow-y-auto">
                           <SelectItem value="semi-professional">Semi Professional</SelectItem>
@@ -284,6 +284,10 @@ const AddNationalTeamForm = ({
                           <SelectItem value="U17">U17</SelectItem>
                           <SelectItem value="U18">U18</SelectItem>
                           <SelectItem value="U19">U19</SelectItem>
+                          <SelectItem value="U20">U20</SelectItem>
+                          <SelectItem value="U21">U21</SelectItem>
+                          <SelectItem value="U23">U23</SelectItem>
+                          <SelectItem value="men's national team">Men&rsquo;s National Team</SelectItem>
                         </SelectContent>
                       </Select>
                     </FormControl>
@@ -304,12 +308,12 @@ const AddNationalTeamForm = ({
                   <FormControl>
                     <div className="w-auto flex items-center gap-4 border-2 border-dashed border-gray-500 rounded-[12px]">
                       {preview ? (
-                        <div className="relative w-full h-28 rounded-xl overflow-hidden group">
+                        <div className="relative w-full h-40 rounded-xl overflow-hidden group">
                           <Image
                             src={preview}
                             alt="Flag"
                             fill
-                            className="object-cover"
+                            className="object-contain py-2"
                           />
                           <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
                             <button
@@ -325,7 +329,7 @@ const AddNationalTeamForm = ({
                           </div>
                         </div>
                       ) : (
-                        <label className="w-full h-28 rounded-xl border border-dashed flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-muted transition">
+                        <label className="w-full h-40 rounded-xl border border-dashed flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-muted transition">
                           <UploadCloud className="h-6 w-6 text-muted-foreground" />
                           <span className="text-sm font-medium text-[#131313] leading-normal">
                             Upload Flag

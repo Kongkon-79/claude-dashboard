@@ -36,7 +36,7 @@ const PricingAndPayment = () => {
     enabled: !!token
   })
 
-  // console.log(totalPages)
+  console.log(data)
 
 
   let content;
@@ -76,29 +76,38 @@ const PricingAndPayment = () => {
             >
               <div className='w-[230px] flex items-center gap-2'>
                 <div>
-                  <Image src={item?.user?.profileImage || "/assets/images/no-user.jpeg"} alt="Profile" width={100} height={100} className="w-8 h-8 rounded-full object-contain" />
+                  <Image src={item?.user?.profileImage || "/assets/images/no-user.jpeg"} alt="Profile" width={100} height={100} className="w-10 h-10 rounded-full object-cover" />
                 </div>
                 <div>
+
+
                   <h4 className="text-base font-semibold leading-[150%] text-[#181818]">
-                    {/* {item?.user?.firstName} {item?.user?.lastName} */}
-                    {item?.user && (
-                      <span>{item?.user?.firstName} {item?.user?.lastName}</span>
+                    {item?.user && !item?.team && (
+                      <div className="">
+                        <span>
+                          {item.user.firstName} {item.user.lastName}
+                        </span>
+                        <span className="block text-sm font-normal text-[#616161]">
+                          {item.user.email}
+                        </span>
+                      </div>
                     )}
-                    {item?.team?.coachName && (
-                      <>
+
+                    {item?.user && item?.team && (
+                      <div className="">
                         <span className="block text-sm text-[#68706A]">
                           {item.team.coachName}
                         </span>
                         <span className="block text-sm text-[#68706A]">
                           {item.team.coachEmail}
                         </span>
-                      </>
+                      </div>
                     )}
                   </h4>
-                  <p className="flex items-center gap-2 text-sm font-normal leading-[150%] text-[#616161]">
-                    {item?.user?.email}
-                  </p>
+
+
                 </div>
+
 
               </div>
               {/* <p className="w-[150px] flex items-center gap-2 text-sm font-normal text-center leading-[150%] text-[#616161]">

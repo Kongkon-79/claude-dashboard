@@ -76,7 +76,7 @@ const UserRegistration = () => {
             >
               <div className='w-[230px] flex items-center gap-2'>
                 <div>
-                  <Image src={item?.profileImage || "/assets/images/no-user.jpeg"} alt="Profile" width={100} height={100} className="w-8 h-8 rounded-full object-contain" />
+                  <Image src={item?.profileImage || "/assets/images/no-user.jpeg"} alt="Profile" width={100} height={100} className="w-10 h-10 rounded-full object-cover" />
                 </div>
                 <div>
                   <h4 className="text-base font-semibold leading-[150%] text-[#181818]">
@@ -92,7 +92,7 @@ const UserRegistration = () => {
                 {item?.citizenship || "N/A"}
               </p>
               <p className="w-[150px] text-sm font-normal text-center leading-[150%] text-[#616161]">
-                {item?.phone || "N/A"}
+               {item?.phoneCode || ""} {item?.phone || "N/A"}
               </p>
               <p className="text-sm font-normal leading-[150%] text-[#616161]">
                 {moment(item?.createdAt).format("DD / MM / YYYY")}

@@ -35,6 +35,7 @@ export interface UserInfo {
   hight?: string;
   inSchoolOrCollege?: boolean;
   phone?: string;
+  phoneCode?: string;
   satAct?: string;
   weight?: number;
 }
