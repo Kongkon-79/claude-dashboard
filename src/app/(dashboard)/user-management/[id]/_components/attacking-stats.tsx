@@ -111,7 +111,7 @@ const AttackingStatsPage = ({ id }: { id?: string }) => {
                 Shooting Accuracy
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
-                Shots off Target
+                Passes Accuracy
               </TableHead>
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3">
                 Action
@@ -145,7 +145,7 @@ const AttackingStatsPage = ({ id }: { id?: string }) => {
                     {item?.shootingAccuracy || "N/A"}
                   </TableCell>
                   <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
-                    {item?.shotsOffTarget || "N/A"}
+                    {item?.passesAccuracy || "N/A"}
                   </TableCell>
                   <TableCell >
                     <div className="h-full w-auto flex items-end justify-center gap-6 py-3">

@@ -23,9 +23,9 @@ export interface AttackingStat {
   shotsOutsidePa: number
   totalShots: number
   shotsOnTarget: number
-  shootingAccuracy: number
+  shootingAccuracy: string
   shotsOffTarget: number
-  passesAccuracy: number
+  passesAccuracy: string
   takeOn: number
   createdAt: string
   updatedAt: string

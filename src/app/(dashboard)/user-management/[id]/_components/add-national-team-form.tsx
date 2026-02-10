@@ -270,14 +270,14 @@ const AddNationalTeamForm = ({
                           <SelectValue placeholder="Select Category" />
                         </SelectTrigger>
                         <SelectContent className="h-[200px] overflow-y-auto">
-                          <SelectItem value="semi-professional">Semi Professional</SelectItem>
+                          {/* <SelectItem value="semi-professional">Semi Professional</SelectItem>
                           <SelectItem value="professional">Professional</SelectItem>
                           <SelectItem value="adult">Adult</SelectItem>
                           <SelectItem value="U9">U9</SelectItem>
                           <SelectItem value="U10">U10</SelectItem>
                           <SelectItem value="U11">U11</SelectItem>
                           <SelectItem value="U12">U12</SelectItem>
-                          <SelectItem value="U13">U13</SelectItem>
+                          <SelectItem value="U13">U13</SelectItem> */}
                           <SelectItem value="U14">U14</SelectItem>
                           <SelectItem value="U15">U15</SelectItem>
                           <SelectItem value="U16">U16</SelectItem>

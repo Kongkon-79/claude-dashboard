@@ -22,7 +22,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { DistributionStats } from "@/components/types/player-distribution-stats-data-type";
 
 type PlayerDistributionFormValues = {
-     passes: number;
+  passes: number;
   passesinFinalThird: number;
   passesinMiddleThird: number;
   passesinOerensiveThird: number;
@@ -40,7 +40,7 @@ type PlayerDistributionFormValues = {
   crosses: number;
   stepIn: number;
   turnoverConceded: number;
-  mostPassesPlayerBetween: number;
+  // mostPassesPlayerBetween: number;
   passTheMost: string;
   ballTheMost: string;
 };
@@ -116,15 +116,15 @@ export const PlayerDistributionSchema = z.object({
     .number({ message: "Turnovers conceded must be a number" })
     .min(0, "Turnovers conceded cannot be negative"),
 
-  mostPassesPlayerBetween: z
-    .number({ message: "Most passes between players must be a number" })
-    .min(0, "Most passes between players cannot be negative"),
+  // mostPassesPlayerBetween: z
+  //   .number({ message: "Most passes between players must be a number" })
+  //   .min(0, "Most passes between players cannot be negative"),
 
-      passTheMost: z
+  passTheMost: z
     .string()
     .min(1, "Pass The Most is required"),
 
-      ballTheMost: z
+  ballTheMost: z
     .string()
     .min(1, "Ball The Most is required"),
 });
@@ -143,29 +143,29 @@ const AddEditPlayerDistributionForm = ({
 
   const form = useForm<PlayerDistributionFormValues>({
     resolver: zodResolver(PlayerDistributionSchema),
- defaultValues: {
-  passes: undefined,
-  passesinFinalThird: undefined,
-  passesinMiddleThird: undefined,
-  passesinOerensiveThird: undefined,
+    defaultValues: {
+      passes: undefined,
+      passesinFinalThird: undefined,
+      passesinMiddleThird: undefined,
+      passesinOerensiveThird: undefined,
 
-  kevPasses: undefined,
-  longPasses: undefined,
-  mediumPasses: undefined,
-  shortPasses: undefined,
+      kevPasses: undefined,
+      longPasses: undefined,
+      mediumPasses: undefined,
+      shortPasses: undefined,
 
-  passesForward: undefined,
-  passesSidewavs: undefined,
-  passesBackward: undefined,
+      passesForward: undefined,
+      passesSidewavs: undefined,
+      passesBackward: undefined,
 
-  passesReceived: undefined,
-  crosses: undefined,
-  stepIn: undefined,
-  turnoverConceded: undefined,
-  mostPassesPlayerBetween: undefined,
-passTheMost: "",
-  ballTheMost: ""
-}
+      passesReceived: undefined,
+      crosses: undefined,
+      stepIn: undefined,
+      turnoverConceded: undefined,
+      // mostPassesPlayerBetween: undefined,
+      passTheMost: "",
+      ballTheMost: ""
+    }
 
 
 
@@ -174,29 +174,29 @@ passTheMost: "",
   // 🔁 Edit mode prefill
   useEffect(() => {
     if (defaultData) {
-    form.reset({
-  passes: defaultData?.passes ?? 0,
-  passesinFinalThird: defaultData?.passesinFinalThird ?? 0,
-  passesinMiddleThird: defaultData?.passesinMiddleThird ?? 0,
-  passesinOerensiveThird: defaultData?.passesinOerensiveThird ?? 0,
+      form.reset({
+        passes: defaultData?.passes ?? 0,
+        passesinFinalThird: defaultData?.passesinFinalThird ?? 0,
+        passesinMiddleThird: defaultData?.passesinMiddleThird ?? 0,
+        passesinOerensiveThird: defaultData?.passesinOerensiveThird ?? 0,
 
-  kevPasses: defaultData?.kevPasses ?? 0,
-  longPasses: defaultData?.longPasses ?? 0,
-  mediumPasses: defaultData?.mediumPasses ?? 0,
-  shortPasses: defaultData?.shortPasses ?? 0,
+        kevPasses: defaultData?.kevPasses ?? 0,
+        longPasses: defaultData?.longPasses ?? 0,
+        mediumPasses: defaultData?.mediumPasses ?? 0,
+        shortPasses: defaultData?.shortPasses ?? 0,
 
-  passesForward: defaultData?.passesForward ?? 0,
-  passesSidewavs: defaultData?.passesSidewavs ?? 0,
-  passesBackward: defaultData?.passesBackward ?? 0,
+        passesForward: defaultData?.passesForward ?? 0,
+        passesSidewavs: defaultData?.passesSidewavs ?? 0,
+        passesBackward: defaultData?.passesBackward ?? 0,
 
-  passesReceived: defaultData?.passesReceived ?? 0,
-  crosses: defaultData?.crosses ?? 0,
-  stepIn: defaultData?.stepIn ?? 0,
-  turnoverConceded: defaultData?.turnoverConceded ?? 0,
-  mostPassesPlayerBetween: defaultData?.mostPassesPlayerBetween ?? 0,
-  passTheMost: defaultData?.passTheMost ?? "",
-  ballTheMost: defaultData?.ballTheMost ?? "",
-});
+        passesReceived: defaultData?.passesReceived ?? 0,
+        crosses: defaultData?.crosses ?? 0,
+        stepIn: defaultData?.stepIn ?? 0,
+        turnoverConceded: defaultData?.turnoverConceded ?? 0,
+        // mostPassesPlayerBetween: defaultData?.mostPassesPlayerBetween ?? 0,
+        passTheMost: defaultData?.passTheMost ?? "",
+        ballTheMost: defaultData?.ballTheMost ?? "",
+      });
 
 
 
@@ -348,7 +348,7 @@ passTheMost: "",
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
-                     Key Passes
+                      Key Passes
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -364,13 +364,13 @@ passTheMost: "",
                   </FormItem>
                 )}
               />
-               <FormField
+              <FormField
                 control={form.control}
                 name="longPasses"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
-                        Long Passes
+                      Long Passes
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -411,31 +411,31 @@ passTheMost: "",
               />
 
 
-          
-            <FormField
-              control={form.control}
-              name="shortPasses"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
-                    Short Passes
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      {...field}
-                      value={field.value ?? ""}
-                      onChange={(e) => field.onChange(Number(e.target.value))}
-                      placeholder="Enter Short Passes"
-                      className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
 
-            <FormField
+              <FormField
+                control={form.control}
+                name="shortPasses"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
+                      Short Passes
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        {...field}
+                        value={field.value ?? ""}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        placeholder="Enter Short Passes"
+                        className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
                 control={form.control}
                 name="passesForward"
                 render={({ field }) => (
@@ -504,7 +504,7 @@ passTheMost: "",
               />
 
 
-                <FormField
+              <FormField
                 control={form.control}
                 name="passesReceived"
                 render={({ field }) => (
@@ -528,37 +528,37 @@ passTheMost: "",
               />
 
 
-          
-            <FormField
-              control={form.control}
-              name="crosses"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
-                    Crosses
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      {...field}
-                      value={field.value ?? ""}
-                      placeholder="Enter Crosses"
-                      onChange={(e) => field.onChange(Number(e.target.value))}
-                      className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
 
-            <FormField
+              <FormField
+                control={form.control}
+                name="crosses"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
+                      Crosses
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        {...field}
+                        value={field.value ?? ""}
+                        placeholder="Enter Crosses"
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
                 control={form.control}
                 name="stepIn"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
-                      Step In   
+                      Step In
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -597,7 +597,7 @@ passTheMost: "",
                   </FormItem>
                 )}
               />
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name="mostPassesPlayerBetween"
                 render={({ field }) => (
@@ -618,51 +618,51 @@ passTheMost: "",
                     <FormMessage />
                   </FormItem>
                 )}
+              /> */}
+
+              <FormField
+                control={form.control}
+                name="passTheMost"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
+                      Who do you pass the to the most?
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
+                        {...field}
+                        placeholder="Enter team name"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
 
-               <FormField
-              control={form.control}
-              name="passTheMost"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
-                    Who do you pass the to the most?
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
-                      {...field}
-                      placeholder="Enter team name"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-             <FormField
-              control={form.control}
-              name="ballTheMost"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
-                    Who Pass The ball to you the most?
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
-                      {...field}
-                      placeholder="Enter team name"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="ballTheMost"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
+                      Who Pass The ball to you the most?
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
+                        {...field}
+                        placeholder="Enter team name"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
 
 
-              </div>
+            </div>
 
             {/* Actions */}
             <div className="flex justify-end gap-3 pt-4">
