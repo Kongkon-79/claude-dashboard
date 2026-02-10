@@ -28,9 +28,9 @@ type AttackingStatsFormValues = {
   shotsOutsidePa: number
   totalShots: number
   shotsOnTarget: number
-  shootingAccuracy: number
+  shootingAccuracy: string
   shotsOffTarget: number
-  passesAccuracy: number
+  passesAccuracy: string
   takeOn: number
 };
 
@@ -69,19 +69,20 @@ export const attackingStatsSchema = z.object({
     .number({ message: "Shots on target must be a number" })
     .min(0, "Shots on target cannot be negative"),
 
-  shootingAccuracy: z
-    .number({ message: "Shooting accuracy must be a number" })
-    .min(0, "Shooting accuracy cannot be negative")
-    .max(100, "Shooting accuracy cannot be more than 100"),
+
+    shootingAccuracy: z
+    .string()
+    .min(1, "Shooting Accuracy is required"),
 
   shotsOffTarget: z
     .number({ message: "Shots off target must be a number" })
     .min(0, "Shots off target cannot be negative"),
 
-  passesAccuracy: z
-    .number({ message: "Pass accuracy must be a number" })
-    .min(0, "Pass accuracy cannot be negative")
-    .max(100, "Pass accuracy cannot be more than 100"),
+ 
+
+    passesAccuracy: z
+    .string()
+    .min(1, "Passes Accuracy is required"),
 
   takeOn: z
     .number({ message: "Take on must be a number" })
@@ -112,8 +113,8 @@ const AddEditAttackingStatsForm = ({
   shotsOnTarget: undefined,
   shotsOffTarget: undefined,
 
-  shootingAccuracy: undefined,
-  passesAccuracy: undefined,
+  shootingAccuracy: "",
+  passesAccuracy: "",
 
   takeOn: undefined,
 },
@@ -135,8 +136,8 @@ const AddEditAttackingStatsForm = ({
   shotsOnTarget: defaultData?.shotsOnTarget ?? 0,
   shotsOffTarget: defaultData?.shotsOffTarget ?? 0,
 
-  shootingAccuracy: defaultData?.shootingAccuracy ?? 0,
-  passesAccuracy: defaultData?.passesAccuracy ?? 0,
+  shootingAccuracy: defaultData?.shootingAccuracy || "",
+  passesAccuracy: defaultData?.passesAccuracy || "",
 
   takeOn: defaultData?.takeOn ?? 0,
 });
@@ -355,7 +356,27 @@ const AddEditAttackingStatsForm = ({
               )}
             />
 
-            <FormField
+             <FormField
+              control={form.control}
+              name="shootingAccuracy"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
+                    Shooting Accuracy
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
+                      {...field}
+                      placeholder="Enter Shooting accuracy"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* <FormField
                 control={form.control}
                 name="shootingAccuracy"
                 render={({ field }) => (
@@ -376,9 +397,9 @@ const AddEditAttackingStatsForm = ({
                     <FormMessage />
                   </FormItem>
                 )}
-              />
+              /> */}
 
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name="passesAccuracy"
                 render={({ field }) => (
@@ -399,7 +420,29 @@ const AddEditAttackingStatsForm = ({
                     <FormMessage />
                   </FormItem>
                 )}
-              />
+              /> */}
+
+                       <FormField
+              control={form.control}
+              name="passesAccuracy"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
+                    Passes Accuracy
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
+                      {...field}
+                      placeholder="Enter passes accuracy"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+
               <FormField
                 control={form.control}
                 name="takeOn"
