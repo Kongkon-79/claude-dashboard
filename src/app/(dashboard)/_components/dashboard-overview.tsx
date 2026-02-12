@@ -1,5 +1,5 @@
 "use client";
-import { Calendar, NotepadText, Trophy, Users } from "lucide-react";
+import { Calendar, DollarSign, Users } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import DashboardOverviewSkeleton from "./dashboard-overview-skeleton";
 import ErrorContainer from "@/components/shared/ErrorContainer/ErrorContainer";
@@ -69,7 +69,7 @@ export function DashboardOverview() {
           </div>
           <div>
             <span className="flex items-center justify-center bg-[#E6F4E6] p-3 rounded-full">
-              <Trophy className="w-6 h-6 text-primary" />
+              <DollarSign  className="w-6 h-6 text-primary" />
             </span>
           </div>
         </div>
@@ -117,7 +117,7 @@ export function DashboardOverview() {
           </div>
           <div>
             <span className="flex items-center justify-center bg-[#E6F4E6] p-3 rounded-full">
-              <NotepadText className="w-6 h-6 text-primary" />
+              <Users className="w-6 h-6 text-primary" />
             </span>
           </div>
         </div>

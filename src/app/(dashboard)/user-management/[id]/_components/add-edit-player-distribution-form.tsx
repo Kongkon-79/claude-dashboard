@@ -632,7 +632,7 @@ const AddEditPlayerDistributionForm = ({
                       <Input
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                         {...field}
-                        placeholder="Enter team name"
+                        placeholder="Enter who do you pass the to the most?"
                       />
                     </FormControl>
                     <FormMessage />
@@ -652,7 +652,7 @@ const AddEditPlayerDistributionForm = ({
                       <Input
                         className="h-[44px] w-full rounded-[12px] text-base leading-[120%] text-[#131313] font-medium border border-[#645949]"
                         {...field}
-                        placeholder="Enter team name"
+                        placeholder="Enter who pass the ball to you the most?"
                       />
                     </FormControl>
                     <FormMessage />

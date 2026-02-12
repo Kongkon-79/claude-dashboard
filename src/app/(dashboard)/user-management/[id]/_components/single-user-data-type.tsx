@@ -29,7 +29,7 @@ export interface User {
   isSubscription: boolean
   subscription: Subscription | null
   accessLavel: string[]
-
+  nationality: string
   birthdayPlace: string
   category: "professional" | "amateur"
   citizenship: string
