@@ -64,7 +64,7 @@ export function DashboardOverview() {
               Total Revenue
             </p>
             <p className="text-3xl leading-[120%] text-[#424242] font-bold font-hexco pt-1">
-              {data?.data?.totalRevenew?.toFixed(2) || 0}
+             $ {data?.data?.totalRevenew?.toFixed(2) || 0}
             </p>
           </div>
           <div>

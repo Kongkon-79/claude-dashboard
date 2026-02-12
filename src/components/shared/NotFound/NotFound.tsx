@@ -14,12 +14,13 @@ const NotFound = ({ message }: Props) => {
       <div className="bg-primary/10 h-[360px] w-full flex flex-col items-center justify-center rounded-[20px]">
         {/* Image */}
         <Image
-          src="/assets/images/404.png"
-          alt="404 Not Found Illustration"
+          src="/assets/images/not_found_page.png"
+          alt="404 Not Found"
           width={300}
           height={300}
           priority
-          className="mb-4 w-[250px] h-[200px]"
+          unoptimized
+          className="mb-4 w-[250px] h-[150px]"
         />
 
         {/* Text Animation applied to message string only */}

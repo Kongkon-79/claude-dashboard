@@ -76,7 +76,7 @@ const UserRegistration = () => {
             >
               <div className='w-[230px] flex items-center gap-2'>
                 <div>
-                  <Image src={item?.profileImage || "/assets/images/no-user.jpeg"} alt="Profile" width={100} height={100} className="w-10 h-10 rounded-full object-cover" />
+                  <Image src={item?.profileImage || "/assets/images/no-user.jpeg"} alt="Profile" width={100} height={100}  className="w-10 h-10 rounded-full object-cover" />
                 </div>
                 <div>
                   <h4 className="text-base font-semibold leading-[150%] text-[#181818]">
