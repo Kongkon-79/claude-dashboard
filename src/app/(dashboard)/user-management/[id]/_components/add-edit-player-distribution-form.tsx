@@ -626,7 +626,8 @@ const AddEditPlayerDistributionForm = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-base leading-[120%] font-semibold text-[#131313]">
-                      Who do you pass the to the most?
+                      {/* Who do you pass the to the most? */}
+                      Who do you pass the ball to the most?
                     </FormLabel>
                     <FormControl>
                       <Input
