@@ -71,7 +71,7 @@ export function DashboardSidebar() {
               <SidebarGroupLabel className="mt-5 mb-5 h-[80px] flex justify-center">
                 <Link href={`/`}>
                   <Image
-                    src={`/assets/images/dashboard-logo.png`}
+                    src={`/assets/images/logo.jpg`}
                     alt="logo"
                     width={1000}
                     height={1000}

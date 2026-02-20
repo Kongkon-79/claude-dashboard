@@ -8,20 +8,53 @@
   }
 }
 
-
+/* new code  */
 
 @layer base {
   :root {
-    /* --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%; */
-    --background: 0 0% 97.3%; /* F8F9FA in HSL */
+    /* Primary Base (#10e607) */
+    --primary: 118 94% 46%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Primary Shades */
+    --primary-light: 118 94% 60%;
+    --primary-lighter: 118 94% 70%;
+    --primary-dark: 118 94% 36%;
+    --primary-darker: 118 94% 26%;
+
+    /* Hover & Ring */
+    --primary-hover: 118 94% 40%;
+    --ring: 118 94% 46%;
+  }
+
+  .dark {
+    /* Primary Base same but adjusted for dark UI */
+    --primary: 118 94% 50%;
+    --primary-foreground: 0 0% 0%;
+
+    --primary-light: 118 94% 60%;
+    --primary-lighter: 118 94% 70%;
+    --primary-dark: 118 94% 40%;
+    --primary-darker: 118 94% 30%;
+
+    --primary-hover: 118 94% 55%;
+    --ring: 118 94% 55%;
+  }
+}
+
+
+/* old code  */
+
+/* 
+@layer base {
+  :root {
+    --background: 0 0% 97.3%; 
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
 
-    /* Updated Primary Color (#079201) */
     --primary: 118 99% 29%;
     --primary-foreground: 0 0% 100%;
 
@@ -63,14 +96,14 @@
   }
 
   .dark {
-   --background: 0 0% 3.9%; /* Dark background */
+   --background: 0 0% 3.9%; 
     --foreground: 0 0% 98%;
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
 
-    /* Updated Primary Color (#079201) */
+    
     --primary: 118 99% 29%;
     --primary-foreground: 0 0% 100%;
 
@@ -101,7 +134,7 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
-
+ */
 
 
 

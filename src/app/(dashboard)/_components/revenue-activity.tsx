@@ -23,10 +23,12 @@ import NotFound from "@/components/shared/NotFound/NotFound";
 
 export const description = "A simple area chart";
 
+
+// #10e607 old color 
 const chartConfig = {
   desktop: {
     label: "Desktop",
-    color: "#079201", // stroke color
+    color: "#10e607", // stroke color
   },
 } satisfies ChartConfig;
 
@@ -156,7 +158,7 @@ export function RevenueActivity() {
               <Area
                 dataKey="revenue"
                 type="monotone"
-                stroke="#079201"
+                stroke="#10e607"
                 strokeWidth={2}
                 fill="url(#desktopGradient)" // Gradient applied here
               />

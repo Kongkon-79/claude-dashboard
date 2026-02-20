@@ -11,7 +11,7 @@ const PricingAndPaymentContainer = () => {
       <div>
         <div className="flex items-center gap-6 px-6 pt-8">
           <button
-            className={`h-[48px] text-base text-primary rounded-[6px] leading-[120%] font-semibold border border-[#079201] py-3 px-7 ${isActive === "pricing-individual-container" &&
+            className={`h-[48px] text-base text-primary rounded-[6px] leading-[120%] font-semibold border border-[#10e607] py-3 px-7 ${isActive === "pricing-individual-container" &&
               "bg-primary text-white rounded-[6px] py-3 px-7"
               }`}
             onClick={() => setIsActive("pricing-individual-container")}
@@ -19,7 +19,7 @@ const PricingAndPaymentContainer = () => {
             Individual Player
           </button>
           <button
-            className={`w-[180px] h-[48px] text-base text-primary rounded-[6px] leading-[120%] font-semibold border border-[#079201] py-3 px-7 ${isActive === "pricing-team-container" &&
+            className={`w-[180px] h-[48px] text-base text-primary rounded-[6px] leading-[120%] font-semibold border border-[#10e607] py-3 px-7 ${isActive === "pricing-team-container" &&
               "bg-primary text-white rounded-[6px] py-3 px-7"
               }`}
             onClick={() => setIsActive("pricing-team-container")}
