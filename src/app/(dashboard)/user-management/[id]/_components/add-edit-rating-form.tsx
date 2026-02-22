@@ -139,7 +139,7 @@ const AddEditRatingForm = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-lg rounded-2xl">
+      <DialogContent className="max-w-lg rounded-2xl bg-white">
         <h3 className="text-xl font-semibold mb-4">
           {isEdit ? "Edit Rating" : "Add Rating"}
         </h3>
