@@ -68,16 +68,18 @@ const AddEditRatingForm = ({
   const token = (session?.data?.user as { accessToken: string })?.accessToken;
   const isEdit = Boolean(defaultData?._id);
 
-
-    // const POSITIONS = [
+    //    const POSITIONS = [
     //     { label: "GK", value: "gk" },
     //     { label: "RB", value: "rb" },
     //     { label: "LB", value: "lb" },
-    //     { label: "CB", value: "cb" },
+    //     { label: "CBL", value: "cbl" },
+    //     { label: "CBR", value: "cbr" },
     //     { label: "CM", value: "cm" },
-    //     { label: "AM", value: "am" },
+    //     { label: "AML", value: "aml" },
+    //     { label: "AMR", value: "amr" },
     //     { label: "RW", value: "rw" },
     //     { label: "LW", value: "lw" },
+    //     { label: "10", value: "10" },
     //     { label: "Striker", value: "striker" },
     // ]
 

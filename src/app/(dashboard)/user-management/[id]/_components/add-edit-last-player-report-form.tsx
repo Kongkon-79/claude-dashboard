@@ -126,30 +126,6 @@ const AddEditLastPlayerReportForm = ({
   const token = (session?.data?.user as { accessToken: string })?.accessToken;
   const isEdit = Boolean(defaultData?._id);
 
-  // const POSITIONS = [
-  //   { label: "GK", value: "gk" },
-  //   { label: "RB", value: "rb" },
-  //   { label: "LB", value: "lb" },
-  //   { label: "CB", value: "cb" },
-  //   { label: "Defensive Midfielder", value: "defensive midfielder" },
-  //   { label: "Offensive Midfielder", value: "offensive midfielder" },
-  //   { label: "Right Winger", value: "right winger" },
-  //   { label: "Left Winger", value: "left winger" },
-  //   { label: "Striker", value: "striker" },
-  // ]
-
-    //   const POSITIONS = [
-    //     { label: "GK", value: "gk" },
-    //     { label: "RB", value: "rb" },
-    //     { label: "LB", value: "lb" },
-    //     { label: "CB", value: "cb" },
-    //     { label: "CM", value: "cm" },
-    //     { label: "AM", value: "am" },
-    //     { label: "RW", value: "rw" },
-    //     { label: "LW", value: "lw" },
-    //     { label: "Striker", value: "striker" },
-    // ]
-
         const POSITIONS = [
         { label: "GK", value: "gk" },
         { label: "RB", value: "rb" },
@@ -161,6 +137,7 @@ const AddEditLastPlayerReportForm = ({
         { label: "AMR", value: "amr" },
         { label: "RW", value: "rw" },
         { label: "LW", value: "lw" },
+        { label: "10", value: "10" },
         { label: "Striker", value: "striker" },
     ]
 
