@@ -218,7 +218,7 @@ const AddEditLastPlayerReportForm = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-xl rounded-2xl bg-white">
+      <DialogContent className="max-w-xl !rounded-[12px] bg-white">
         <h3 className="text-xl font-semibold mb-4">
           {isEdit ? "Edit Last Player Report" : "Add Last Player Report"}
         </h3>
@@ -269,7 +269,7 @@ const AddEditLastPlayerReportForm = ({
                         <SelectTrigger className="w-full h-[48px] py-2 px-3 rounded-[8px] border border-[#645949] text-base font-medium leading-[120%] text-[#131313]">
                           <SelectValue placeholder="Select" />
                         </SelectTrigger>
-                        <SelectContent className="h-[200px] overflow-y-auto">
+                        <SelectContent className="h-[200px] overflow-y-auto bg-white">
                           <SelectItem value="semi-professional">Semi Professional</SelectItem>
                           <SelectItem value="professional">Professional</SelectItem>
                           <SelectItem value="adult">Adult</SelectItem>
@@ -366,7 +366,7 @@ const AddEditLastPlayerReportForm = ({
                         </FormControl>
                       </PopoverTrigger>
 
-                      <PopoverContent className="max-w-[220px] p-3">
+                      <PopoverContent className="max-w-[220px] p-3 bg-white">
                         <div className="space-y-2">
                           {POSITIONS.map((pos) => {
                             const checked = field.value?.includes(pos.value)
