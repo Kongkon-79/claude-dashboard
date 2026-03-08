@@ -239,7 +239,7 @@ const AddEditPlayerDistributionForm = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="undefined max-w-2xl min-h-[400px] md:max-h-[600px] overflow-auto rounded-2xl bg-white">
+      <DialogContent className="undefined max-w-2xl min-h-[400px] md:max-h-[600px] overflow-auto  !rounded-[12px]  bg-white">
         <h3 className="text-xl font-semibold mb-4">
           {isEdit ? "Edit Player Distribution Stats" : "Add Player Distribution Stats"}
         </h3>

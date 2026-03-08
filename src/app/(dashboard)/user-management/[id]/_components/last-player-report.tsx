@@ -114,9 +114,9 @@ const LastPlayerReportPage = ({ id }: { id?: string }) => {
               <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
                 Number of Games
               </TableHead>
-              <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
+              {/* <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
                 Defensive Summary
-              </TableHead>
+              </TableHead> */}
               {/* <TableHead className="text-base font-medium leading-[150%] text-[#131313] text-center py-3 ">
                 Strengths
               </TableHead>
@@ -163,9 +163,9 @@ const LastPlayerReportPage = ({ id }: { id?: string }) => {
                    <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
                     {item?.numberOfGames || 0}
                   </TableCell>
-                  <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
+                  {/* <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
                     {item?.deFensiveSummary || "N/A"}
-                  </TableCell>
+                  </TableCell> */}
                   {/* <TableCell className="text-base font-normal text-[#131313] leading-[150%] text-center py-3">
                     {item?.strengths || "N/A"}
                   </TableCell>

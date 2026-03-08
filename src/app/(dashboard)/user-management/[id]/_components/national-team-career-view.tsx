@@ -17,7 +17,7 @@ const NationalCareerView = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="p-6 space-y-4">
+      <DialogContent className="p-6 space-y-4 bg-white !rounded-[12px]">
 
         <div className="space-y-4">
           <p className="text-base font-normal text-[#6C757D)] leading-[150%]">

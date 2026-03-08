@@ -25,6 +25,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 
+import logo from "../../../../public/assets/images/logo.jpg"
+
 const items = [
   {
     title: "Dashboard Overview",
@@ -71,11 +73,11 @@ export function DashboardSidebar() {
               <SidebarGroupLabel className="mt-5 mb-5 h-[80px] flex justify-center">
                 <Link href={`/`}>
                   <Image
-                    src={`/assets/images/logo.jpg`}
+                    src={logo}
                     alt="logo"
                     width={1000}
                     height={1000}
-                    className="h-[60px] w-auto object-contain"
+                    className="h-[100px] w-[240px] object-cover"
                   />
                 </Link>
               </SidebarGroupLabel>
