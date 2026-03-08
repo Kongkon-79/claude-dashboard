@@ -181,7 +181,7 @@ const AddEditGkDistributionForm = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl rounded-2xl bg-white">
+      <DialogContent className="max-w-2xl !rounded-[12px] bg-white">
         <h3 className="text-xl font-semibold mb-4">
           {isEdit ? "Edit Gk Distribution Stats" : "Add Gk Distribution Stats"}
         </h3>
