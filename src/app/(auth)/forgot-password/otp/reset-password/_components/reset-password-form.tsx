@@ -24,6 +24,8 @@ import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
+import logo from "../../../../../../../public/assets/images/logo.jpg"
+
 const formSchema = z
   .object({
     password: z.string().min(6, {
@@ -92,7 +94,7 @@ const ResetPasswordForm = () => {
     <div className="w-full md:w-[570px] bg-white rounded-[16px] border-[2px] border-[#E7E7E7] shadow-[0px_0px_32px_0px_#0000001F] p-8">
       <div className="w-full flex items-center justify-center pb-4">
         <Link href="/">
-          <Image src="/assets/images/logo.jpg" alt="auth logo" width={500} height={500} className="w-[290px] h-[80px] object-contain" />
+          <Image src={logo} alt="auth logo" width={500} height={500} className="w-[290px] h-[110px] object-cover"  />
         </Link>
       </div>
 

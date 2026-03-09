@@ -21,7 +21,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import logo from "../../../../../public/assets/images/logo.jpg"
@@ -38,7 +38,7 @@ const formSchema = z.object({
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter();
+  // const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -49,37 +49,46 @@ const LoginForm = () => {
     },
   });
 
-  // 2. Define a submit handler.
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+
+   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       setIsLoading(true);
 
       const res = await signIn("credentials", {
-        email: values?.email,
-        password: values?.password,
+        email: values.email,
+        password: values.password,
         redirect: false,
       });
 
-      // if (res?.error) {
-      //   throw new Error(res.error);
-      // }
-
-       if (res?.error) {
-      if (res.error === "ADMIN_ONLY") {
-        toast.error("Only admin can access this admin dashboard");
+      if (!res) {
+        toast.error("No response from server");
         return;
       }
 
-      if (res.error === "INVALID_CREDENTIALS") {
-        toast.error("Email or Password wrong");
+      if (res.error) {
+        if (res.error === "ADMIN_ONLY") {
+          toast.error("Only admin can access this admin dashboard");
+          return;
+        }
+
+        if (
+          res.error === "INVALID_CREDENTIALS" ||
+          res.error === "CredentialsSignin"
+        ) {
+          toast.error("Email or Password wrong");
+          return;
+        }
+
+        toast.error(res.error || "Login failed");
         return;
       }
 
-      toast.error("Login failed");
-      return;
-    }
-      toast.success("Login successful!");
-      router.push("/");
+      if (res.ok) {
+        toast.success("Login successful!");
+
+        // Full reload so middleware can detect fresh token properly
+        window.location.href = "/";
+      }
     } catch (error) {
       console.error("Login failed:", error);
       toast.error("Login failed. Please try again.");
@@ -87,6 +96,52 @@ const LoginForm = () => {
       setIsLoading(false);
     }
   }
+
+  // 2. Define a submit handler.
+  // async function onSubmit(values: z.infer<typeof formSchema>) {
+  //   try {
+  //     setIsLoading(true);
+
+  //     const res = await signIn("credentials", {
+  //       email: values?.email,
+  //       password: values?.password,
+  //       redirect: false,
+  //     });
+
+  //     if (!res) {
+  //       toast.error("No response from server");
+  //       return;
+  //     }
+
+  //     // if (res?.error) {
+  //     //   throw new Error(res.error);
+  //     // }
+
+  //      if (res?.error) {
+  //     if (res.error === "ADMIN_ONLY") {
+  //       toast.error("Only admin can access this admin dashboard");
+  //       return;
+  //     }
+
+  //     if (res.error === "INVALID_CREDENTIALS") {
+  //       toast.error("Email or Password wrong");
+  //       return;
+  //     }
+
+  //     toast.error("Login failed");
+  //     return;
+  //   }
+  //     toast.success("Login successful!");
+  //     router.push("/");
+  //   } catch (error) {
+  //     console.error("Login failed:", error);
+  //     toast.error("Login failed. Please try again.");
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // }
+
+
   return (
     <div>
       <div className="w-full md:w-[570px] bg-white rounded-[16px] border-[2px] border-[#E7E7E7] shadow-[0px_0px_32px_0px_#0000001F] p-8">

@@ -16,7 +16,7 @@ const PricingTeamView = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-xl p-6 space-y-4">
+      <DialogContent className="max-w-xl p-6 space-y-4 bg-white !rounded-[12px]">
         <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-[120%] text-primary text-center">Team Details</h3>
 
         <div className="space-y-2">
